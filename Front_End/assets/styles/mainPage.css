@@ -46,9 +46,18 @@
     position: relative;
     left: 6vw;
 }
-#img>img{
+#img>#car{
     width:43vw ;
     height: 45vh;
+}
+
+#detail{
+    width: 14vw;
+    height: 9.3vh;
+    position: absolute;
+    top: -2vw;
+    right: -0.5vw;
+
 }
 
 #findCar{
