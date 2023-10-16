@@ -1,0 +1,65 @@
+*{
+    margin: 0;
+    font-family:"Apple SD Gothic Neo";
+}
+
+#logo{
+    width: 8.5vw;
+    height: 6vh;
+}
+
+.nav-link{
+    font-size: 1.1vw;
+}
+.nav-item{
+    margin-left: 1vw;
+}
+.container{
+    display: flex;
+    flex-direction: row;
+    top: 10vw;
+    position: relative;
+}
+
+.container>div:nth-child(1){
+    width: 40vw;
+
+}
+
+.container>div:nth-child(2){
+    height: 50vh;
+    width: 40vw;
+}
+
+.container>div:nth-child(1)>h1{
+    font-size: 4vw;
+}
+
+.container>div:nth-child(1)>h1:nth-child(2){
+    color: #F35D09;
+}
+.container>div:nth-child(1)>p{
+    font-size: 1.1vw;
+}
+#img{
+    /*style="width: 40vw;height: 50vh"*/
+    position: relative;
+    left: 6vw;
+}
+#img>img{
+    width:43vw ;
+    height: 45vh;
+}
+
+#findCar{
+    width: 11.5vw;
+    height: 4.5vh;
+    border: none;
+    color: white;
+    background-color: #F35D09;
+    border-radius: 1vh;
+}
+
+#findCar:hover{
+    background-color: #002864;
+}
