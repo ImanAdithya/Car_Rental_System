@@ -36,7 +36,7 @@
 }
 
 .container>div:nth-child(1)>h1:nth-child(2){
-    color: #F35D09;
+    color: #FF6B17;
 }
 .container>div:nth-child(1)>p{
     font-size: 1.1vw;
@@ -65,10 +65,11 @@
     height: 4.5vh;
     border: none;
     color: white;
-    background-color: #F35D09;
+    background-color: #FF6B17;
     border-radius: 1vh;
 }
 
 #findCar:hover{
     background-color: #002864;
 }
+

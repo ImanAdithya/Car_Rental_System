@@ -1,5 +1,6 @@
 *{
     margin: 0;
+    font-family:"Apple SD Gothic Neo";
 }
 
 #form{
@@ -13,7 +14,9 @@
     height: 45vw;
     border-radius: 1vw;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    border: 2px solid black;
+    display: flex;
+    flex-direction: row;
+    background-color: white;
 }
 
 #logo{
@@ -22,4 +25,74 @@
     position: relative;
     left: 2vw;
     top: 1vw;
+}
+
+
+#form>div:nth-child(1){
+    width: 60vw;
+    height: 78vh;
+}
+#form>div:nth-child(2){
+    width: 40vw;
+    position: relative;
+}
+
+#loginpic{
+    width: 45vw;
+    height: 56vh;
+    position: relative;
+    top: 8vw;
+}
+
+#innerDiv{
+    width: 25vw;
+    height: 70vh;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 0.7vw;
+}
+
+#username{
+    width: 21vw;
+
+}
+#pass{
+    width: 21vw;
+
+}
+
+#formDetail{
+    position: relative;;
+    top: 13vh;
+}
+
+#forget{
+    font-size:13px;
+
+}
+
+#subBtn{
+    background-color: #F35D09;
+    width: 21vw;
+    height: 4vh;
+    border: none;
+    left: 2.2vw;
+    position: relative;
+}
+
+#subBtn:hover{
+    background-color: #002864;;
+}
+
+#sign{
+    color:#F35D09 ;
+}
+#login{
+    position: relative;
+    top: 3vw;
 }
