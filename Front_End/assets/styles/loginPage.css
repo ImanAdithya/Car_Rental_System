@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+}
+
+#form{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    width: 75vw;
+    height: 45vw;
+    border-radius: 1vw;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border: 2px solid black;
+}
+
+#logo{
+    width:6vw;
+    height: 4vh;
+    position: relative;
+    left: 2vw;
+    top: 1vw;
+}
