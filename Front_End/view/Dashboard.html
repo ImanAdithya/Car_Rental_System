@@ -43,18 +43,18 @@
 <section class="side-bar-warp">
     <div class="sidebar-menu full-side-bar flowHide"> <!-- Change to full-side-bar -->
         <nav class="">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav mt-4">
                 <li class="nav-item">
                     <a class="nav-link" href="#">
                         <span class="sidebar-icon"><img src="../assets/img/dash.png" alt="" style="width: 20px;height: 20px"></span>
-                        <span class="fadeInRight animated nav-link-name">DASHBOARD</span>
+                        <span id="dashBtn" class="fadeInRight animated nav-link-name">DASHBOARD</span>
                     </a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="#">
                         <span class="sidebar-icon"><img src="../assets/img/profile.png" alt="" style="width: 20px;height: 20px" alt=""></span>
                         <!--                        <span class="fadeInRight animated nav-link-name name-hide tax-show">CUSTOMER</span>-->
-                        <span class="fadeInRight animated nav-link-name">CUSTOMER</span>
+                        <span id="customerBtn" class="fadeInRight animated nav-link-name">CUSTOMER</span>
                     </a>
                 </li>
                 <li class="nav-item ">
@@ -99,7 +99,7 @@
 
 <section id="mainContext">
 
-   <div id="Dashboard">
+   <div id="dashboard">
        <div class="container-fluid">
 
            <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -186,35 +186,60 @@
        </div>
 
        <div class="container-fluid">
-           <div class="row">
+           <div class="row justify-content-between mt-4">
 
-               <div class="col-xl-7 col-md-6 mb-4" style="border: 2px solid red">
-                    <img src="../assets/img/dashCarDeatil.png" style="width: 47vw;height: 43vh">
+               <div class="col-xl-8 col-md-6 mb-4">
+                    <img src="../assets/img/dashCarDeatil.png" style="width: 52vw;height: 47vh;border-radius: 2vw">
+               </div>
+
+               <div class="col-xl-4 col-md-6 mb-4 me-2" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;border-radius: 2vw">
+                   <div class="card-body">
+                       <div class="chart-pie pt-4 pb-2">
+                           <canvas id="myPieChart"></canvas>
+                       </div>
+                       <div class="mt-4 text-center small">
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-primary"></i> Driver
+                                        </span>
+                           <span class="mr-2">
+                                            <i class="fas fa-circle text-success"></i> Car
+                                        </span>
+                           <span class="mr-2">
+                                            <i class="fas fa-circle text-info"></i> Customer
+                                        </span>
+                       </div>
+                   </div>
                </div>
 
            </div>
        </div>
    </div>
 
+    <div id="customer">
+        <h2>This is customer Page</h2>
+        h
+    </div>
+
 </section>
 
 
 
 <script>
-    $(document).ready(function () {
-        $(document).on('click', '.cta', function () {
-            $(this).toggleClass('active');
-        });
+
+    document.getElementById("customer").style.display="none";
+
+    document.getElementById("customerBtn").addEventListener("click",function (){
+        document.getElementById("dashboard").style.display="none";
+        document.getElementById("customer").style.display="block";
     });
 
-    $(document).ready(function () {
-        $(".nav-link").hover(function () {
-            $(this).addClass('tax-active');
-        }, function () {
-            $(this).removeClass('tax-active');
-        });
+    document.getElementById("dashBtn").addEventListener("click",function (){
+        document.getElementById("dashboard").style.display="block";
+        document.getElementById("customer").style.display="none";
     });
+
 </script>
+<script src="../assets/script/Dashboard.js"></script>
 <!-- Bootstrap core JavaScript-->
 <script src="../vendor/jquery/jquery.min.js"></script>
 <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

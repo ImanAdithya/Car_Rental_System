@@ -276,9 +276,9 @@ body{
 
 #mainContext{
     position: relative;
-    height: 80vh;
+    height: max-content;
     width: 84vw;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     left: 15.7vw;
     top: 1.3vh;
 }
