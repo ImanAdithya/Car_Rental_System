@@ -1,6 +1,4 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,9 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ADMIN DASHBOARD</title>
     <link rel="stylesheet" href="../assets/styles/Admin.css">
-
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="../assets/styles/custom/sb-admin-2.min.css" rel="stylesheet">
     <script src="../assets/js/jquery-3.6.1.min.js"></script>
 
@@ -20,7 +16,7 @@
 
 <body>
 
-<nav style="background-color: #292929!important;" class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav style="background-color: #292929!important;position: fixed;z-index: 4;width: 100vw" class="navbar navbar-expand-sm bg-dark navbar-dark">
 
     <!-- Brand/logo -->
     <a class="navbar-brand" href="#">
@@ -42,9 +38,9 @@
     </ul>
 </nav>
 
-<section class="side-bar-warp">
-    <div class="sidebar-menu full-side-bar flowHide"> <!-- Change to full-side-bar -->
-        <nav class="">
+<section class="side-bar-warp" style="position: relative;z-index: 1;top: 6vh">
+    <div class="sidebar-menu full-side-bar flowHide ">
+        <nav class="" >
             <ul class="navbar-nav mt-4">
                 <li class="nav-item">
                     <a class="nav-link" href="#">
@@ -76,7 +72,7 @@
 
                 <li class="nav-item ">
                     <a class="nav-link" href="#">
-                        <span class="sidebar-icon"><img src="../assets/img/book.png" style="width: 27px;height: 28px" alt=""></span>
+                        <span class="sidebar-icon"><img src="../assets/img/book.png" style="width: 25px;height: 26px" alt=""></span>
                         <!--                        <span class="fadeInRight animated nav-link-name name-hide tax-show">DRIVERS</span>-->
                         <span class="fadeInRight animated nav-link-name">BOOKING</span>
                     </a>
@@ -108,7 +104,7 @@
     </div>
 </section>
 
-<section id="mainContext">
+<section id="mainContext" style="z-index: 1;position: relative;top: 8vh">
 
    <div id="dashboard">
        <div class="container-fluid">
@@ -201,25 +197,6 @@
 
                <div class="col-xl-8 col-md-6 mb-4">
                     <img src="../assets/img/dashCarDeatil.png" style="width: 52vw;height: 47vh;border-radius: 2vw">
-               </div>
-
-               <div class="col-xl-4 col-md-6 mb-4 me-2" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;border-radius: 2vw">
-                   <div class="card-body">
-                       <div class="chart-pie pt-4 pb-2">
-                           <canvas id="myPieChart"></canvas>
-                       </div>
-                       <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Driver
-                                        </span>
-                           <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Car
-                                        </span>
-                           <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> Customer
-                                        </span>
-                       </div>
-                   </div>
                </div>
 
            </div>
@@ -367,7 +344,7 @@
                <div class="col-xl-4 col-md-6 mb-4">
                            <div class="d-flex flex-column align-items-center mt-4">
                                <img src=""  alt="" style="width: 18vw;height: 16vh;background-color: #EFEFEF">
-                               <label for="uNic" class="btn btn-primary form-label mt-3" style="width: 8vw;height: 3.5vh">UPLOAD</label>
+                               <label for="uNic" class="btn  btn-outline-dark form-label mt-3" style="width: 8vw;height: 3.5vh">UPLOAD</label>
                                <input type="file" class="d-none" id="uNic">
                            </div>
                </div>
@@ -465,8 +442,222 @@
        </div>
     </div>
 
-    <div id="car">
-        <h1> CARRRR</h1>
+    <div id="car" style="height: max-content">
+
+       <div class="container-fluid">
+
+           <div class="col-6">
+               <h1 class="h3 mb-0 text-gray-800">Car</h1>
+           </div>
+
+           <div class="row">
+               <div class="col-12">
+                   <form>
+                       <div class="row justify-content-around mt-4">
+                           <div class="mb-3" style="width: 13vw">
+                               <input type="text" class="form-control"  placeholder="Register Number">
+                           </div>
+
+                           <div class="mb-3" style="width: 13vw">
+                               <input type="text" class="form-control"  placeholder="Brand">
+                           </div>
+
+                           <div class="mb-3" style="width: 13vw">
+                               <input type="text" class="form-control"  placeholder="Color">
+                           </div>
+
+                           <div class="mb-3" style="width: 13vw">
+                               <input type="text" class="form-control"  placeholder="Passenger">
+                           </div>
+
+                           <div class="dropdown">
+                               <select name="cars" id="type"  style="width: 13vw;height:4vh;border-radius:5px;opacity: 0.5">
+                                   <option value="" disabled selected>Type</option>
+                                   <option value="">Luxury</option>
+                                   <option value="">Premium</option>
+                               </select>
+                           </div>
+
+                       </div>
+
+                       <div class="row justify-content-around mt-4">
+                           <div class="dropdown">
+                               <select name="cars" id="fuel"  style="width: 13vw;height:4vh;border-radius:5px;opacity: 0.5">
+                                   <option value="" disabled selected>Fuel Type</option>
+                                   <option value="">Petrol</option>
+                                   <option value="">Diesel</option>
+                               </select>
+                           </div>
+
+                           <div class="dropdown">
+                               <select name="cars" id="transmission"  style="width: 13vw;height:4vh;border-radius:5px;opacity: 0.5">
+                                   <option value="" disabled selected>Transmission Type</option>
+                                   <option value="">Auto</option>
+                                   <option value="">Manual</option>
+                               </select>
+                           </div>
+
+                           <div class="dropdown">
+                               <select name="availability" id="cars"  style="width: 13vw;height:4vh;border-radius:5px;opacity: 0.5">
+                                   <option value="" disabled selected>Availability</option>
+                                   <option value="">Yes</option>
+                                   <option value="">No</option>
+                                   <option value="">Maintain</option>
+                               </select>
+                           </div>
+
+                           <div class="mb-3" style="width: 13vw">
+                               <input type="text" class="form-control"  placeholder="Current Meter Value">
+                           </div>
+
+                           <div class="mb-3" style="width: 13vw">
+                               <input type="text" class="form-control"  placeholder="Price Extra Km">
+                           </div>
+
+
+                       </div>
+
+                       <div class="row justify-content-around mt-4">
+                           <div class="mb-3" style="width: 13vw">
+                               <input type="text" class="form-control"  placeholder="Wavier Payment">
+                           </div>
+
+                           <div class="mb-3" style="width: 13vw">
+                               <input type="text" class="form-control"  placeholder="Free Milage Daily">
+                           </div>
+
+                           <div class="mb-3" style="width: 13vw">
+                               <input type="text" class="form-control"  placeholder="Price">
+                           </div>
+
+                           <div class="mb-3" style="width: 13vw">
+                               <input type="text" class="form-control"  placeholder="Free Milage Monthly">
+                           </div>
+
+                           <div class="mb-3" style="width: 13vw">
+                               <input type="text" class="form-control"  placeholder="Price">
+                           </div>
+
+                       </div>
+                   </form>
+               </div>
+           </div>
+
+           <div class="row mt-3">
+
+               <div class="col-3">
+                   <div class="d-flex flex-column align-items-center mt-4">
+                       <img src=""  alt="" style="width: 18vw;height: 16vh;background-color: #EFEFEF">
+                       <label for="uNic" class="btn  btn-outline-dark form-label mt-3" style="width: 8vw;height: 3.3vh">UPLOAD</label>
+                       <input type="file" class="d-none" id="front">
+                   </div>
+               </div>
+
+               <div class="col-3">
+                   <div class="d-flex flex-column align-items-center mt-4">
+                       <img src=""  alt="" style="width: 18vw;height: 16vh;background-color: #EFEFEF">
+                       <label for="uNic" class="btn  btn-outline-dark form-label mt-3 " style="width: 8vw;height: 3.3vh">UPLOAD</label>
+                       <input type="file" class="d-none" id="back">
+                   </div>
+               </div>
+
+               <div class="col-3">
+                   <div class="d-flex flex-column align-items-center mt-4">
+                       <img src=""  alt="" style="width: 18vw;height: 16vh;background-color: #EFEFEF">
+                       <label for="uNic" class="btn  btn-outline-dark form-label mt-3" style="width: 8vw;height: 3.3vh">UPLOAD</label>
+                       <input type="file" class="d-none" id="side">
+                   </div>
+               </div>
+
+               <div class="col-3">
+                   <div class="d-flex flex-column align-items-center mt-4">
+                       <img src=""  alt="" style="width: 18vw;height: 16vh;background-color: #EFEFEF">
+                       <label for="uNic" class="btn  btn-outline-dark form-label mt-3" style="width: 8vw;height: 3.3vh">UPLOAD</label>
+                       <input type="file" class="d-none" id="interio">
+                   </div>
+               </div>
+
+           </div>
+
+           <div class="row  mt-5 mx-1">
+               <div class="col-6">
+                   <button type="button" class="btn btn-primary btn-sm" style="width: 6vw">Save</button>
+                   <button type="button" class="btn btn-success btn-sm mx-1" style="width: 6vw">Update</button>
+                   <button type="button" class="btn btn-danger btn-sm mx-1" style="width: 6vw">Delete</button>
+               </div>
+           </div>
+
+           <div class="row mt-5 mx-2">
+
+               <div class="dropdown">
+                   <select name="cars" id="b"  style="width: 7vw;height:4vh;border-radius:5px;opacity: 0.5">
+                       <option value="">All</option>
+                       <option value="">Petrol</option>
+                       <option value="">Diesel</option>
+                   </select>
+               </div>
+
+               <div class="dropdown mx-3">
+                   <select name="cars" id="a"  style="width: 11vw;height:4vh;border-radius:5px;opacity: 0.5">
+                       <option value="">Vehicle Number</option>
+                       <option value="">Brand</option>
+                       <option value="">Color</option>
+                   </select>
+               </div>
+
+               <div style="width: 17vw">
+                   <input type="text" class="form-control"  placeholder="Search">
+               </div>
+           </div>
+
+           <div class="d-flex justify-content-center mt-5">
+               <table>
+                   <thead>
+                   <tr>
+                       <th>ID</th>
+                       <th>REGISTER NUMBER</th>
+                       <th>BRAND</th>
+                       <th>FUEL</th>
+                       <th>TRANSMISSION</th>
+                       <th>CURRENT METER VALUE</th>
+                       <th>AVAILABILITY</th>
+                   </tr>
+                   </thead>
+                   <tbody>
+                   <tr>
+                       <td>CROO1</td>
+                       <td>987E2F34</td>
+                       <td>BMW</td>
+                       <td>PETROL</td>
+                       <td>AUTO</td>
+                       <td>54000KM</td>
+                       <td>MAINTAIN</td>
+                   </tr>
+                   <tr>
+                       <td>CROO1</td>
+                       <td>987E2F34</td>
+                       <td>BMW</td>
+                       <td>PETROL</td>
+                       <td>AUTO</td>
+                       <td>54000KM</td>
+                       <td>MAINTAIN</td>
+                   </tr>
+                   <tr>
+                       <td>CROO1</td>
+                       <td>987E2F34</td>
+                       <td>BMW</td>
+                       <td>PETROL</td>
+                       <td>AUTO</td>
+                       <td>54000KM</td>
+                       <td>MAINTAIN</td>
+                   </tr>
+
+                   </tbody>
+               </table>
+           </div>
+       </div>
+
+
     </div>
 </section>
 
@@ -478,10 +669,12 @@
 
     document.getElementById("customer").style.display="none";
     document.getElementById("driver").style.display="none";
+    document.getElementById("car").style.display="none";
 
     document.getElementById("customerBtn").addEventListener("click",function (){
         document.getElementById("dashboard").style.display="none";
         document.getElementById("driver").style.display="none";
+        document.getElementById("car").style.display="none";
         document.getElementById("customer").style.display="block";
     });
 
@@ -489,39 +682,25 @@
         document.getElementById("dashboard").style.display="block";
         document.getElementById("customer").style.display="none";
         document.getElementById("driver").style.display="none";
+        document.getElementById("car").style.display="none";
     });
 
     document.getElementById("driverBtn").addEventListener("click",function (){
         document.getElementById("dashboard").style.display="none";
         document.getElementById("customer").style.display="none";
+        document.getElementById("car").style.display="none";
         document.getElementById("driver").style.display="block";
     });
 
-
-
-
+    document.getElementById("carBtn").addEventListener("click",function (){
+        document.getElementById("dashboard").style.display="none";
+        document.getElementById("customer").style.display="none";
+        document.getElementById("car").style.display="block";
+        document.getElementById("driver").style.display="none";
+    });
 
 </script>
 <script src="../assets/script/Dashboard.js"></script>
-<!-- Bootstrap core JavaScript-->
-<script src="../vendor/jquery/jquery.min.js"></script>
-<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="../assets/script/custom/js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
-<script src="../vendor/chart.js/Chart.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="../assets/script/custom/js/demo/chart-area-demo.js"></script>
-<script src="../assets/script/custom/js/demo/chart-pie-demo.js"></script>
-
-
-
 </body>
 
 </html>
