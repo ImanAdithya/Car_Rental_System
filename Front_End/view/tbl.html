@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        tbody td {
+            /* 1. Animate the background-color
+               from transparent to white on hover */
+            background-color: white;
+            transition: all 0.2s linear;
+            transition-delay: 0.3s, 0s;
+            /* 2. Animate the opacity on hover */
+            opacity: 0.6;
+        }
+        tbody tr:hover td {
+            background-color: rgba(255,255,255,1);
+            transition-delay: 0s, 0s;
+            opacity: 1;
+            font-size: 2em;
+        }
+
+        td {
+            /* 3. Scale the text using transform on hover */
+            transform-origin: center left;
+            transition-property: transform;
+            transition-duration: 0.4s;
+            transition-timing-function: ease-in-out;
+            font-size: 15px;
+        }
+        tr:hover td {
+            transform: scale(1.1);
+        }
+
+        /*!* Codepen styling *!*/
+        /** { box-sizing: border-box;*/
+        /*}*/
+
+        table {
+            width: 90%;
+            margin: 0 5%;
+            text-align: left;
+        }
+        th, td {
+            padding: 0.5em;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            background: white;
+            color: black;
+        }
+
+        /*body > *  {*/
+        /*    margin: auto;*/
+        /*}*/
+
+    </style>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Description</th>
+        <th>Price (SEK)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Samsung Galaxy Z Flip 3 5G SM-F711B 128GB</td>
+        <td>9 987 kr</td>
+    </tr>
+    <tr>
+        <td>Samsung Galaxy S21 5G SM-G991B 128GB</td>
+        <td>8 222 kr</td>
+    </tr>
+    <tr>
+        <td>Samsung Galaxy Z Fold3 5G SM-F926B 256GB</td>
+        <td>18 228 kr</td>
+    </tr>
+    <tr>
+        <td>Samsung Galaxy S21 Ultra 5G SM-G998B 128GB</td>
+        <td>11 178 kr</td>
+    </tr>
+    <tr>
+        <td>Samsung Galaxy Watch 4 Classic 46mm LTE</td>
+        <td>4 254 kr</td>
+    </tr>
+    <tr>
+        <td>Samsung Galaxy A52 SM-A525F/DS (6GB RAM) 128GB</td>
+        <td>3 789 kr</td>
+    </tr>
+    <tr>
+        <td>Samsung Galaxy S20 FE 5G SM-G781B/DS (6GB RAM) 128GB</td>
+        <td>6 390 kr</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

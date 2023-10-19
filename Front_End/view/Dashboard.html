@@ -13,6 +13,8 @@
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="../assets/styles/custom/sb-admin-2.min.css" rel="stylesheet">
+    <script src="../assets/js/jquery-3.6.1.min.js"></script>
+
 
 </head>
 
@@ -59,13 +61,22 @@
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="#">
-                        <span class="sidebar-icon"><img src="../assets/img/car.png" alt="" style="width: 25px;height: 28px" ></span>
-                        <span class="fadeInRight animated nav-link-name">DRIVER</span>
+                        <span class="sidebar-icon"><img src="../assets/img/driver.png" alt="" style="width: 25px;height: 28px" ></span>
+                        <span  id="driverBtn" class="fadeInRight animated nav-link-name">DRIVER</span>
                     </a>
                 </li>
+
                 <li class="nav-item ">
                     <a class="nav-link" href="#">
-                        <span class="sidebar-icon"><img src="../assets/img/driver.png" style="width: 27px;height: 28px" alt=""></span>
+                        <span class="sidebar-icon"><img src="../assets/img/car.png" alt="" style="width: 25px;height: 28px" ></span>
+                        <span  id="carBtn" class="fadeInRight animated nav-link-name">CAR</span>
+                    </a>
+                </li>
+
+
+                <li class="nav-item ">
+                    <a class="nav-link" href="#">
+                        <span class="sidebar-icon"><img src="../assets/img/book.png" style="width: 27px;height: 28px" alt=""></span>
                         <!--                        <span class="fadeInRight animated nav-link-name name-hide tax-show">DRIVERS</span>-->
                         <span class="fadeInRight animated nav-link-name">BOOKING</span>
                     </a>
@@ -219,81 +230,276 @@
 
         <div class="container-fluid">
 
-            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Customer</h1>
-            </div>
+           <div class="row">
+               <div class="col-6">
+                   <h1 class="h3 mb-0 text-gray-800">Customer</h1>
+               </div>
 
-            <div class="row justify-content-around">
-                <div class="col-xl-8 col-md-6 mb-4" style="border: 1px solid red">
-                    <form>
-                        <div class="row justify-content-around mt-4">
-                            <div class="mb-3 w-25">
-                                <input type="text" class="form-control" id="name" placeholder="Full Name">
-                            </div>
+               <div class="col-4">
+                   <form class="d-flex" role="search">
+                       <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
+                       <button class="btn btn-outline-success mx-1" type="button" id="search">Search</button>
+                   </form>
+               </div>
 
-                            <div class="mb-3 w-25">
-                                <input type="text" class="form-control" id="address" placeholder="Address">
-                            </div>
+           </div>
 
-                            <div class="mb-3  w-25">
-                                <input type="text" class="form-control" id="Contact" placeholder="Contact">
-                            </div>
-                        </div>
-                        <div class="row justify-content-around mt-4">
-                            <div class="mb-3 w-25">
-                                <input type="text" class="form-control" id="email" placeholder="Email">
-                            </div>
-
-                            <div class="mb-3 w-25">
-                                <input type="text" class="form-control" id="nic" placeholder="NIC">
-                            </div>
-
-                            <div class="mb-3  w-25">
-                                <input type="text" class="form-control" id="dNic" placeholder="Driver NIC">
-                            </div>
-                        </div>
-                        <div class="row justify-content-around mt-4">
-                            <div class="mb-3 w-25">
-                                <input type="text" class="form-control" id="userName" placeholder="User Name">
-                            </div>
-
-                            <div class="mb-3 w-25">
-                                <input type="text" class="form-control" id="pass" placeholder="Password">
-                            </div>
-
-                            <div class="mb-3  w-25">
-                                <input type="text" class="form-control" id="cPass" placeholder="Confirm Password">
-                            </div>
-                        </div>
-
-
-                    </form>
-                </div>
-
-
-                <div class="col-xl-4 col-md-6 mb-4" style="border: 1px solid red"></div>
+            <div class="d-flex justify-content-center mt-5">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>CONTACT</th>
+                        <th>E-MAIL</th>
+                        <th>USERNAME</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>C001</td>
+                        <td>IMAN ADITHYA</td>
+                        <td>0788249177</td>
+                        <td>iman@gmail.com</td>
+                        <td>iman</td>
+                    </tr>
+                    <tr>
+                        <td>C001</td>
+                        <td>IMAN ADITHYA</td>
+                        <td>0788249177</td>
+                        <td>iman@gmail.com</td>
+                        <td>iman</td>
+                    </tr>
+                    <tr>
+                        <td>C001</td>
+                        <td>IMAN ADITHYA</td>
+                        <td>0788249177</td>
+                        <td>iman@gmail.com</td>
+                        <td>iman</td>
+                    </tr>
+                    <tr>
+                        <td>C001</td>
+                        <td>IMAN ADITHYA</td>
+                        <td>0788249177</td>
+                        <td>iman@gmail.com</td>
+                        <td>iman</td>
+                    </tr>
+                    <tr>
+                        <td>C001</td>
+                        <td>IMAN ADITHYA</td>
+                        <td>0788249177</td>
+                        <td>iman@gmail.com</td>
+                        <td>iman</td>
+                    </tr>
+                    <tr>
+                        <td>C001</td>
+                        <td>IMAN ADITHYA</td>
+                        <td>0788249177</td>
+                        <td>iman@gmail.com</td>
+                        <td>iman</td>
+                    </tr>
+                    <tr>
+                        <td>C001</td>
+                        <td>IMAN ADITHYA</td>
+                        <td>0788249177</td>
+                        <td>iman@gmail.com</td>
+                        <td>iman</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
     </div>
 
+    <div id="driver">
+       <div class="container-fluid">
+
+           <div class="col-6">
+               <h1 class="h3 mb-0 text-gray-800">Driver</h1>
+           </div>
+
+           <div class="row justify-content-around mt-3">
+               <div class="col-xl-8 col-md-6 mb-4">
+                   <form>
+                       <div class="row justify-content-around mt-4">
+                           <div class="mb-3 w-25">
+                               <input type="text" class="form-control" id="name" placeholder="Full Name">
+                           </div>
+
+                           <div class="mb-3 w-25">
+                               <input type="text" class="form-control" id="address" placeholder="Address">
+                           </div>
+
+                           <div class="mb-3  w-25">
+                               <input type="text" class="form-control" id="Contact" placeholder="Contact">
+                           </div>
+                       </div>
+                       <div class="row justify-content-around mt-4">
+                           <div class="mb-3 w-25">
+                               <input type="text" class="form-control" id="email" placeholder="Email">
+                           </div>
+
+                           <div class="mb-3 w-25">
+                               <input type="text" class="form-control" id="nic" placeholder="DRIVER NIC">
+                           </div>
+
+                           <div class="mb-3  w-25">
+                               <input type="text" class="form-control" id="dNic" placeholder="LICENSE NUMBER">
+                           </div>
+                       </div>
+                       <div class="row justify-content-around mt-4">
+                           <div class="mb-3 w-25">
+                               <input type="text" class="form-control" id="userName" placeholder="User Name">
+                           </div>
+
+                           <div class="mb-3 w-25">
+                               <input type="text" class="form-control" id="pass" placeholder="Password">
+                           </div>
+
+                           <div class="mb-3  w-25">
+                               <input type="text" class="form-control" id="cPass" placeholder="Confirm Password">
+                           </div>
+                       </div>
+                   </form>
+               </div>
+
+               <div class="col-xl-4 col-md-6 mb-4">
+                           <div class="d-flex flex-column align-items-center mt-4">
+                               <img src=""  alt="" style="width: 18vw;height: 16vh;background-color: #EFEFEF">
+                               <label for="uNic" class="btn btn-primary form-label mt-3" style="width: 8vw;height: 3.5vh">UPLOAD</label>
+                               <input type="file" class="d-none" id="uNic">
+                           </div>
+               </div>
+           </div>
+
+           <div class="row mx-3">
+               <div class="col-6">
+                   <button type="button" class="btn btn-primary btn-sm" style="width: 6vw">Save</button>
+                   <button type="button" class="btn btn-success btn-sm  mx-2" style="width: 6vw">Update</button>
+                   <button type="button" class="btn btn-danger btn-sm  mx-2" style="width: 6vw">Delete</button>
+               </div>
+           </div>
+
+           <div class="d-flex justify-content-center mt-5">
+               <table>
+                   <thead>
+                   <tr>
+                       <th>ID</th>
+                       <th>NAME</th>
+                       <th>CONTACT</th>
+                       <th>E-MAIL</th>
+                       <th>NIC</th>
+                       <th>DRIVER NIC</th>
+                       <th>USERNAME</th>
+                   </tr>
+                   </thead>
+                   <tbody>
+                   <tr>
+                       <td>C001</td>
+                       <td>IMAN</td>
+                       <td>0788249177</td>
+                       <td>iman@gmail.com</td>
+                       <td>200209801887</td>
+                       <td>284723848244</td>
+                       <td>iman</td>
+                   </tr>
+                   <tr>
+                       <td>C001</td>
+                       <td>IMAN</td>
+                       <td>0788249177</td>
+                       <td>iman@gmail.com</td>
+                       <td>200209801887</td>
+                       <td>284723848244</td>
+                       <td>iman</td>
+                   </tr>
+                   <tr>
+                       <td>C001</td>
+                       <td>IMAN</td>
+                       <td>0788249177</td>
+                       <td>iman@gmail.com</td>
+                       <td>200209801887</td>
+                       <td>284723848244</td>
+                       <td>iman</td>
+                   </tr>
+                   <tr>
+                       <td>C001</td>
+                       <td>IMAN</td>
+                       <td>0788249177</td>
+                       <td>iman@gmail.com</td>
+                       <td>200209801887</td>
+                       <td>284723848244</td>
+                       <td>iman</td>
+                   </tr>
+                   <tr>
+                       <td>C001</td>
+                       <td>IMAN</td>
+                       <td>0788249177</td>
+                       <td>iman@gmail.com</td>
+                       <td>200209801887</td>
+                       <td>284723848244</td>
+                       <td>iman</td>
+                   </tr>
+                   <tr>
+                       <td>C001</td>
+                       <td>IMAN</td>
+                       <td>0788249177</td>
+                       <td>iman@gmail.com</td>
+                       <td>200209801887</td>
+                       <td>284723848244</td>
+                       <td>iman</td>
+                   </tr>
+                   <tr>
+                       <td>C001</td>
+                       <td>IMAN</td>
+                       <td>0788249177</td>
+                       <td>iman@gmail.com</td>
+                       <td>200209801887</td>
+                       <td>284723848244</td>
+                       <td>iman</td>
+                   </tr>
+                   </tbody>
+               </table>
+           </div>
+
+       </div>
+    </div>
+
+    <div id="car">
+        <h1> CARRRR</h1>
+    </div>
 </section>
 
 
 
 <script>
 
+
+
     document.getElementById("customer").style.display="none";
+    document.getElementById("driver").style.display="none";
 
     document.getElementById("customerBtn").addEventListener("click",function (){
         document.getElementById("dashboard").style.display="none";
+        document.getElementById("driver").style.display="none";
         document.getElementById("customer").style.display="block";
     });
 
     document.getElementById("dashBtn").addEventListener("click",function (){
         document.getElementById("dashboard").style.display="block";
         document.getElementById("customer").style.display="none";
+        document.getElementById("driver").style.display="none";
     });
+
+    document.getElementById("driverBtn").addEventListener("click",function (){
+        document.getElementById("dashboard").style.display="none";
+        document.getElementById("customer").style.display="none";
+        document.getElementById("driver").style.display="block";
+    });
+
+
+
+
 
 </script>
 <script src="../assets/script/Dashboard.js"></script>
