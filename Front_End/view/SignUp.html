@@ -9,21 +9,73 @@
 </head>
 <body>
 <section>
-    <div id="form">
+    <div id="form" class="container-fluid ">
         <h1>SIGN UP</h1>
 
-        <form>
-
-            <div class="row justify-content-around">
-                <div class="mb-3 col-5">
+        <form class="mt-5">
+            <div class="row justify-content-between container-fluid">
+                <div class=" col-6">
                     <input type="text" class="form-control" id="txtName" placeholder="Full Name">
                 </div>
-                <div class="mb-3 col-5">
+                <div class=" col-6">
                     <input type="text" class="form-control" id="txtUserName" placeholder="UserName">
                 </div>
             </div>
 
+            <div class="row justify-content-between container-fluid mt-3">
+                <div class=" col-6">
+                    <input type="text" class="form-control" id="txtAddress" placeholder="Address">
+                </div>
+                <div class=" col-6">
+                    <input type="text" class="form-control" id="txtContact" placeholder="Contact">
+                </div>
+            </div>
+
+            <div class="row justify-content-between container-fluid mt-3">
+                <div>
+                    <input type="text" class="form-control" id="txtNic" placeholder="NIC">
+                </div>
+            </div>
+
+            <div class="row justify-content-between container-fluid mt-3">
+                <div>
+                    <input type="text" class="form-control" id="txtLicense" placeholder="License Number">
+                </div>
+            </div>
+
+            <div class="row justify-content-between container-fluid mt-3">
+                <div class=" col-6">
+                    <input type="text" class="form-control" id="txtPass" placeholder="Password">
+                </div>
+                <div class=" col-6">
+                    <input type="text" class="form-control" id="txtConPass" placeholder="Confirm Password">
+                </div>
+            </div>
         </form>
+
+        <div class="row mt-5 justify-content-around">
+
+            <div class="col-5">
+                <div class="d-flex flex-column align-items-center">
+                    <img src=""  alt="" style="width: 12vw;height: 14vh;background-color: #EFEFEF">
+                    <label for="a" class="btn  btn-outline-dark form-label mt-3 btn-sm ">UPLOAD</label>
+                    <input type="file" class="d-none" id="a">
+                </div>
+            </div>
+
+
+            <div class="col-5">
+                <div class="d-flex flex-column align-items-center">
+                    <img src=""  alt="" style="width: 12vw;height: 14vh;background-color: #EFEFEF">
+                    <label for="b" class="btn  btn-outline-dark form-label mt-3 btn-sm ">UPLOAD</label>
+                    <input type="file" class="d-none" id="b">
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5 text-center d-grid gap-2 col-9 mx-auto">
+            <button type="button" class="btn btn-primary">REGISTER</button>
+        </div>
 
     </div>
 </section>

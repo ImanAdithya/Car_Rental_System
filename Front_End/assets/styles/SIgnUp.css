@@ -10,18 +10,18 @@ section{
 }
 
 #form{
-    width: 40vw;
-    height: 90vh;
+    width: 30vw;
+    height: 74vh;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
+    position: relative;
+    top: 10vh;
+    background-color: white;
+    border-radius: 1vw;
 }
 
 h1{
     position: relative;
     text-align: center;
+    top: 2vh;
 }
+
