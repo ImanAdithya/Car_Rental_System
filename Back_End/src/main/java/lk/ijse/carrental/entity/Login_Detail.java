@@ -13,12 +13,11 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Data
 public class Login_Detail {
-
     @Id
     private String loginID;
     private String date;
     private String time;
     @ManyToOne(cascade = {CascadeType.REFRESH,CascadeType.DETACH})
     @JoinColumn(name ="userName",referencedColumnName = "userName",nullable = false)
-    private String userName;
+    private User user;
 }

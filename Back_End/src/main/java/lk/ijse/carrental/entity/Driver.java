@@ -1,21 +1,29 @@
 package lk.ijse.carrental.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.hibernate.engine.internal.Cascade;
+
+import javax.persistence.*;
+
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@ToString
 public class Driver {
-
-    String driverID;
-
-    String driverName;
-
-    String driverEmail;
-
-    String driverNIC;
-
-    String driverLicence;
-
-    String availability;
-
-    String filePath;
-
-    String userName;
+    @Id
+    private String driverID;
+    private String driverName;
+    private String driverEmail;
+    private String driverNIC;
+    private String driverLicence;
+    private String availability;
+   private String filePath;
+   @OneToOne(cascade={CascadeType.REFRESH,CascadeType.DETACH})
+   @JoinColumn(name = "userName",referencedColumnName = "userName",nullable = false)
+    private User userName;
 
 }

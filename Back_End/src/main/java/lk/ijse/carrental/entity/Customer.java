@@ -1,14 +1,29 @@
 package lk.ijse.carrental.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import javax.persistence.*;
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class Customer {
-    String cusID;
-    String cusName;
-    String cusEmail;
-    String cusAddress;
-    String nic;
-    String licenceNumber;
-    String filePath_1;
-    String filePath_2;
-    String userName;
+    @Id
+    private String cusID;
+    private String cusName;
+    private String cusEmail;
+    private String cusAddress;
+    private String nic;
+    private String licenceNumber;
+    private String filePath_1;
+    private String filePath_2;
+    @OneToOne(cascade = {CascadeType.REFRESH,CascadeType.DETACH})
+    @JoinColumn(name = "userName",referencedColumnName = "userName",nullable = false)
+    private User userName;
 
 }
