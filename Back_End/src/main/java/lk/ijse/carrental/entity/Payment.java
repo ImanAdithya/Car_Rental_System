@@ -17,5 +17,9 @@ public class Payment {
     @Id
     private String paymentID;
     private String payment;
+    private String paymentExtraMilage;
+    private String wavierPayment;
+
+
 
 }

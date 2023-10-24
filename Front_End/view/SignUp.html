@@ -6,52 +6,52 @@
     <link rel="stylesheet" href="../assets/styles/SIgnUp.css">
     <link rel="stylesheet" href="../assets/styles/normalize.css">
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
+
 </head>
 <body>
 <section>
     <div id="form" class="container-fluid ">
         <h1>SIGN UP</h1>
 
-        <form class="mt-5">
+        <form class="mt-5" id="userForm">
             <div class="row justify-content-between container-fluid">
                 <div class=" col-6">
-                    <input type="text" class="form-control" id="txtName" placeholder="Full Name">
+                    <input type="text" class="form-control" id="txtName" name="cusName" placeholder="Full Name">
                 </div>
                 <div class=" col-6">
-                    <input type="text" class="form-control" id="txtUserName" placeholder="UserName">
+                    <input type="text" class="form-control" id="txtUserName" name="userName" placeholder="UserName">
                 </div>
             </div>
 
             <div class="row justify-content-between container-fluid mt-3">
                 <div class=" col-6">
-                    <input type="text" class="form-control" id="txtAddress" placeholder="Address">
+                    <input type="text" class="form-control" id="txtAddress" name="cusAddress" placeholder="Address">
                 </div>
                 <div class=" col-6">
-                    <input type="text" class="form-control" id="txtContact" placeholder="Contact">
-                </div>
-            </div>
-
-            <div class="row justify-content-between container-fluid mt-3">
-                <div>
-                    <input type="text" class="form-control" id="txtNic" placeholder="NIC">
+                    <input type="text" class="form-control" id="txtContact" name="contact" placeholder="Contact">
                 </div>
             </div>
 
             <div class="row justify-content-between container-fluid mt-3">
                 <div>
-                    <input type="text" class="form-control" id="txtLicense" placeholder="License Number">
+                    <input type="text" class="form-control" id="txtNic" name="cusEmail" placeholder="Email">
+                </div>
+            </div>
+
+            <div class="row justify-content-between container-fluid mt-3">
+                <div>
+                    <input type="text" class="form-control" id="txtLicense" name="licenceNumber" placeholder="License Number">
                 </div>
             </div>
 
             <div class="row justify-content-between container-fluid mt-3">
                 <div class=" col-6">
-                    <input type="text" class="form-control" id="txtPass" placeholder="Password">
+                    <input type="text" class="form-control" id="txtPass" name="password" placeholder="Password">
                 </div>
                 <div class=" col-6">
                     <input type="text" class="form-control" id="txtConPass" placeholder="Confirm Password">
                 </div>
             </div>
-        </form>
 
         <div class="row mt-5 justify-content-around">
 
@@ -59,7 +59,7 @@
                 <div class="d-flex flex-column align-items-center">
                     <img src=""  alt="" style="width: 12vw;height: 14vh;background-color: #EFEFEF">
                     <label for="a" class="btn  btn-outline-dark form-label mt-3 btn-sm ">UPLOAD</label>
-                    <input type="file" class="d-none" id="a">
+                    <input type="file" class="d-none" id="a" name="filePath_1">
                 </div>
             </div>
 
@@ -68,16 +68,43 @@
                 <div class="d-flex flex-column align-items-center">
                     <img src=""  alt="" style="width: 12vw;height: 14vh;background-color: #EFEFEF">
                     <label for="b" class="btn  btn-outline-dark form-label mt-3 btn-sm ">UPLOAD</label>
-                    <input type="file" class="d-none" id="b">
+                    <input type="file" class="d-none" id="b" name="filePath_2">
                 </div>
             </div>
         </div>
 
         <div class="mt-5 text-center d-grid gap-2 col-9 mx-auto">
-            <button type="button" class="btn btn-primary">REGISTER</button>
+            <button id="btnRegister" type="button" class="btn btn-primary">REGISTER</button>
         </div>
+        </form>
 
     </div>
 </section>
+
+<script src="../assets/js/jquery-3.6.1.min.js"></script>
+<script>
+
+ $('#btnRegister').click(function () {
+      let formData=$('#userForm').serialize();
+     //let formData = new FormData($("#userForm")[0]);
+
+     $.ajax({
+         url:'http://localhost:8080/Back_End_war/customer',
+         method:'post',
+         data:formData,
+         async: false,
+         contentType: false,
+         processData: false,
+         success:function (res) {
+             alert("Customer Added Success");
+         },error:function (err) {
+             alert("ERROR SOMETHING")
+             console.log(err)
+         }
+     });
+
+ })
+
+</script>
 </body>
 </html>

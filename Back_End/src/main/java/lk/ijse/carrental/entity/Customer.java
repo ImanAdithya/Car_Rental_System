@@ -16,14 +16,14 @@ public class Customer {
     @Id
     private String cusID;
     private String cusName;
+    private String contact;
     private String cusEmail;
     private String cusAddress;
-    private String nic;
     private String licenceNumber;
     private String filePath_1;
     private String filePath_2;
     @OneToOne(cascade = {CascadeType.REFRESH,CascadeType.DETACH})
-    @JoinColumn(name = "userName",referencedColumnName = "userName",nullable = false)
+    @JoinColumn(name = "userName",referencedColumnName = "userName")
     private User userName;
 
 }

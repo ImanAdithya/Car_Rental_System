@@ -16,6 +16,7 @@ import javax.persistence.Id;
 @ToString
 public class User {
     @Id
+    private String userID;
     private String userName;
     private String password;
     private String role;

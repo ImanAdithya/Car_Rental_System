@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,4 +21,7 @@ public class Rent {
     @ManyToOne(cascade = {CascadeType.REFRESH,CascadeType.DETACH})
     @JoinColumn(name = "customerID",referencedColumnName = "cusID",nullable = false)
     private Customer customerID;
+
+    @OneToMany(mappedBy = "rents",cascade = CascadeType.ALL)
+    private List<Rent_Detail> rentDetailList;
 }

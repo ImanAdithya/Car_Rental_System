@@ -14,10 +14,9 @@ import javax.persistence.Id;
 @Data
 @ToString
 public class Car {
-
     @Id
-    String regNo;
     String carID;
+    String regNo;
     String type;
     String brand;
     String color;
