@@ -34,7 +34,7 @@ public class CustomerServiceImpl implements CustomerService {
 
        // Customer cus = mapper.map (dto, Customer.class);
         customerRepo.save (new Customer (dto.getCusID (), dto.getCusName (), dto.getContact (), dto.getCusEmail (), dto.getCusAddress (), dto.getLicenceNumber () , dto.getFilePath_1 (), dto.getFilePath_2 (),new User (dto.getUserDTO ().getUserID (),dto.getUserDTO ().getUserName (),dto.getUserDTO ().getPassword (),dto.getUserDTO ().getRole ())));
-        userService.saveUser (new UserDTO (dto.getUserDTO ().getUserID (),dto.getUserDTO ().getUserName (),dto.getUserDTO ().getPassword (),dto.getUserDTO ().getRole ()));
+        //userService.saveUser (new UserDTO (dto.getUserDTO ().getUserID (),dto.getUserDTO ().getUserName (),dto.getUserDTO ().getPassword (),dto.getUserDTO ().getRole ()));
 
     }
 }

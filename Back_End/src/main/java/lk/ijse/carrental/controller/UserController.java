@@ -13,18 +13,27 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/customer")
 public class UserController {
 
+//    @Autowired
+//    CustomerService customerService;
+
     @Autowired
-    CustomerService customerService;
+    UserService userService;
+
+//    @PostMapping
+//    public ResponseUtil saveUser(@ModelAttribute CustomerDTO customerDTO,@ModelAttribute UserDTO userDTO){
+//        customerDTO.setCusID ("C001");
+//        userDTO.setUserID ("UT001");
+//        userDTO.setRole ("CUS");
+//        customerDTO.setUserDTO (userDTO);
+//        System.out.println ("CUSTOMER DTO +++++ "+customerDTO.toString ());
+//        customerService.saveCustomer (customerDTO);
+//
+//        return new ResponseUtil ("OK","Customer User Added Success",customerDTO);
+//    }
 
     @PostMapping
-    public ResponseUtil saveUser(@ModelAttribute CustomerDTO customerDTO,@ModelAttribute UserDTO userDTO){
-        customerDTO.setCusID ("C001");
-        userDTO.setUserID ("UT001");
-        userDTO.setRole ("CUS");
-        customerDTO.setUserDTO (userDTO);
-        System.out.println ("CUSTOMER DTO +++++ "+customerDTO.toString ());
-        customerService.saveCustomer (customerDTO);
-
-        return new ResponseUtil ("OK","Customer User Added Success",customerDTO);
+    public ResponseUtil saveUser(@ModelAttribute UserDTO dto){
+        userService.saveUser (dto);
+        return  new ResponseUtil("OK","USER ADDED",dto);
     }
 }
