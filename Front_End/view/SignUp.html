@@ -85,23 +85,25 @@
 <script>
 
  $('#btnRegister').click(function () {
-      let formData=$('#userForm').serialize();
-     //let formData = new FormData($("#userForm")[0]);
+     // let formData=$('#userForm').serialize();
+     let formData = new FormData($("#userForm")[0]);
 
      $.ajax({
          url:'http://localhost:8080/Back_End_war/customer',
          method:'post',
          data:formData,
-         contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+         contentType: false,
+         processData: false,
          success:function (res) {
-             alert("Customer Added Success");
+             alert(res+"Customer Added Success");
          },error:function (err) {
              alert("ERROR SOMETHING")
              console.log(err)
          }
      });
-
  })
+
+
 
 </script>
 </body>

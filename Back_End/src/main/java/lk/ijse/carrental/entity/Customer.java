@@ -24,8 +24,7 @@ public class Customer {
     private String licenceNumber;
     private String filePath_1;
     private String filePath_2;
-    @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "userID")
+    @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
 }
