@@ -28,7 +28,7 @@ public class CustomerController {
 //    }
 
     @PostMapping
-    public ResponseUtil addCustomer(@ModelAttribute CustomerDTO customerDTO, @ModelAttribute UserDTO user){
+    public ResponseUtil saveCustomer(@ModelAttribute CustomerDTO customerDTO, @ModelAttribute UserDTO user){
         System.out.println(customerDTO);
         customerDTO.setUserDTO (user);
         System.out.println(customerDTO);
