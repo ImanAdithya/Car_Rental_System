@@ -18,6 +18,5 @@ public class CustomerDTO {
     private String licenceNumber;
     private String filePath_1;
     private String filePath_2;
-    private String username;
     private UserDTO userDTO;
 }

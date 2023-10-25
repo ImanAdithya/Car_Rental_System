@@ -18,14 +18,11 @@ public class UserController {
 
     @PostMapping
     public ResponseUtil saveUser(@ModelAttribute CustomerDTO customerDTO,@ModelAttribute UserDTO userDTO){
-        System.out.println ("THIS IS CUSTOMER DTO "+customerDTO.toString ());
         customerDTO.setCusID ("C001");
-        customerDTO.setUsername (userDTO.getUserName ());
-        userDTO.setUserID ("US001");
+        userDTO.setUserID ("UT001");
         userDTO.setRole ("CUS");
         customerDTO.setUserDTO (userDTO);
-        System.out.println ("THIS IS CUSTOMER DTO "+customerDTO.toString ());
-
+        System.out.println ("CUSTOMER DTO +++++ "+customerDTO.toString ());
         customerService.saveCustomer (customerDTO);
 
         return new ResponseUtil ("OK","Customer User Added Success",customerDTO);

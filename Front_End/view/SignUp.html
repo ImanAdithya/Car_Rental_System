@@ -92,9 +92,7 @@
          url:'http://localhost:8080/Back_End_war/customer',
          method:'post',
          data:formData,
-         async: false,
-         contentType: false,
-         processData: false,
+         contentType: 'application/x-www-form-urlencoded; charset=utf-8',
          success:function (res) {
              alert("Customer Added Success");
          },error:function (err) {

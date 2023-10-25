@@ -1,6 +1,7 @@
 package lk.ijse.carrental.entity;
 
 
+import lk.ijse.carrental.dto.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,4 +21,6 @@ public class User {
     private String userName;
     private String password;
     private String role;
+
+
 }

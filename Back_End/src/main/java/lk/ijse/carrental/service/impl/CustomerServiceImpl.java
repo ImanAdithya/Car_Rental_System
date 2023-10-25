@@ -1,6 +1,7 @@
 package lk.ijse.carrental.service.impl;
 
 import lk.ijse.carrental.dto.CustomerDTO;
+import lk.ijse.carrental.dto.UserDTO;
 import lk.ijse.carrental.entity.Customer;
 import lk.ijse.carrental.entity.User;
 import lk.ijse.carrental.repo.CustomerRepository;
@@ -31,9 +32,9 @@ public class CustomerServiceImpl implements CustomerService {
             throw new RuntimeException (dto.getCusID ()+" This Customer User Already Exists..");
         }
 
-        Customer cus = mapper.map (dto, Customer.class);
-        customerRepo.save (cus);
+       // Customer cus = mapper.map (dto, Customer.class);
+        customerRepo.save (new Customer (dto.getCusID (), dto.getCusName (), dto.getContact (), dto.getCusEmail (), dto.getCusAddress (), dto.getLicenceNumber () , dto.getFilePath_1 (), dto.getFilePath_2 (),new User (dto.getUserDTO ().getUserID (),dto.getUserDTO ().getUserName (),dto.getUserDTO ().getPassword (),dto.getUserDTO ().getRole ())));
+        userService.saveUser (new UserDTO (dto.getUserDTO ().getUserID (),dto.getUserDTO ().getUserName (),dto.getUserDTO ().getPassword (),dto.getUserDTO ().getRole ()));
 
-        userService.saveUser (dto.getUserDTO ());
     }
 }

@@ -13,6 +13,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @ToString
 public class Customer {
+
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private String cusID;
     private String cusName;
@@ -22,8 +24,8 @@ public class Customer {
     private String licenceNumber;
     private String filePath_1;
     private String filePath_2;
-    @OneToOne(cascade = {CascadeType.REFRESH,CascadeType.DETACH})
-    @JoinColumn(name = "userName",referencedColumnName = "userName")
-    private User userName;
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "userID")
+    private User user;
 
 }
