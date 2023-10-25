@@ -28,11 +28,12 @@ public class CustomerController {
 //    }
 
     @PostMapping
-    public ResponseUtil saveCustomer(@ModelAttribute CustomerDTO customerDTO, @ModelAttribute UserDTO user){
-        System.out.println(customerDTO);
+    public ResponseUtil saveCustomer(@ModelAttribute CustomerDTO customerDTO, @ModelAttribute UserDTO user,@ModelAttribute String cusID){
+
+        System.out.println("++++++++++++"+cusID);
+
         customerDTO.setUserDTO (user);
-        System.out.println(customerDTO);
-        customerService.saveCustomer (customerDTO);
-        return new ResponseUtil("Ok","Successfully Added",null);
+        //customerService.saveCustomer (customerDTO);
+        return new ResponseUtil("Ok","Successfully Added",customerDTO);
     }
 }

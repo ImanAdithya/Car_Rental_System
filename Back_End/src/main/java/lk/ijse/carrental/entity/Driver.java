@@ -22,8 +22,7 @@ public class Driver {
     private String driverLicence;
     private String availability;
    private String filePath;
-   @OneToOne(cascade={CascadeType.REFRESH,CascadeType.DETACH})
-   @JoinColumn(name = "userName",referencedColumnName = "userName",nullable = false)
-    private User userName;
+    @OneToOne(cascade = CascadeType.ALL)
+    private User user;
 
 }

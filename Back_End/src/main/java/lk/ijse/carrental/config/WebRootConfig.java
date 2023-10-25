@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @Import({JPAConfig.class})
-@ComponentScan(basePackages = "lk.ijse.carrental")
+@ComponentScan(basePackages = "lk.ijse.carrental.service")
 public class WebRootConfig {
     public WebRootConfig(){
         System.out.println ("This is WebRootConfig Constructor");

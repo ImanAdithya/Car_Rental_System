@@ -14,6 +14,7 @@
         <h1>SIGN UP</h1>
 
         <form class="mt-5" id="userForm">
+
             <div class="row justify-content-between container-fluid mt-3">
                 <div>
                     <input type="text" class="form-control" id="cusID" name="cusID" placeholder="CustomerID">
@@ -82,6 +83,7 @@
         <div class="mt-5 text-center d-grid gap-2 col-9 mx-auto">
             <button id="btnRegister" type="button" class="btn btn-primary">REGISTER</button>
         </div>
+
         </form>
 
     </div>
@@ -91,15 +93,17 @@
 <script>
 
  $('#btnRegister').click(function () {
-      let formData=$('#userForm').serialize();
-    // let formData = new FormData($("#userForm")[0]);
+      //let formData=$('#userForm').serialize();
+     let formData = new FormData($("#userForm")[0]);
 
      $.ajax({
          url:'http://localhost:8080/Back_End_war/customer',
          method:'post',
          data:formData,
+         //contentType: 'application/x-www-form-urlencoded; charset=utf-8',
          contentType: false,
          processData: false,
+         async:false,
          success:function (res) {
              alert(res+"Customer Added Success");
          },error:function (err) {
@@ -108,7 +112,6 @@
          }
      });
  })
-
 
 
 </script>
