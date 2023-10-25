@@ -18,6 +18,8 @@ import javax.persistence.OneToOne;
 public class DriverDTO {
     private String driverID;
     private String driverName;
+    private String driverAddress;
+    private String driverContact;
     private String driverEmail;
     private String driverNIC;
     private String driverLicence;

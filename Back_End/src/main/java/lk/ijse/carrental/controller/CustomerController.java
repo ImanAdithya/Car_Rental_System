@@ -15,25 +15,27 @@ public class CustomerController {
     @Autowired
     CustomerService customerService;
 
-//    @PostMapping
-//    public ResponseUtil saveUser(@ModelAttribute CustomerDTO customerDTO,@ModelAttribute UserDTO userDTO){
-//        customerDTO.setCusID ("C001");
-//        userDTO.setUserID ("UT001");
-//        userDTO.setRole ("CUS");
-//        customerDTO.setUserDTO (userDTO);
-//        System.out.println ("CUSTOMER DTO +++++ "+customerDTO.toString ());
-//        customerService.saveCustomer (customerDTO);
-//
-//        return new ResponseUtil ("OK","Customer User Added Success",customerDTO);
-//    }
+    //in here if you have used @model attribute you cant send multipart type data here
+    //only query strings and x-www-form url encoded data
+    //got it.?
+
+    //allways check the front end request headers content-type header to verfy what types of data you are
+    //sending to the backend
+
+    //Done..........
+
+    //any issues.?
+
+    //how we pass x-www-form url encoded data to backend ..formdata or not
 
     @PostMapping
-    public ResponseUtil saveCustomer(@ModelAttribute CustomerDTO customerDTO, @ModelAttribute UserDTO user,@ModelAttribute String cusID){
+    public ResponseUtil saveCustomer(@ModelAttribute CustomerDTO customerDTO, @ModelAttribute UserDTO user){
 
-        System.out.println("++++++++++++"+cusID);
-
+        System.out.println("++++++++++++"+customerDTO.toString ());
+        //Customer Dto wlaat values enne na ara succus kiyla awe math  methnata commnet krpu nisa
+        //ok wait
         customerDTO.setUserDTO (user);
-        //customerService.saveCustomer (customerDTO);
+        customerService.saveCustomer (customerDTO);
         return new ResponseUtil("Ok","Successfully Added",customerDTO);
     }
 }

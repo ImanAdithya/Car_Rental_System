@@ -17,6 +17,8 @@ public class Driver {
     @Id
     private String driverID;
     private String driverName;
+    private String driverAddress;
+    private String driverContact;
     private String driverEmail;
     private String driverNIC;
     private String driverLicence;

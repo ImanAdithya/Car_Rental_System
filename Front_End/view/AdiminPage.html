@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../assets/styles/Admin.css">
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="../assets/styles/custom/sb-admin-2.min.css" rel="stylesheet">
-    <script src="../assets/js/jquery-3.6.1.min.js"></script>
+
 
 
 </head>
@@ -296,67 +296,69 @@
                <h1 class="h3 mb-0 text-gray-800">Driver</h1>
            </div>
 
-           <div class="row justify-content-around mt-3">
-               <div class="col-xl-8 col-md-6 mb-4">
-                   <form>
+           <form id="driverForm">
+               <div class="row justify-content-around mt-3">
+                   <div class="col-xl-8 col-md-6 mb-4">
                        <div class="row justify-content-around mt-4">
                            <div class="mb-3 w-25">
-                               <input type="text" class="form-control" id="name" placeholder="Full Name">
+                               <input type="text" class="form-control" id="name"  name="driverName" placeholder="Full Name">
                            </div>
 
                            <div class="mb-3 w-25">
-                               <input type="text" class="form-control" id="address" placeholder="Address">
+                               <input type="text" class="form-control" id="address" name="driverAddress" placeholder="Address">
                            </div>
 
                            <div class="mb-3  w-25">
-                               <input type="text" class="form-control" id="Contact" placeholder="Contact">
+                               <input type="text" class="form-control" id="Contact" name="driverContact" placeholder="Contact">
                            </div>
                        </div>
                        <div class="row justify-content-around mt-4">
                            <div class="mb-3 w-25">
-                               <input type="text" class="form-control" id="email" placeholder="Email">
+                               <input type="text" class="form-control" id="email" name="driverEmail" placeholder="Email">
                            </div>
 
                            <div class="mb-3 w-25">
-                               <input type="text" class="form-control" id="nic" placeholder="DRIVER NIC">
+                               <input type="text" class="form-control" id="nic" name="driverNIC" placeholder="DRIVER NIC">
                            </div>
 
                            <div class="mb-3  w-25">
-                               <input type="text" class="form-control" id="dNic" placeholder="LICENSE NUMBER">
+                               <input type="text" class="form-control" id="dNic" name="driverLicence" placeholder="LICENSE NUMBER">
                            </div>
                        </div>
                        <div class="row justify-content-around mt-4">
                            <div class="mb-3 w-25">
-                               <input type="text" class="form-control" id="userName" placeholder="User Name">
+                               <input type="text" class="form-control" id="userName" name="userName" placeholder="User Name">
                            </div>
 
                            <div class="mb-3 w-25">
-                               <input type="text" class="form-control" id="pass" placeholder="Password">
+                               <input type="text" class="form-control" id="pass" name="password" placeholder="Password">
                            </div>
 
                            <div class="mb-3  w-25">
-                               <input type="text" class="form-control" id="cPass" placeholder="Confirm Password">
+                               <input type="text" class="form-control" id="cPass" name="role" placeholder="Confirm Password">
                            </div>
                        </div>
-                   </form>
+
+                   </div>
+
+                   <div class="col-xl-4 col-md-6 mb-4">
+                       <div class="d-flex flex-column align-items-center mt-4">
+                           <img src=""  alt="" style="width: 18vw;height: 16vh;background-color: #EFEFEF">
+                           <label for="uNic" class="btn  btn-outline-dark form-label mt-3" style="width: 8vw;height: 3.5vh">UPLOAD</label>
+                           <input type="file" class="d-none" id="uNic">
+                       </div>
+                   </div>
                </div>
 
-               <div class="col-xl-4 col-md-6 mb-4">
-                           <div class="d-flex flex-column align-items-center mt-4">
-                               <img src=""  alt="" style="width: 18vw;height: 16vh;background-color: #EFEFEF">
-                               <label for="uNic" class="btn  btn-outline-dark form-label mt-3" style="width: 8vw;height: 3.5vh">UPLOAD</label>
-                               <input type="file" class="d-none" id="uNic">
-                           </div>
+               <div class="row mx-3">
+                   <div class="col-6">
+                       <button type="button" id="btnSaveDriver" class="btn btn-primary btn-sm" style="width: 6vw">Save</button>
+                       <button type="button" class="btn btn-success btn-sm  mx-2" style="width: 6vw">Update</button>
+                       <button type="button" class="btn btn-danger btn-sm  mx-2" style="width: 6vw">Delete</button>
+                   </div>
                </div>
-           </div>
 
-           <div class="row mx-3">
-               <div class="col-6">
-                   <button type="button" class="btn btn-primary btn-sm" style="width: 6vw">Save</button>
-                   <button type="button" class="btn btn-success btn-sm  mx-2" style="width: 6vw">Update</button>
-                   <button type="button" class="btn btn-danger btn-sm  mx-2" style="width: 6vw">Delete</button>
-               </div>
-           </div>
+           </form>
 
            <div class="d-flex justify-content-center mt-5">
                <table>
@@ -884,8 +886,30 @@
 </section>
 
 
-
+<script src="../assets/js/jquery-3.6.1.min.js"></script>
 <script>
+
+
+    $('#btnSaveDriver').click(function () {
+        //let formData=$('#userForm').serialize();
+        let formData = new FormData($("#driverForm")[0]);
+
+        $.ajax({
+            url:'http://localhost:8080/Back_End_war/driver',
+            method:'post',
+            data:formData,
+            //contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+            contentType: false,
+            processData: false,
+            async:false,
+            success:function (res) {
+                alert(res+"Employee Added Success");
+            },error:function (err) {
+                alert("ERROR SOMETHING")
+                console.log(err)
+            }
+        });
+    })
 
 
 
