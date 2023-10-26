@@ -70,10 +70,49 @@ function getAllDriver() {
                 let row = `<tr><td>${id}</td><td>${name}</td><td>${contact}</td><td>${email}</td><td>${nic}</td><td>${driverNic}</td><td>${userName}</td></tr>`;
                 $("#tblDriver").append(row);
             }
+            bindTrEvents();
         },error(err){
             alert(err+"Driver Loaded Failed");
         }
     });
 }
 
-//Bind Values to Tables
+//Bind Table Values to TextFields
+function bindTrEvents() {
+
+    $('#tblDriver>tr').click(function () {
+        let id=$(this).children().eq(0).text();
+
+       let driver= findCustomer(id);
+       console.log(driver)
+
+
+        $('#txtDriverName').val();
+        $('#txtDriverAddress').val();
+        $('#txtDriverContact').val();
+        $('#txtDriverEmail').val();
+        $('#txtDriverNic').val();
+        $('#txtDriverLicense').val();
+        $('#txtDUserName').val();
+        $('#txtDUserPass').val();
+
+    });
+}
+
+//find Diver
+function findCustomer(id) {
+    $.ajax({
+        url:BASIC_URL+'driver?id='+id,
+        method:'GET',
+        dataType: 'json',
+        async: false,
+        success:function (res) {
+            console.log("Driver find Succuss");
+           // console.log(res.data);
+            return res.data;
+            },error:function () {
+                console.log("Driver Find Error")
+            }
+        });
+    }
+

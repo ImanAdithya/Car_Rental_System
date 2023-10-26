@@ -43,7 +43,7 @@ public class DriverController {
 
     @GetMapping(params = {"id"})
     public ResponseUtil getDriver(String id){
-        driverService.findDriver (id);
-        return new ResponseUtil ("OK","Successfully Loaded",id);
+        DriverDTO driver = driverService.findDriver (id);
+        return new ResponseUtil ("OK","Successfully Loaded",driver);
     }
 }
