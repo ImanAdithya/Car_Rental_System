@@ -1,14 +1,16 @@
+getAllCars();
+let carIDNum="";
 
 //save Car
 $('#btnSaveCar').click(function () {
     let carID="CR001";
     let regNO=$('#txtRegNum').val();
-    let type=$('#txtCarType').val();
+    let type=$('#txtCarType option:selected').text();
     let brand=$('#txtBrand').val();
     let color=$('#txtColor').val();
     let passenger=$('#txtPassenger').val();
-    let fuelType=$('#txtFuelType').val();
-    let transmissionType=$('#txtTransmissionType').val();
+    let fuelType=$('#txtFuelType option:selected').text();
+    let transmissionType=$('#txtTransmissionType option:selected').text();
     let currentMeter=$('#txtCurrentMValue').val();
     let priceExtraKM=$('#txtPriceExtraKm').val();
     let wavierPayment=$('#txtWavierPayment').val();
@@ -16,7 +18,7 @@ $('#btnSaveCar').click(function () {
     let fmdPrice=$('#txtFMDPrice').val();
     let fmm=$('#txtFMM').val();
     let fmmPrice=$('#txtFMMPrice').val();
-    let available=$('#txtAvailabilityType').val();
+    let available=$('#txtAvailabilityType option:selected').text();
 
     let car={
         carID:carID,
@@ -46,6 +48,7 @@ $('#btnSaveCar').click(function () {
         origin:'*',
         success:function (res) {
             alert(res.message);
+            getAllCars();
         },error:function (err) {
             alert(err);
         }
@@ -59,7 +62,39 @@ function getAllCars() {
         method:'GET',
         dataType:'json',
         success:function (res) {
+            let car=res.data;
+            console.log(res.data);
+            for (let i in car) {
+                let c=car[i];
+                let id=c.carID;
+                let regNo=c.regNo;
+                let brand=c.brand;
+                let fuel=c.fuelType;
+                let transmission=c.transmissionType;
+                let currentMeter=c.currentMeterValue;
+                let available=c.availability;
 
+                let row = `<tr>
+                             <td>${id}</td>
+                             <td>${regNo}</td>
+                             <td>${brand}</td>
+                             <td>${fuel}</td>
+                             <td>${transmission}</td>
+                             <td>${currentMeter}</td>
+                             <td>${available}</td>
+                           </tr>`;
+                $("#tblCar").append(row);
+            }
+        },error:function (err) {
+            alert(err);
         }
     });
 }
+
+function bindTrEvent() {
+    $('#tblCar>tr').click(function () {
+        carIDNum=$(this).children().eq(0).text();
+
+    });
+}
+
