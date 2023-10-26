@@ -1,14 +1,15 @@
 let BASIC_URL='http://localhost:8080/Back_End_war/';
 
-
 getAllDriver();
+
+let driverIDNum="";
 
 //Bind Table Values to TextFields
 function bindTrEvents() {
     $('#tblDriver>tr').click(function () {
-        let id=$(this).children().eq(0).text();
+       driverIDNum=$(this).children().eq(0).text();
 
-        findCustomer(id, function (d) {
+        findCustomer(driverIDNum, function (d) {
             $('#txtDriverName').val(d.driverName);
             $('#txtDriverAddress').val(d.driverAddress);
             $('#txtDriverContact').val(d.driverContact);
@@ -24,7 +25,7 @@ function bindTrEvents() {
 
 //Save Driver
 $('#btnSaveDriver').click(function () {
-    let driverID="D001"
+    let driverID="D002"
     let driverName=$('#txtDriverName').val();
     let driverAddress=$('#txtDriverAddress').val();
     let driverContact=$('#txtDriverContact').val();
@@ -171,7 +172,19 @@ $('#btnUpdateDriver').click(function () {
 
 });
 
-
+$('#btnDeleteDriver').click(function () {
+    $.ajax({
+        url:BASIC_URL+'driver?id='+driverIDNum,
+        method: 'DELETE',
+        success:function (res) {
+            console.log(res.message);
+            getAllDriver();
+            clearFields();
+        },error:function (err) {
+            console.log(err)
+        }
+    });
+});
 
 
 
