@@ -1,5 +1,32 @@
 getAllCars();
+
 let carIDNum="";
+
+//Bind table values to Text Fields
+function bindTrEvent() {
+    $('#tblCar>tr').click(function () {
+        carIDNum=$(this).children().eq(0).text();
+
+        findCar(carIDNum,function (c) {
+            $('#txtRegNum').val(c.regNo);
+            $('#txtCarType option:selected').text(c.type);
+            $('#txtBrand').val(c.brand);
+            $('#txtColor').val(c.color);
+            $('#txtPassenger').val(c.passenger);
+            $('#txtFuelType option:selected').text(c.fuelType);
+            $('#txtTransmissionType option:selected').text(c.transmissionType);
+            $('#txtCurrentMValue').val(c.currentMeterValue);
+            $('#txtPriceExtraKm').val(c.priceForExtra_Km);
+            $('#txtWavierPayment').val(c.wavierPayment);
+            $('#txtFMD').val(c.freeMilageDaily);
+            $('#txtFMDPrice').val(c.freeMilageDailyPrice);
+            $('#txtFMM').val(c.freeMilageMonthly);
+            $('#txtFMMPrice').val(c.freeMilageMonthlyPrice);
+            $('#txtAvailabilityType option:selected').text(c.availability);
+        });
+
+    });
+}
 
 //save Car
 $('#btnSaveCar').click(function () {
@@ -85,16 +112,23 @@ function getAllCars() {
                            </tr>`;
                 $("#tblCar").append(row);
             }
+            bindTrEvent();
         },error:function (err) {
             alert(err);
         }
     });
 }
 
-function bindTrEvent() {
-    $('#tblCar>tr').click(function () {
-        carIDNum=$(this).children().eq(0).text();
-
+//Find Car by id
+function findCar(id,callback) {
+    $.ajax({
+        url:BASIC_URL+'car?id='+id,
+        method:'GET',
+        async:'false',
+        success:function (res) {
+            callback(res.data);
+        },error:function (err) {
+            alert(err);
+        }
     });
 }
-
