@@ -1,0 +1,1 @@
+let BASIC_URL='http://localhost:8080/Back_End_war/';

@@ -21,17 +21,18 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     CustomerRepository customerRepo;
 
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    ModelMapper mapper;
     @Override
     public void saveCustomer(CustomerDTO dto) {
-
-        Customer customer =new Customer(dto.getCusID (), dto.getCusName (), dto.getContact (), dto.getCusEmail (), dto.getCusAddress (), dto.getLicenceNumber (),new User(dto.getUser ().getUserName (),dto.getUser ().getPassword (),"Customer"),"","");
-        customerRepo.save(customer);
-
-
+       customerRepo.save (new Customer(
+                dto.getCusID (),
+                dto.getCusName (),
+                dto.getContact (),
+                dto.getCusEmail (),
+                dto.getCusAddress (),
+                dto.getLicenceNumber (),
+                new User(dto.getUser ().getUserName (),dto.getUser ().getPassword (),dto.getUser ().getRole ()),
+                "",
+                ""
+        ));
     }
 }

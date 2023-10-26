@@ -24,6 +24,7 @@ public class DriverDTO {
     private String driverNIC;
     private String driverLicence;
     private String availability;
-    private String filePath;
     private User user;
+    private String filePath;
+
 }

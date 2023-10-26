@@ -1,4 +1,7 @@
 package lk.ijse.carrental.repo;
 
-public interface DriverRepository {
+import lk.ijse.carrental.entity.Driver;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface DriverRepository extends JpaRepository<Driver,String> {
 }

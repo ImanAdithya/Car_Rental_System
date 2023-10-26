@@ -23,8 +23,8 @@ public class Driver {
     private String driverNIC;
     private String driverLicence;
     private String availability;
-   private String filePath;
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
+    private String filePath;
 
 }
