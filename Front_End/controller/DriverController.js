@@ -42,5 +42,4 @@ $('#btnSaveDriver').click(function () {
             alert(err+"Something Went Wrong");
         }
     });
-
 });

@@ -17,8 +17,17 @@ public class DriverController {
 
     @PostMapping
     public ResponseUtil saveDriver(@RequestBody DriverDTO driverDTO){
-        System.out.println (driverDTO);
         driverService.saveDriver (driverDTO);
-        return new ResponseUtil("Ok","Successfully Added",driverDTO);
+        return new ResponseUtil("Ok","Successfully Added...",driverDTO);
+    }
+
+    @PutMapping
+    public ResponseUtil updateDriver(@RequestBody DriverDTO driverDTO){
+        return new ResponseUtil("OK","Successfully Updated...",driverDTO);
+    }
+
+    @DeleteMapping(params = {"id"})
+    public ResponseUtil deleteDriver(String id){
+        return new ResponseUtil ("OK","Successfully Deleted....",id);
     }
 }

@@ -32,4 +32,25 @@ public class DriverServiceImpl  implements DriverService {
                 ""
         ));
     }
+
+    @Override
+    public void updateDriver(DriverDTO dto) {
+        driverRepo.save (new Driver (
+                dto.getDriverID (),
+                dto.getDriverName (),
+                dto.getDriverAddress (),
+                dto.getDriverContact (),
+                dto.getDriverEmail (),
+                dto.getDriverNIC (),
+                dto.getDriverLicence (),
+                dto.getAvailability (),
+                new User (dto.getUser ().getUserName (),dto.getUser ().getPassword (),dto.getUser ().getRole ()),
+                ""
+        ));
+    }
+
+    @Override
+    public void deleteDriver(String id) {
+        driverRepo.deleteById (id);
+    }
 }
