@@ -5,10 +5,13 @@ import lk.ijse.carrental.entity.Driver;
 import lk.ijse.carrental.entity.User;
 import lk.ijse.carrental.repo.DriverRepository;
 import lk.ijse.carrental.service.DriverService;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -17,8 +20,16 @@ public class DriverServiceImpl  implements DriverService {
     @Autowired
     DriverRepository driverRepo;
 
+    @Autowired
+    ModelMapper mapper;
+
     @Override
     public void saveDriver(DriverDTO dto) {
+
+        if (driverRepo.existsById (dto.getDriverID ())){
+            throw new RuntimeException (dto.getDriverID ()+"This Driver Already Exists");
+        }
+
         driverRepo.save (new Driver (
                 dto.getDriverID (),
                 dto.getDriverName (),
@@ -35,6 +46,10 @@ public class DriverServiceImpl  implements DriverService {
 
     @Override
     public void updateDriver(DriverDTO dto) {
+        if (!driverRepo.existsById (dto.getDriverID ())){
+            throw new RuntimeException (dto.getDriverID ()+"This Driver Not Available");
+        }
+
         driverRepo.save (new Driver (
                 dto.getDriverID (),
                 dto.getDriverName (),
@@ -51,6 +66,27 @@ public class DriverServiceImpl  implements DriverService {
 
     @Override
     public void deleteDriver(String id) {
+        if (!driverRepo.existsById (id)){
+            throw new RuntimeException (id+"This Driver Not Available");
+        }
         driverRepo.deleteById (id);
     }
+
+    @Override
+    public DriverDTO findDriver(String id) {
+        if (!driverRepo.existsById (id)){
+            throw new RuntimeException (id +"Driver Not Available");
+        }
+
+        Driver driver = driverRepo.findById (id).get ();
+        return mapper.map (driver, DriverDTO.class);
+    }
+
+    @Override
+    public List<DriverDTO> getAllDrivers() {
+        List<Driver> all = driverRepo.findAll ();
+        return mapper.map (all,new TypeToken<List<DriverDTO>> (){}.getType ());
+    }
+
+
 }

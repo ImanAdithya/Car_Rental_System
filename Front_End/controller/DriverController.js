@@ -1,5 +1,7 @@
 let BASIC_URL='http://localhost:8080/Back_End_war/';
 
+
+//Save Driver
 $('#btnSaveDriver').click(function () {
     let driverID="D001"
     let driverName=$('#txtDriverName').val();
