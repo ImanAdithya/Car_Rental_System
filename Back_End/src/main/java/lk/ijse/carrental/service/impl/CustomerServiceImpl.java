@@ -29,11 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void saveCustomer(CustomerDTO dto) {
 
-        Customer customer =new Customer(dto.getCusID (), dto.getCusName (), dto.getContact (), dto.getCusEmail (), dto.getCusAddress (), dto.getLicenceNumber (), "","",new User(dto.getUserDTO ().getUserName (),dto.getUserDTO ().getPassword (),"Customer"));
-
-        System.out.println(customer);
-
-        System.out.println(customer);
+        Customer customer =new Customer(dto.getCusID (), dto.getCusName (), dto.getContact (), dto.getCusEmail (), dto.getCusAddress (), dto.getLicenceNumber (),new User(dto.getUser ().getUserName (),dto.getUser ().getPassword (),"Customer"),"","");
         customerRepo.save(customer);
 
 

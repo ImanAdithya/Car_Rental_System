@@ -16,7 +16,8 @@ public class CustomerDTO {
     private String cusEmail;
     private String cusAddress;
     private String licenceNumber;
+    private UserDTO user;
     private String filePath_1;
     private String filePath_2;
-    private UserDTO userDTO;
+
 }

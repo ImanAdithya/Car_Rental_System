@@ -13,7 +13,7 @@
     <div id="form" class="container-fluid ">
         <h1>SIGN UP</h1>
 
-        <form class="mt-5" id="userForm">
+        <form class="mt-5" id="userForm" role="form" action="/customer" enctype="multipart/form-data" method="post">
 
             <div class="row justify-content-between container-fluid mt-3">
                 <div>
@@ -41,7 +41,7 @@
 
             <div class="row justify-content-between container-fluid mt-3">
                 <div>
-                    <input type="text" class="form-control" id="txtNic" name="cusEmail" placeholder="Email">
+                    <input type="text" class="form-control" id="txtEmail" name="cusEmail" placeholder="Email">
                 </div>
             </div>
 
@@ -92,49 +92,92 @@
 <script src="../assets/js/jquery-3.6.1.min.js"></script>
 <script>
 
+ // $('#btnRegister').click(function () {
+ //     // let formData=$('#userForm').serialize(); //like this
+ //      //this should be use if you are planning to send x-www-form url encoded data
+ //
+ //
+ //     // this should be used when you need send multipart form data (which we used when we want to upload files)
+ //     //let formData = new FormData($("#userForm")[0]);
+ //     // contentType: false, // this is also should be done if you wanna upload files
+ //     // processData: false, //this one also
+ //
+ //     //baically, if you wanna upload a file you can use muitipart from data type
+ //     //other wise if you have small data -> you can use query string
+ //     //if you have little bit big values then you can use x-www-form-urlencoded type
+ //     //if you have complex data you can use application/json type
+ //
+ //     //got it.?
+ //
+ //     //ah hri hri mage form eka serilizable form data eken giye natte file uplaod thibba nisad?
+ //     //ow oya yawala thibbe multipart form data type eka
+ //     //ekai
+ //
+ //     //ah ekane ....api pissu waila idiye okkoma aya ....heee hee thankss....den dennm wedeeeee
+ //     //ok
+ //     // byeee
+ //     ///byeeeeeeeee
+ //
+ //     $.ajax({
+ //         url:'http://localhost:8080/Back_End_war/customer',
+ //         method:'post',
+ //         data:formData,
+ //         //contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+ //          //contentType: false, // this is also should be done if you wanna upload files
+ //          //processData: false, //this one also
+ //         success:function (res) {
+ //             alert(res+"Customer Added Success");
+ //         },error:function (err) {
+ //             alert("ERROR SOMETHING")
+ //             console.log(err)
+ //         }
+ //     });
+ // })
+
  $('#btnRegister').click(function () {
-      let formData=$('#userForm').serialize(); //like this
-      //this should be use if you are planning to send x-www-form url encoded data
 
+     let cusID = $('#cusID').val();
+     let cusName = $('#txtName').val();
+     let contact = $('#txtContact').val();
+     let email = $('#txtEmail').val();
+     let address = $('#txtAddress').val();
+     let licenceNum = $('#txtLicense').val();
+     let userName = $('#txtUserName').val();
+     let password = $('#txtPass').val();
 
-     // this should be used when you need send multipart form data (which we used when we want to upload files)
-     // let formData = new FormData($("#userForm")[0]);
-     // contentType: false, // this is also should be done if you wanna upload files
-     // processData: false, //this one also
+     let role="CUS";
 
-     //baically, if you wanna upload a file you can use muitipart from data type
-     //other wise if you have small data -> you can use query string
-     //if you have little bit big values then you can use x-www-form-urlencoded type
-     //if you have complex data you can use application/json type
+     let customer={
+        cusID:cusID,
+        cusName:cusName,
+        contact:contact,
+        cusEmail:email,
+        cusAddress:address,
+        licenceNumber:licenceNum,
+        user:{
+            userName:userName,
+            password:password,
+            role:role,
+        }
+     }
 
-     //got it.?
-
-     //ah hri hri mage form eka serilizable form data eken giye natte file uplaod thibba nisad?
-     //ow oya yawala thibbe multipart form data type eka
-     //ekai
-
-     //ah ekane ....api pissu waila idiye okkoma aya ....heee hee thankss....den dennm wedeeeee
-     //ok
-     // byeee
-     ///byeeeeeeeee
+     console.log(cusName);
 
      $.ajax({
          url:'http://localhost:8080/Back_End_war/customer',
-         method:'post',
-         data:formData,
-         //contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-         // contentType: false, // this is also should be done if you wanna upload files
-         // processData: false, //this one also
-         // async:false,
+         method:'POST',
+         data : JSON.stringify(customer),
+         contentType : 'application/json',
+         header:'Access-Control-Allow-Origin',
+         origin:'*',
          success:function (res) {
-             alert(res+"Customer Added Success");
+             alert("Customer SUCCUSS");
          },error:function (err) {
-             alert("ERROR SOMETHING")
-             console.log(err)
+           alert(err+"ERROR");
          }
-     });
- })
+     })
 
+ });
 
 </script>
 </body>

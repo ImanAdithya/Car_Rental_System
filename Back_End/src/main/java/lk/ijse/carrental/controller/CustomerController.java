@@ -29,12 +29,9 @@ public class CustomerController {
     //how we pass x-www-form url encoded data to backend ..formdata or not
 
     @PostMapping
-    public ResponseUtil saveCustomer(@ModelAttribute CustomerDTO customerDTO, @ModelAttribute UserDTO user){
+    public ResponseUtil saveCustomer(@RequestBody CustomerDTO customerDTO){
 
         System.out.println("++++++++++++"+customerDTO.toString ());
-        //Customer Dto wlaat values enne na ara succus kiyla awe math  methnata commnet krpu nisa
-        //ok wait
-        customerDTO.setUserDTO (user);
         customerService.saveCustomer (customerDTO);
         return new ResponseUtil("Ok","Successfully Added",customerDTO);
     }

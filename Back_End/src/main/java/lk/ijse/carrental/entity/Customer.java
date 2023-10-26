@@ -22,9 +22,9 @@ public class Customer {
     private String cusEmail;
     private String cusAddress;
     private String licenceNumber;
-    private String filePath_1;
-    private String filePath_2;
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
+    private String filePath_1;
+    private String filePath_2;
 
 }
