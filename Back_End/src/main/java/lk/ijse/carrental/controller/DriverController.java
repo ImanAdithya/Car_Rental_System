@@ -17,7 +17,8 @@ public class DriverController {
 
     @PostMapping
     public ResponseUtil saveDriver(@RequestBody DriverDTO driverDTO){
-
+        System.out.println (driverDTO);
+        driverService.saveDriver (driverDTO);
         return new ResponseUtil("Ok","Successfully Added",driverDTO);
     }
 }

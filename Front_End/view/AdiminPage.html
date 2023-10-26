@@ -301,41 +301,41 @@
                    <div class="col-xl-8 col-md-6 mb-4">
                        <div class="row justify-content-around mt-4">
                            <div class="mb-3 w-25">
-                               <input type="text" class="form-control" id="name"  name="driverName" placeholder="Full Name">
+                               <input type="text" class="form-control" id="txtDriverName"  name="driverName" placeholder="Full Name">
                            </div>
 
                            <div class="mb-3 w-25">
-                               <input type="text" class="form-control" id="address" name="driverAddress" placeholder="Address">
+                               <input type="text" class="form-control" id="txtDriverAddress" name="driverAddress" placeholder="Address">
                            </div>
 
                            <div class="mb-3  w-25">
-                               <input type="text" class="form-control" id="Contact" name="driverContact" placeholder="Contact">
+                               <input type="text" class="form-control" id="txtDriverContact" name="driverContact" placeholder="Contact">
                            </div>
                        </div>
                        <div class="row justify-content-around mt-4">
                            <div class="mb-3 w-25">
-                               <input type="text" class="form-control" id="email" name="driverEmail" placeholder="Email">
+                               <input type="text" class="form-control" id="txtDriverEmail" name="driverEmail" placeholder="Email">
                            </div>
 
                            <div class="mb-3 w-25">
-                               <input type="text" class="form-control" id="nic" name="driverNIC" placeholder="DRIVER NIC">
+                               <input type="text" class="form-control" id="txtDriverNic" name="driverNIC" placeholder="DRIVER NIC">
                            </div>
 
                            <div class="mb-3  w-25">
-                               <input type="text" class="form-control" id="dNic" name="driverLicence" placeholder="LICENSE NUMBER">
+                               <input type="text" class="form-control" id="txtDriverLicense" name="driverLicence" placeholder="LICENSE NUMBER">
                            </div>
                        </div>
                        <div class="row justify-content-around mt-4">
                            <div class="mb-3 w-25">
-                               <input type="text" class="form-control" id="userName" name="userName" placeholder="User Name">
+                               <input type="text" class="form-control" id="txtDUserName" name="userName" placeholder="User Name">
                            </div>
 
                            <div class="mb-3 w-25">
-                               <input type="text" class="form-control" id="pass" name="password" placeholder="Password">
+                               <input type="text" class="form-control" id="txtDUserPass" name="password" placeholder="Password">
                            </div>
 
                            <div class="mb-3  w-25">
-                               <input type="text" class="form-control" id="cPass" name="role" placeholder="Confirm Password">
+                               <input type="text" class="form-control" id="txtDRePass" name="role" placeholder="Confirm Password">
                            </div>
                        </div>
 
@@ -344,8 +344,8 @@
                    <div class="col-xl-4 col-md-6 mb-4">
                        <div class="d-flex flex-column align-items-center mt-4">
                            <img src=""  alt="" style="width: 18vw;height: 16vh;background-color: #EFEFEF">
-                           <label for="uNic" class="btn  btn-outline-dark form-label mt-3" style="width: 8vw;height: 3.5vh">UPLOAD</label>
-                           <input type="file" class="d-none" id="uNic">
+                           <label for="fileDriverImg" class="btn  btn-outline-dark form-label mt-3" style="width: 8vw;height: 3.5vh">UPLOAD</label>
+                           <input type="file" class="d-none" id="fileDriverImg">
                        </div>
                    </div>
                </div>
@@ -353,8 +353,8 @@
                <div class="row mx-3">
                    <div class="col-6">
                        <button type="button" id="btnSaveDriver" class="btn btn-primary btn-sm" style="width: 6vw">Save</button>
-                       <button type="button" class="btn btn-success btn-sm  mx-2" style="width: 6vw">Update</button>
-                       <button type="button" class="btn btn-danger btn-sm  mx-2" style="width: 6vw">Delete</button>
+                       <button type="button" id="btnUpateDriver" class="btn btn-success btn-sm  mx-2" style="width: 6vw">Update</button>
+                       <button type="button" id="btnDeleteDriver" class="btn btn-danger btn-sm  mx-2" style="width: 6vw">Delete</button>
                    </div>
                </div>
 
@@ -550,7 +550,7 @@
                <div class="col-3">
                    <div class="d-flex flex-column align-items-center mt-4">
                        <img src=""  alt="" style="width: 18vw;height: 16vh;background-color: #EFEFEF">
-                       <label for="uNic" class="btn  btn-outline-dark form-label mt-3" style="width: 8vw;height: 3.3vh">UPLOAD</label>
+                       <label class="btn  btn-outline-dark form-label mt-3" style="width: 8vw;height: 3.3vh">UPLOAD</label>
                        <input type="file" class="d-none" id="front">
                    </div>
                </div>
@@ -558,7 +558,7 @@
                <div class="col-3">
                    <div class="d-flex flex-column align-items-center mt-4">
                        <img src=""  alt="" style="width: 18vw;height: 16vh;background-color: #EFEFEF">
-                       <label for="uNic" class="btn  btn-outline-dark form-label mt-3 " style="width: 8vw;height: 3.3vh">UPLOAD</label>
+                       <label  class="btn  btn-outline-dark form-label mt-3 " style="width: 8vw;height: 3.3vh">UPLOAD</label>
                        <input type="file" class="d-none" id="back">
                    </div>
                </div>
@@ -566,7 +566,7 @@
                <div class="col-3">
                    <div class="d-flex flex-column align-items-center mt-4">
                        <img src=""  alt="" style="width: 18vw;height: 16vh;background-color: #EFEFEF">
-                       <label for="uNic" class="btn  btn-outline-dark form-label mt-3" style="width: 8vw;height: 3.3vh">UPLOAD</label>
+                       <label  class="btn  btn-outline-dark form-label mt-3" style="width: 8vw;height: 3.3vh">UPLOAD</label>
                        <input type="file" class="d-none" id="side">
                    </div>
                </div>
@@ -574,7 +574,7 @@
                <div class="col-3">
                    <div class="d-flex flex-column align-items-center mt-4">
                        <img src=""  alt="" style="width: 18vw;height: 16vh;background-color: #EFEFEF">
-                       <label for="uNic" class="btn  btn-outline-dark form-label mt-3" style="width: 8vw;height: 3.3vh">UPLOAD</label>
+                       <label  class="btn  btn-outline-dark form-label mt-3" style="width: 8vw;height: 3.3vh">UPLOAD</label>
                        <input type="file" class="d-none" id="interio">
                    </div>
                </div>
@@ -887,6 +887,7 @@
 
 
 <script src="../assets/js/jquery-3.6.1.min.js"></script>
+<script src="../controller/DriverController.js"></script>
 <script>
 
     document.getElementById("customer").style.display="none";
