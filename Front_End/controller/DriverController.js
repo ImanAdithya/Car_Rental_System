@@ -42,6 +42,7 @@ $('#btnSaveDriver').click(function () {
         origin:'*',
         success:function (res) {
             alert(res);
+            clearFields();
         },error:function (err) {
             alert(err+"Something Went Wrong");
         }
@@ -67,7 +68,15 @@ function getAllDriver() {
                 let nic = d.driverNIC;
                 let driverNic = d.driverLicence;
                 let userName = d.user.userName;
-                let row = `<tr><td>${id}</td><td>${name}</td><td>${contact}</td><td>${email}</td><td>${nic}</td><td>${driverNic}</td><td>${userName}</td></tr>`;
+                let row = `<tr>
+                             <td>${id}</td>
+                             <td>${name}</td>
+                             <td>${contact}</td>
+                             <td>${email}</td>
+                             <td>${nic}</td>
+                             <td>${driverNic}</td>
+                             <td>${userName}</td>
+                           </tr>`;
                 $("#tblDriver").append(row);
             }
             bindTrEvents();
@@ -77,30 +86,8 @@ function getAllDriver() {
     });
 }
 
-//Bind Table Values to TextFields
-function bindTrEvents() {
-
-    $('#tblDriver>tr').click(function () {
-        let id=$(this).children().eq(0).text();
-
-       let driver= findCustomer(id);
-       console.log(driver)
-
-
-        $('#txtDriverName').val();
-        $('#txtDriverAddress').val();
-        $('#txtDriverContact').val();
-        $('#txtDriverEmail').val();
-        $('#txtDriverNic').val();
-        $('#txtDriverLicense').val();
-        $('#txtDUserName').val();
-        $('#txtDUserPass').val();
-
-    });
-}
-
 //find Diver
-function findCustomer(id) {
+function findCustomer(id,callback) {
     $.ajax({
         url:BASIC_URL+'driver?id='+id,
         method:'GET',
@@ -108,11 +95,46 @@ function findCustomer(id) {
         async: false,
         success:function (res) {
             console.log("Driver find Succuss");
-           // console.log(res.data);
-            return res.data;
-            },error:function () {
-                console.log("Driver Find Error")
-            }
+            callback(res.data)
+        },error:function () {
+            console.log("Driver Find Error")
+        }
+
+    });
+}
+
+//Bind Table Values to TextFields
+function bindTrEvents() {
+
+    $('#tblDriver>tr').click(function () {
+        let id=$(this).children().eq(0).text();
+
+        findCustomer(id, function (d) {
+            $('#txtDriverName').val(d.driverName);
+            $('#txtDriverAddress').val(d.driverAddress);
+            $('#txtDriverContact').val(d.driverContact);
+            $('#txtDriverEmail').val(d.driverEmail);
+            $('#txtDriverNic').val(d.driverNIC);
+            $('#txtDriverLicense').val(d.driverLicence);
+            $('#txtDUserName').val(d.user.userName);
+            $('#txtDUserPass').val(d.user.password);
+
         });
-    }
+    });
+}
+
+//Clear Text Fields
+function clearFields() {
+    $('#txtDriverName').val("");
+    $('#txtDriverAddress').val("");
+    $('#txtDriverContact').val("");
+    $('#txtDriverEmail').val("");
+    $('#txtDriverNic').val("");
+    $('#txtDriverLicense').val("");
+    $('#txtDUserName').val("");
+    $('#txtDUserPass').val("");
+    $('#txtDRePass').val("");
+}
+
+
 
