@@ -25,7 +25,7 @@ public class DriverController {
 
     @PutMapping
     public ResponseUtil updateDriver(@RequestBody DriverDTO driverDTO){
-        driverService.saveDriver (driverDTO);
+        driverService.updateDriver (driverDTO);
         return new ResponseUtil("OK","Successfully Updated...",driverDTO);
     }
 
