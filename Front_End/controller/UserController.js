@@ -3,6 +3,8 @@ let BASIC_URL='http://localhost:8080/Back_End_war/';
 //Register Customer
 $('#btnRegister').click(function () {
 
+    let formData= new FormData($("#userForm")[0]);
+
     let cusID = $('#cusID').val();
     let cusName = $('#txtName').val();
     let contact = $('#txtContact').val();
@@ -11,7 +13,6 @@ $('#btnRegister').click(function () {
     let licenceNum = $('#txtLicense').val();
     let userName = $('#txtUserName').val();
     let password = $('#txtPass').val();
-
     let role="CUS";
 
     let customer={
@@ -27,12 +28,10 @@ $('#btnRegister').click(function () {
             role:role,
         }
     }
-
-    console.log(cusName);
-
     $.ajax({
         url:BASIC_URL+'customer',
         method:'POST',
+        async: false,
         data : JSON.stringify(customer),
         contentType : 'application/json',
         header:'Access-Control-Allow-Origin',
@@ -43,6 +42,21 @@ $('#btnRegister').click(function () {
             alert(err+"ERROR");
         }
     })
+
+    $.ajax({
+        url: BASIC_URL + "customer?cID="+cusID,
+        method: "post",
+        async: false,
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (res) {
+          alert(res.message);
+        },
+        error: function (res) {
+            alert(res.message);
+        }
+    });
 
 });
 

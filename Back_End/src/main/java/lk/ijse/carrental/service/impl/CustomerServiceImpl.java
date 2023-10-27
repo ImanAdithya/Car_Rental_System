@@ -1,6 +1,7 @@
 package lk.ijse.carrental.service.impl;
 
 import lk.ijse.carrental.dto.CustomerDTO;
+import lk.ijse.carrental.dto.CustomerImageDTO;
 import lk.ijse.carrental.dto.DriverDTO;
 import lk.ijse.carrental.dto.UserDTO;
 import lk.ijse.carrental.entity.Customer;
@@ -16,6 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -48,4 +56,41 @@ public class CustomerServiceImpl implements CustomerService {
         List<Customer> all = customerRepo.findAll ();
         return mapper.map (all,new TypeToken<List<CustomerDTO>> (){}.getType ());
     }
+
+    @Override
+    public void saveCustomerImage(CustomerImageDTO dto) {
+
+        Customer customer = customerRepo.findById(dto.getCID ()).get();
+
+        try {
+            byte[] nicFileBytes = dto.getNicImage ().getBytes ();
+            byte[] licenseFileBytes = dto.getLicenseImage ().getBytes ();
+
+
+            String projectPath="/Users/imanadithya/Software Engineering/IJSE/PROJECTS/Car_Rental_System/Front_End/assets";
+            Path nicLocation = Paths.get(projectPath + "/projectImages/bucket/customer/nic/nic_" + dto.getCID () + ".jpeg");
+            Path licenseLocation = Paths.get(projectPath + "/projectImages/bucket/customer/license/license_" + dto.getCID () + ".jpeg");
+
+            Files.write(nicLocation, nicFileBytes);
+            Files.write(licenseLocation, licenseFileBytes);
+
+            dto.getNicImage().transferTo(nicLocation);
+            dto.getLicenseImage().transferTo(licenseLocation);
+
+
+
+
+        } catch (IOException e) {
+            throw new RuntimeException (e);
+        }
+
+        customer.setFilePath_1 ("/assets/projectImages/bucket/customer/nic/nic_" + dto.getCID ()+".jpeg");
+        customer.setFilePath_2 ("/assets/projectImages/bucket/customer/license/license_" + dto.getCID ()+".jpeg");
+
+        customerRepo.save(customer);
+
+
+    }
+
+
 }
