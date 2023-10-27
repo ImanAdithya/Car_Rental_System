@@ -12,5 +12,5 @@ import org.springframework.web.multipart.MultipartFile;
 @ToString
 public class DriverImageDTO {
     String dID;
-    MultipartFile diverLicence;
+    MultipartFile diverLicenceImage;
 }

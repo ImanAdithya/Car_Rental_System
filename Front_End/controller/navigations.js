@@ -1,4 +1,4 @@
-document.getElementById("customer").style.display="none";
+ document.getElementById("customer").style.display="none";
 document.getElementById("driver").style.display="none";
 document.getElementById("car").style.display="none";
 document.getElementById("booking").style.display="none";

@@ -1,4 +1,3 @@
-let BASIC_URL='http://localhost:8080/Back_End_war/';
 
 getAllDriver();
 
@@ -25,9 +24,9 @@ function bindTrEvents() {
 
 //Save Driver
 $('#btnSaveDriver').click(function () {
-    let formData = new FormData($("#tblDriver")[0]);
+    let formDataDriver = new FormData($("#driverForm")[0]);
 
-    let driverID="D002"
+    let driverID="D0013"
     let driverName=$('#txtDriverName').val();
     let driverAddress=$('#txtDriverAddress').val();
     let driverContact=$('#txtDriverContact').val();
@@ -58,6 +57,7 @@ $('#btnSaveDriver').click(function () {
     $.ajax({
         url:BASIC_URL+'driver',
         method:"POST",
+        async: false,
         data:JSON.stringify(driver),
         contentType:'Application/json',
         header:'Access-Control-Allow-Origin',
@@ -74,7 +74,8 @@ $('#btnSaveDriver').click(function () {
     $.ajax({
         url:BASIC_URL+'driver?dID='+driverID,
         method:'POST',
-        data:formData,
+        async: false,
+        data:formDataDriver,
         contentType:false,
         processData:false,
         success:function (res) {

@@ -100,13 +100,13 @@ public class DriverServiceImpl  implements DriverService {
         Driver driver = driverRepo.findById(dto.getDID ()).get();
 
         try {
-            byte[] dLicenseBytes = dto.getDiverLicence ().getBytes ();
+            byte[] dLicenseBytes = dto.getDiverLicenceImage ().getBytes ();
 
             String projectPath="/Users/imanadithya/Software Engineering/IJSE/PROJECTS/Car_Rental_System/Front_End/assets";
             Path dLicenceLocation = Paths.get(projectPath + "/projectImages/bucket/driver/driver_" + dto.getDID () + ".jpeg");
 
             Files.write(dLicenceLocation, dLicenseBytes);
-            dto.getDiverLicence ().transferTo(dLicenceLocation);
+            dto.getDiverLicenceImage ().transferTo(dLicenceLocation);
 
 
         } catch (IOException e) {
