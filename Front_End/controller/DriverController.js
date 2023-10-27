@@ -25,6 +25,8 @@ function bindTrEvents() {
 
 //Save Driver
 $('#btnSaveDriver').click(function () {
+    let formData = new FormData($("#tblDriver")[0]);
+
     let driverID="D002"
     let driverName=$('#txtDriverName').val();
     let driverAddress=$('#txtDriverAddress').val();
@@ -68,6 +70,20 @@ $('#btnSaveDriver').click(function () {
             alert(err+"Something Went Wrong");
         }
     });
+
+    $.ajax({
+        url:BASIC_URL+'driver?dID='+driverID,
+        method:'POST',
+        data:formData,
+        contentType:false,
+        processData:false,
+        success:function (res) {
+            alert(res.message);
+        },error:function (err) {
+            alert(err);
+        }
+    });
+
 });
 
 //Load Table to Driver_Detail

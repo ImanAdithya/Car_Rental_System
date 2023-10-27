@@ -1,6 +1,7 @@
 package lk.ijse.carrental.controller;
 
 import lk.ijse.carrental.dto.DriverDTO;
+import lk.ijse.carrental.dto.DriverImageDTO;
 import lk.ijse.carrental.dto.UserDTO;
 import lk.ijse.carrental.service.DriverService;
 import lk.ijse.carrental.util.ResponseUtil;
@@ -45,5 +46,12 @@ public class DriverController {
     public ResponseUtil getDriver(String id){
         DriverDTO driver = driverService.findDriver (id);
         return new ResponseUtil ("OK","Successfully Loaded",driver);
+    }
+
+    @PostMapping(params = {"dID"})
+    public ResponseUtil saveImage(@ModelAttribute DriverImageDTO dto,String dID){
+        dto.setDID (dID);
+        driverService.saveDriverImage (dto);
+        return new ResponseUtil ("OK","Successfully Loaded Image",dto);
     }
 }

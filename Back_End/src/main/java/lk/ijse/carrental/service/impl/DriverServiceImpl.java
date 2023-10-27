@@ -1,6 +1,8 @@
 package lk.ijse.carrental.service.impl;
 
 import lk.ijse.carrental.dto.DriverDTO;
+import lk.ijse.carrental.dto.DriverImageDTO;
+import lk.ijse.carrental.entity.Customer;
 import lk.ijse.carrental.entity.Driver;
 import lk.ijse.carrental.entity.User;
 import lk.ijse.carrental.repo.DriverRepository;
@@ -11,6 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Service
@@ -72,6 +78,7 @@ public class DriverServiceImpl  implements DriverService {
         driverRepo.deleteById (id);
     }
 
+
     @Override
     public DriverDTO findDriver(String id) {
         if (!driverRepo.existsById (id)){
@@ -86,6 +93,28 @@ public class DriverServiceImpl  implements DriverService {
     public List<DriverDTO> getAllDrivers() {
         List<Driver> all = driverRepo.findAll ();
         return mapper.map (all,new TypeToken<List<DriverDTO>> (){}.getType ());
+    }
+
+    @Override
+    public void saveDriverImage(DriverImageDTO dto) {
+        Driver driver = driverRepo.findById(dto.getDID ()).get();
+
+        try {
+            byte[] dLicenseBytes = dto.getDiverLicence ().getBytes ();
+
+            String projectPath="/Users/imanadithya/Software Engineering/IJSE/PROJECTS/Car_Rental_System/Front_End/assets";
+            Path dLicenceLocation = Paths.get(projectPath + "/projectImages/bucket/driver/driver_" + dto.getDID () + ".jpeg");
+
+            Files.write(dLicenceLocation, dLicenseBytes);
+            dto.getDiverLicence ().transferTo(dLicenceLocation);
+
+
+        } catch (IOException e) {
+            throw new RuntimeException (e);
+        }
+
+        driver.setFilePath ("/assets/projectImages/bucket/driver/driver_" + dto.getDID ()+".jpeg");
+        driverRepo.save(driver);
     }
 
 
