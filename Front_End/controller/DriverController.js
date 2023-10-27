@@ -187,8 +187,6 @@ $('#btnDeleteDriver').click(function () {
 });
 
 
-
-
 //Clear Text Fields
 function clearFields() {
     $('#txtDriverName').val("");

@@ -45,3 +45,37 @@ $('#btnRegister').click(function () {
     })
 
 });
+
+getAllCustomer();
+
+function getAllCustomer() {
+    $('#tblCustomer').empty();
+
+    $.ajax({
+        url:BASIC_URL+'customer',
+        method: 'GET',
+        dataType:'json',
+        success:function (res) {
+            let customer=res.data;
+            for(let i in customer){
+                let cus=customer[i];
+                let id = cus.cusID;
+                let name = cus.cusName;
+                let contact = cus.contact;
+                let email = cus.cusEmail;
+                let userName = cus.user.userName;
+
+                let row = `<tr>
+                             <td>${id}</td>
+                             <td>${name}</td>
+                             <td>${contact}</td>
+                             <td>${email}</td>
+                             <td>${userName}</td>
+                           </tr>`;
+                $("#tblCustomer").append(row);
+            }
+        },error(err){
+            alert(err+"Customer Loaded Failed");
+        }
+    });
+}

@@ -30,7 +30,7 @@ function bindTrEvent() {
 
 //save Car
 $('#btnSaveCar').click(function () {
-    let carID="CR001";
+    let carID="CR003";
     let regNO=$('#txtRegNum').val();
     let type=$('#txtCarType option:selected').text();
     let brand=$('#txtBrand').val();
@@ -84,13 +84,14 @@ $('#btnSaveCar').click(function () {
 
 //Load All cars to table
 function getAllCars() {
+    $('#tblCar').empty();
+
     $.ajax({
         url:BASIC_URL+'car',
         method:'GET',
         dataType:'json',
         success:function (res) {
             let car=res.data;
-            console.log(res.data);
             for (let i in car) {
                 let c=car[i];
                 let id=c.carID;
@@ -124,7 +125,7 @@ function findCar(id,callback) {
     $.ajax({
         url:BASIC_URL+'car?id='+id,
         method:'GET',
-        async:'false',
+        async:false,
         success:function (res) {
             callback(res.data);
         },error:function (err) {
@@ -132,3 +133,71 @@ function findCar(id,callback) {
         }
     });
 }
+
+//update car
+$('#btnUpdateCar').click(function () {
+    let carID="CR001";
+    let regNO=$('#txtRegNum').val();
+    let type=$('#txtCarType option:selected').text();
+    let brand=$('#txtBrand').val();
+    let color=$('#txtColor').val();
+    let passenger=$('#txtPassenger').val();
+    let fuelType=$('#txtFuelType option:selected').text();
+    let transmissionType=$('#txtTransmissionType option:selected').text();
+    let currentMeter=$('#txtCurrentMValue').val();
+    let priceExtraKM=$('#txtPriceExtraKm').val();
+    let wavierPayment=$('#txtWavierPayment').val();
+    let fmd=$('#txtFMD').val();
+    let fmdPrice=$('#txtFMDPrice').val();
+    let fmm=$('#txtFMM').val();
+    let fmmPrice=$('#txtFMMPrice').val();
+    let available=$('#txtAvailabilityType option:selected').text();
+
+    let car={
+        carID:carID,
+        regNo:regNO,
+        type:type,
+        brand:brand,
+        color:color,
+        passenger:passenger,
+        fuelType:fuelType,
+        transmissionType:transmissionType,
+        currentMeterValue:currentMeter,
+        priceForExtra_Km:priceExtraKM,
+        wavierPayment:wavierPayment,
+        freeMilageDaily:fmd,
+        freeMilageDailyPrice:fmdPrice,
+        freeMilageMonthly:fmm,
+        freeMilageMonthlyPrice:fmmPrice,
+        availability:available
+    }
+
+    $.ajax({
+        url:BASIC_URL+'car',
+        method:'PUT',
+        data:JSON.stringify(car),
+        contentType:'Application/json',
+        header:'Access-Control-Allow-Origin',
+        origin:'*',
+        success:function (res) {
+            alert(res.message);
+            getAllCars();
+        },error:function (err) {
+            alert(err);
+        }
+    });
+});
+
+//delete car
+$('#btnDeleteCar').click(function () {
+    $.ajax({
+        url:BASIC_URL+'car?id='+carIDNum,
+        method:'DELETE',
+        success:function (res) {
+            alert(res.message);
+            getAllCars();
+        },error:function (err) {
+            alert(err)
+        }
+    });
+});
