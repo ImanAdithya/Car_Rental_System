@@ -51,4 +51,8 @@
     height: 45vh;
 }
 
-
+.swal-custom {
+    width: 500px; /* Set your desired width */
+    height: 250px; /* Set your desired height */
+    font-size: 16px;
+}

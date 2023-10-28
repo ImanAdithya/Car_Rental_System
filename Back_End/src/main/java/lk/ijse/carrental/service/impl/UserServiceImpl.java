@@ -24,9 +24,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(UserDTO dto) {
-//       if (userRepo.existsById (dto.getUserName ())){
-//           throw new RuntimeException (dto.getUserName ()+" This  UserName Already Exists..");
-//       }
         User user = mapper.map (dto, User.class);
         userRepo.save (user);
 

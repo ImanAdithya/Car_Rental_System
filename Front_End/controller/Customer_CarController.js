@@ -23,7 +23,7 @@ function bindCarEvent(cars) {
 
         $("#carsAppend").append(`<div class="class=col col-lg-4">
                 <div class="card ">
-                    <img src="../assets/img/booking_cars/c5.jpeg" style="width: 26vw;border-radius: 9px" class="card-img-top m-3" alt="">
+                    <img src="../assets/img/booking_cars/c5.jpeg"  id="kl" style="width: 26vw;border-radius: 9px" class="card-img-top m-3" alt="">
                     <div class="card-body">
 
                         <section class="mb-4">
@@ -63,13 +63,21 @@ function bindCarEvent(cars) {
                         </section>
 
                         <section class="d-flex justify-content-between flex-lg-row flex-column gap-1 mt-3">
-                            <button style="width: 5vw;" class="btn btn-success rent" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><p class="card-text "><i class="bi bi-upc-scan"></i> Rent </p></button>
+                            <button style="width: 5vw;" class="btn btn-success rent" data-bs-toggle="modal" data-bs-target="#testPoP"><p class="card-text "><i class="bi bi-upc-scan"></i> Rent </p></button>
                             <button class="btn btn-warning cart" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><p class="card-text"><i class="bi bi-cart-check-fill"></i> Add to cart</p></button>
                         </section>
 
                     </div>
                 </div>
             </div>`);
-
     }
+    d();
+}
+
+
+//Bind the Rent Button
+function bindRentBtn() {
+    $('.rent').click(function () {
+        alert("DD");
+    });
 }
