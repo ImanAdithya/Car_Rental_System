@@ -341,10 +341,9 @@
            <div class="col-6">
                <h1 class="h3 mb-0 text-gray-800">Car</h1>
            </div>
-
+           <form id="carForm">
            <div class="row">
                <div class="col-12">
-                   <form>
                        <div class="row justify-content-around mt-4">
                            <div class="mb-3" style="width: 13vw">
                                <input type="text" class="form-control" id="txtRegNum" placeholder="Register Number">
@@ -430,7 +429,6 @@
                            </div>
 
                        </div>
-                   </form>
                </div>
            </div>
 
@@ -440,7 +438,7 @@
                    <div class="d-flex flex-column align-items-center mt-4">
                        <img src=""  alt="" style="width: 18vw;height: 16vh;background-color: #EFEFEF">
                        <label class="btn  btn-outline-dark form-label mt-3" style="width: 8vw;height: 3.3vh">UPLOAD</label>
-                       <input type="file" class="d-none" id="front">
+                       <input type="file" class="d-none" id="front" name="filePath_1">
                    </div>
                </div>
 
@@ -448,7 +446,7 @@
                    <div class="d-flex flex-column align-items-center mt-4">
                        <img src=""  alt="" style="width: 18vw;height: 16vh;background-color: #EFEFEF">
                        <label  class="btn  btn-outline-dark form-label mt-3 " style="width: 8vw;height: 3.3vh">UPLOAD</label>
-                       <input type="file" class="d-none" id="back">
+                       <input type="file" class="d-none" id="back" name="filePath_2">
                    </div>
                </div>
 
@@ -456,7 +454,7 @@
                    <div class="d-flex flex-column align-items-center mt-4">
                        <img src=""  alt="" style="width: 18vw;height: 16vh;background-color: #EFEFEF">
                        <label  class="btn  btn-outline-dark form-label mt-3" style="width: 8vw;height: 3.3vh">UPLOAD</label>
-                       <input type="file" class="d-none" id="side">
+                       <input type="file" class="d-none" id="side" name="filePath_3">
                    </div>
                </div>
 
@@ -464,7 +462,7 @@
                    <div class="d-flex flex-column align-items-center mt-4">
                        <img src=""  alt="" style="width: 18vw;height: 16vh;background-color: #EFEFEF">
                        <label  class="btn  btn-outline-dark form-label mt-3" style="width: 8vw;height: 3.3vh">UPLOAD</label>
-                       <input type="file" class="d-none" id="interio">
+                       <input type="file" class="d-none" id="interio" name="filePath_4">
                    </div>
                </div>
 
@@ -477,6 +475,7 @@
                    <button id="btnDeleteCar" type="button" class="btn btn-danger btn-sm mx-1" style="width: 6vw">Delete</button>
                </div>
            </div>
+            </form>
 
            <div class="row mt-5 mx-2">
 

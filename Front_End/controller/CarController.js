@@ -30,6 +30,8 @@ function bindTrEvent() {
 
 //save Car
 $('#btnSaveCar').click(function () {
+    let formDataCar = new FormData($("#carForm")[0]);
+
     let carID="CR005";
     let regNO=$('#txtRegNum').val();
     let type=$('#txtCarType option:selected').text();
@@ -80,6 +82,22 @@ $('#btnSaveCar').click(function () {
             alert(err);
         }
     });
+
+    $.ajax({
+        url:BASIC_URL+'car?cID='+carID,
+        method:'POST',
+        async: false,
+        data:formDataCar,
+        contentType:false,
+        processData:false,
+        success:function (res) {
+            alert(res.message);
+        },error:function (err) {
+            alert(err);
+        }
+    });
+
+
 });
 
 //Load All cars to table
