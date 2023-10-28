@@ -1,5 +1,7 @@
 
-$('#test').css('display','none');
+$('#popUpRentPage').css('display','none');
+$('#cartPage').css('display','none');
+
 getAllCar();
 
 //Load All Car Details
@@ -9,7 +11,7 @@ function getAllCar() {
         method: "get",
         dataType:'json',
         success: function (res) {
-            showAlert("CAR LOAD SUCCUSS");
+           // showAlert("CAR LOAD SUCCUSS");
             bindCarEvent(res.data);
         },error:function (err) {
             alert("ERROR LOAD CARS hHHH")
@@ -82,9 +84,22 @@ function bindCarEvent(cars) {
 function bindRentBtn() {
     $('.rent').click(function () {
 
-        document.getElementById("driverDetailsPopupBg").style.display="block";
-
-        $('#test').css('display','block');
+        $('#driverDetailsPopupBg').css('display','block');
+        $('#popUpRentPage').css('display','block');
+        let test=$(this).parent().parent().children(":eq(4)").children(":eq(0)").text();
+        console.log(test);
     });
 
 }
+
+//Close RentPopUp
+$('#closeBtn').click(function () {
+    $('#popUpRentPage').css('display','none');
+});
+
+//Show cartPage
+$('#cartBtn').click(function () {
+    $('#cartPage').css('display','block');
+    $('#rentPage').css('display','none');
+    $('#popUpRentPage').css('display','none');
+});

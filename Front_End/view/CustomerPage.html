@@ -26,7 +26,7 @@
                         <a class="nav-link active"  aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Cart</a>
+                        <a class="nav-link" id="cartBtn" href="#">Cart</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
@@ -45,7 +45,7 @@
     </nav>
 </header>
 
-<main style="overflow-x: hidden">
+<main id="rentPage" style="overflow-x: hidden">
 
     <div>
         <img src="../assets/img/customerCar.jpg" style="height: 50vh;width: 100vw">
@@ -94,20 +94,96 @@
 
 </main>
 
-<main class="position-fixed top-0 start-0 vh-100 w-100 " style="z-index: 6" id="test">
+<main class="position-fixed top-0 start-0 vh-100 w-100 " style="z-index: 6" id="popUpRentPage">
     <div class="vh-100 w-100 position-absolute">
         <section class="popupSecAdminPanel container-fluid bg-transparent d-flex justify-content-center" id="driverDetailsPopupBg">
             <div class="bg-white d-flex flex-column  z-3 rounded popupDetailDiv z-3 bg-light shadow mt-5" id="driverDetailPopup">
 
+                <div class="d-flex flex-row">
+                    <h3 class="mt-2 mx-2">RENT CAR</h3>
+                    <button type="button" class="btn-close position-relative mt-2" id="closeBtn" aria-label="Close" style="left: 19vw"></button>
+                </div>
+
+                <div style="width: 29.5vw;height: 2px;background-color: black;opacity: 0.2"></div>
+
+                <div class="d-flex flex-row justify-content-around mt-4">
+                    <div style="width: 13vw">
+                        <label  class="form-label">PickUp-Date</label>
+                        <input type="date" class="form-control" id="txtPickUpdate">
+                    </div>
+                   <div style="width: 13vw">
+                       <label  class="form-label">PickUp-Time</label>
+                       <input type="time" class="form-control " id="txtPickUpTime">
+                   </div>
+                </div>
+
+                <div class="d-flex flex-row justify-content-around mt-2">
+                    <div style="width: 13vw">
+                        <label  class="form-label">Return-Date</label>
+                        <input type="date" class="form-control" id="txtReturndate">
+                    </div>
+                    <div style="width: 13vw">
+                        <label  class="form-label">Return-Time</label>
+                        <input type="time" class="form-control " id="txtReturnTime">
+                    </div>
+                </div>
+
+                <div class="d-flex flex-row justify-content-around mt-2">
+                    <div style="width: 13vw">
+                        <label  class="form-label">Wavier Payment</label>
+                        <input type="text" class="form-control" id="txtWavierPayment">
+                    </div>
+                    <div style="width: 13vw">
+                        <label  class="form-label">Rent Payment</label>
+                        <input type="text" class="form-control " id="txtRentCoast">
+                    </div>
+                </div>
+
+                <div class="d-flex flex-row justify-content-around mt-2">
+
+                    <div class="dropdown d-flex flex-column" style="width: 13vw">
+                        <label  class="form-label">Driver</label>
+                        <select name="cars" id="b"  style="height:3.7vh;border-radius:5px;opacity: 0.5">
+                            <option value="">Driver</option>
+                            <option value="">Yes</option>
+                            <option value="">No</option>
+                        </select>
+                    </div>
+                    <div style="width: 13vw">
+                        <label  class="form-label">Driver Payment</label>
+                        <input type="text" class="form-control " id="txtDriverPayment">
+                    </div>
+                </div>
+
+                <div class="d-flex flex-row justify-content-around mt-2">
+                    <div style="width: 28vw">
+                        <label  class="form-label">Total Payment</label>
+                        <input type="text" class="form-control" id="txtTotalAmont">
+                    </div>
+                </div>
+
+                <div class="mt-2 mx-2 ">
+                    <label  class="form-label">Wavier Slip</label>
+                    <div class="d-flex flex-column align-items-center ">
+                        <img src=""  alt="" style="width: 28vw;height: 16vh;background-color: #EFEFEF">
+                        <label class="btn  btn-outline-dark form-label mt-2" style="width: 8vw;height: 3.3vh">UPLOAD</label>
+                        <input type="file" class="d-none" id="front" name="filePath_1">
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center mt-5">
+                    <button type="button" class="btn btn-success" style="width: 28vw">REQUEST</button>
+                </div>
             </div>
         </section>
     </div>
 </main>
 
+<main id="cartPage">
+    <div style="width: 100vw;height: 100vh;background-color: red"></div>
+</main>
 
-<script>
-    /*document.getElementById("driverDetailsPopupBg").style.display="none";*/
-</script>
+
 
 <script src="../assets/js/jquery-3.6.1.min.js"></script>
 <script src="../controller/Customer_CarController.js"></script>

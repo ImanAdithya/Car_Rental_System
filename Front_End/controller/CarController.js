@@ -32,7 +32,7 @@ function bindTrEvent() {
 $('#btnSaveCar').click(function () {
     let formDataCar = new FormData($("#carForm")[0]);
 
-    let carID="CR005";
+    let carID="CR001";
     let regNO=$('#txtRegNum').val();
     let type=$('#txtCarType option:selected').text();
     let brand=$('#txtBrand').val();
