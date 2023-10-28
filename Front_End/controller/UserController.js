@@ -45,6 +45,10 @@ $('#btnRegister').click(function () {
         }
     })
 
+    if ($('#cusNicImage').get(0).files.length === 0 || $('#cusLicenseImage').get(0).files.length === 0) {
+        return;
+    }
+
     $.ajax({
         url: BASIC_URL + "customer?cID="+cusID,
         method: "post",
