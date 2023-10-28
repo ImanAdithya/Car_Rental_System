@@ -11,6 +11,11 @@
 </head>
 <body >
 <header >
+
+
+</header>
+
+<main style="overflow-x: hidden">
     <nav class="navbar navbar-expand-lg bg-body-tertiary" >
         <div class="container-fluid">
             <img class="navbar-brand mx-4" src="../assets/img/logo.png" id="logo">
@@ -39,21 +44,19 @@
         </div>
     </nav>
 
-</header>
-
-<main style="overflow-x: hidden">
     <div >
-        <img src="../assets/img/customerCar.jpg" style="height: 50vh">
+        <img src="../assets/img/customerCar.jpg" style="height: 50vh;width: 100vw">
     </div>
 
-    <div class=" mt- d-flex justify-content-between">
-                <p class="mx-5" style="font-size: 3vw;margin: 0">Browse Your Car</p>
+    <div class=" mt-3 d-flex justify-content-between">
+                <p class="mx-5" style="font-size: 2.5vw;margin: 0">Browse Your Car</p>
 
             <div class="d-flex mt-4" style="right: 3vw;position:relative;">
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="height: 4.3vh;width: 15vw" >
                     <button class="btn btn-outline-success" type="submit" style="height: 4.3vh;width: 5vw">Search</button>
                 </form>
+
             </div>
         </div>
 
@@ -68,5 +71,6 @@
 
 <script src="../assets/js/jquery-3.6.1.min.js"></script>
 <script src="../controller/Customer_CarController.js"></script>
+
 </body>
 </html>

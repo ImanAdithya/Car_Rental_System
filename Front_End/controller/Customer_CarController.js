@@ -1,21 +1,22 @@
-test();
 
-function test() {
-    console.log("DDD")
+getAllCar();
+
+//Load All Car Details
+function getAllCar() {
     $.ajax({
         url: 'http://localhost:8080/Back_End_war/car',
         method: "get",
         dataType:'json',
         success: function (res) {
-            alert(res);
-            loadAllCars(res.data);
+            bindCarEvent(res.data);
         },error:function (err) {
             alert("ERROR LOAD CARS hHHH")
         }
     });
 }
 
-function loadAllCars(cars) {
+//Bind the Car Details to div as a card items
+function bindCarEvent(cars) {
     $("#carsAppend").empty();
 
     for (let car of cars) {
