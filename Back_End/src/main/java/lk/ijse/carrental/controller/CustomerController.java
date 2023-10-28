@@ -26,7 +26,7 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ResponseUtil gellAllCustomer(){
+    public ResponseUtil getAllCustomer(){
         List<CustomerDTO> allCustomer = customerService.getAllCustomer ();
         return new ResponseUtil("Ok","Successfully Loaded Customer",allCustomer);
     }

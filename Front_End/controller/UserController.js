@@ -5,8 +5,9 @@ $('#btnRegister').click(function () {
 
     let formData= new FormData($("#userForm")[0]);
 
-    let cusID ="CR005";
-    console.log(cusID);
+
+
+    let cusID=$('#cusID').val();
     let cusName = $('#txtName').val();
     let contact = $('#txtContact').val();
     let email = $('#txtEmail').val();
@@ -95,30 +96,23 @@ function getAllCustomer() {
     });
 }
 
-//Generate a CustomerID
-function generateNextCusID(){
-    let nextCustomerCusID="";
 
-    $.ajax({
-        url:BASIC_URL+'customer?currentID',
-        method:'GET',
-        dataType:'json',
-        success:function (res) {
-            nextCustomerCusID=res;
-            console.log(res)
-        }
-    });
 
-    if (nextCustomerCusID==null){
-       return  nextCustomerCusID="CR001";
-    }
-
-    // Extract the numeric part of the current car ID and increment it
-    const numericPart = parseInt(nextCustomerCusID.substr(2), 10);
-    const nextNumericPart = numericPart + 1;
-
-    // Format the next car ID with leading zeros
-    const nextCarID = "CR" + String(nextNumericPart).padStart(3, '0');
-
-    return nextCarID;
-}
+// //Generate a CustomerID
+// function generateNextCusID(callback){
+//     let nextCustomerCusID="";
+//     $.ajax({
+//         url:BASIC_URL+'customer?currentID',
+//         method:'GET',
+//         dataType:'json',
+//         success:function (res) {
+//             const numericPart = parseInt(res.substr(2), 10);
+//             const nextNumericPart = numericPart + 1;
+//
+//             // Format the next car ID with leading zeros
+//             const nextCarID = "CR" + String(nextNumericPart).padStart(3, '0');
+//             console.log(nextCarID);
+//             callback(nextCarID);
+//         }
+//     });
+// }
