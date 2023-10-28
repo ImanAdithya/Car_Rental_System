@@ -97,7 +97,6 @@ $('#btnSaveCar').click(function () {
         }
     });
 
-
 });
 
 //Load All cars to table

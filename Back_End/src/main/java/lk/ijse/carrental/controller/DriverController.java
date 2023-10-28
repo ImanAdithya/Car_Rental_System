@@ -52,6 +52,6 @@ public class DriverController {
     public ResponseUtil saveImage(@ModelAttribute DriverImageDTO dto,String dID){
         dto.setDID (dID);
         driverService.saveDriverImage (dto);
-        return new ResponseUtil ("OK","Successfully Loaded Image",dto);
+        return new ResponseUtil ("OK","Successfully Loaded Image",dID);
     }
 }

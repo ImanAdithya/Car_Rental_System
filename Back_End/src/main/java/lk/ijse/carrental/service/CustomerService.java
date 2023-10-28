@@ -9,5 +9,6 @@ public interface CustomerService {
     void saveCustomer(CustomerDTO dto);
     void saveCustomerImage(CustomerImageDTO dto);
     List<CustomerDTO> getAllCustomer();
+    String getLastCusID();
 
 }

@@ -58,30 +58,38 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public String getLastCusID() {
+        return customerRepo.getCusID ();
+    }
+
+    @Override
     public void saveCustomerImage(CustomerImageDTO dto) {
 
         Customer customer = customerRepo.findById(dto.getCID ()).get();
 
         try {
-            byte[] nicFileBytes = dto.getNicImage ().getBytes ();
-            byte[] licenseFileBytes = dto.getLicenseImage ().getBytes ();
+
+            if (dto.getLicenseImage () != null && dto.getNicImage () != null) {
+
+                byte[] nicFileBytes = dto.getNicImage ().getBytes ();
+                byte[] licenseFileBytes = dto.getLicenseImage ().getBytes ();
 
 
-            String projectPath="/Users/imanadithya/Software Engineering/IJSE/PROJECTS/Car_Rental_System/Front_End/assets";
-            Path nicLocation = Paths.get(projectPath + "/projectImages/bucket/customer/nic/nic_" + dto.getCID () + ".jpeg");
-            Path licenseLocation = Paths.get(projectPath + "/projectImages/bucket/customer/license/license_" + dto.getCID () + ".jpeg");
+                String projectPath = "/Users/imanadithya/Software Engineering/IJSE/PROJECTS/Car_Rental_System/Front_End/assets";
+                Path nicLocation = Paths.get (projectPath + "/projectImages/bucket/customer/nic/nic_" + dto.getCID () + ".jpeg");
+                Path licenseLocation = Paths.get (projectPath + "/projectImages/bucket/customer/license/license_" + dto.getCID () + ".jpeg");
 
-            Files.write(nicLocation, nicFileBytes);
-            Files.write(licenseLocation, licenseFileBytes);
+                Files.write (nicLocation, nicFileBytes);
+                Files.write (licenseLocation, licenseFileBytes);
 
-            dto.getNicImage().transferTo(nicLocation);
-            dto.getLicenseImage().transferTo(licenseLocation);
-
-
-
+                dto.getNicImage ().transferTo (nicLocation);
+                dto.getLicenseImage ().transferTo (licenseLocation);
+            }
 
         } catch (IOException e) {
+            System.out.println (e);
             throw new RuntimeException (e);
+
         }
 
         customer.setFilePath_1 ("/assets/projectImages/bucket/customer/nic/nic_" + dto.getCID ()+".jpeg");

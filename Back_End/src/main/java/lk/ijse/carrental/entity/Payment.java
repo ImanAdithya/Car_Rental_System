@@ -20,6 +20,6 @@ public class Payment {
     private String paymentExtraMilage;
     private String wavierPayment;
 
-
+    //description
 
 }

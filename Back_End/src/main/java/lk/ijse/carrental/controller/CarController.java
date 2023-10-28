@@ -50,8 +50,7 @@ public class CarController {
     @PostMapping(params = {"cID"})
     public  ResponseUtil saveCarImage(@ModelAttribute CarImageDTO carImageDTO,String cID){
         carImageDTO.setCID (cID);
-
-        return new ResponseUtil ("OK","Image save  Success",carImageDTO);
+        return new ResponseUtil ("OK","Image save  Success",cID);
     }
 
 }

@@ -35,6 +35,12 @@ public class CustomerController {
     public ResponseUtil saveImage(@ModelAttribute CustomerImageDTO customerImageDTO,String cID){
        customerImageDTO.setCID (cID);
         customerService.saveCustomerImage (customerImageDTO);
-       return new ResponseUtil ("OK","Photo uploaded succuss",customerImageDTO);
+       return new ResponseUtil ("OK","Photo uploaded succuss",cID);
+    }
+
+    @GetMapping(params = {"currentID"})
+    public  ResponseUtil nextCusID(){
+        String lastCusID = customerService.getLastCusID ();
+        return new ResponseUtil ("Ok","NEXT CUS ID",lastCusID);
     }
 }
