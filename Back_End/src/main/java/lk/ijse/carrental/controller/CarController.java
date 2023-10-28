@@ -2,6 +2,7 @@ package lk.ijse.carrental.controller;
 
 
 import lk.ijse.carrental.dto.CarDTO;
+import lk.ijse.carrental.dto.CarImageDTO;
 import lk.ijse.carrental.service.CarService;
 import lk.ijse.carrental.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,11 @@ public class CarController {
         return new ResponseUtil ("OK","Car Loaded Success",car);
     }
 
+    @PostMapping(params = {"cID"})
+    public  ResponseUtil saveCarImage(@ModelAttribute CarImageDTO carImageDTO,String cID){
+        carImageDTO.setCID (cID);
+
+        return new ResponseUtil ("OK","Image save  Success",carImageDTO);
+    }
 
 }

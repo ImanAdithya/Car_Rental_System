@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="../assets/styles/customerPage.css">
     <meta name="viewport" content="width=device-width initial-scale=1">
 
+    <style>
+
+        </style>
+
 
 </head>
 <body >
@@ -42,7 +46,8 @@
 </header>
 
 <main style="overflow-x: hidden">
-    <div >
+
+    <div>
         <img src="../assets/img/customerCar.jpg" style="height: 50vh;width: 100vw">
     </div>
 
@@ -83,13 +88,26 @@
     <div class="d-flex justify-content-center">
 
             <div class=" row row-cols-1 row-cols-md-3 g-4 mt-3" id="carsAppend" style="width: 90vw;">
-
             </div>
 
         </div>
+
+</main>
+
+<main class="position-fixed top-0 start-0 vh-100 w-100 " style="z-index: 6" id="test">
+    <div class="vh-100 w-100 position-absolute">
+        <section class="popupSecAdminPanel container-fluid bg-transparent d-flex justify-content-center" id="driverDetailsPopupBg">
+            <div class="bg-white d-flex flex-column  z-3 rounded popupDetailDiv z-3 bg-light shadow mt-5" id="driverDetailPopup">
+
+            </div>
+        </section>
+    </div>
 </main>
 
 
+<script>
+    /*document.getElementById("driverDetailsPopupBg").style.display="none";*/
+</script>
 
 <script src="../assets/js/jquery-3.6.1.min.js"></script>
 <script src="../controller/Customer_CarController.js"></script>

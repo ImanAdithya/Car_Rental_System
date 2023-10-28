@@ -1,8 +1,10 @@
 package lk.ijse.carrental.service.impl;
 
 import lk.ijse.carrental.dto.CarDTO;
+import lk.ijse.carrental.dto.CarImageDTO;
 import lk.ijse.carrental.dto.DriverDTO;
 import lk.ijse.carrental.entity.Car;
+import lk.ijse.carrental.entity.Customer;
 import lk.ijse.carrental.entity.Driver;
 import lk.ijse.carrental.repo.CarRepository;
 import lk.ijse.carrental.service.CarService;
@@ -12,6 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Service
@@ -91,6 +97,7 @@ public class CarServiceImpl implements CarService {
         carRepo.deleteById (id);
     }
 
+
     @Override
     public List<CarDTO> getAllCars() {
         List<Car> allCars = carRepo.findAll ();
@@ -105,5 +112,43 @@ public class CarServiceImpl implements CarService {
 
         Car car = carRepo.findById (id).get ();
         return mapper.map (car, CarDTO.class);
+    }
+
+    @Override
+    public void saveImage(CarImageDTO dto) {
+        Car car = carRepo.findById(dto.getCID ()).get();
+
+        try {
+            byte[] file_1 = dto.getFilePath_1 ().getBytes ();
+            byte[] file_2 = dto.getFilePath_2 ().getBytes ();
+            byte[] file_3 = dto.getFilePath_3 ().getBytes ();
+            byte[] file_4 = dto.getFilePath_4 ().getBytes ();
+
+            String projectPath="/Users/imanadithya/Software Engineering/IJSE/PROJECTS/Car_Rental_System/Front_End/assets";
+            Path filePath_1 = Paths.get(projectPath + "/projectImages/bucket/car/file_1/file_1" + dto.getCID () + ".jpeg");
+            Path filePath_2 = Paths.get(projectPath + "/projectImages/bucket/car/file_2/file_2" + dto.getCID () + ".jpeg");
+            Path filePath_3 = Paths.get(projectPath + "/projectImages/bucket/car/file_3/file_3" + dto.getCID () + ".jpeg");
+            Path filePath_4 = Paths.get(projectPath + "/projectImages/bucket/car/file_4/file_4" + dto.getCID () + ".jpeg");
+
+            Files.write(filePath_1, file_1);
+            Files.write(filePath_2, file_2);
+            Files.write(filePath_3, file_3);
+            Files.write(filePath_4, file_4);
+
+            dto.getFilePath_1 ().transferTo(filePath_1);
+            dto.getFilePath_2 ().transferTo(filePath_2);
+            dto.getFilePath_3 ().transferTo(filePath_3);
+            dto.getFilePath_4 ().transferTo(filePath_4);
+
+        } catch (IOException e) {
+            throw new RuntimeException (e);
+        }
+
+        car.setFilePath_1 ("/assets/projectImages/bucket/car/file_1/file_1" + dto.getCID ()+".jpeg");
+        car.setFilePath_1 ("/assets/projectImages/bucket/car/file_2/file_2" + dto.getCID ()+".jpeg");
+        car.setFilePath_1 ("/assets/projectImages/bucket/car/file_3/file_3" + dto.getCID ()+".jpeg");
+        car.setFilePath_1 ("/assets/projectImages/bucket/car/file_4/file_4" + dto.getCID ()+".jpeg");
+
+        carRepo.save(car);
     }
 }

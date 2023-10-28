@@ -9,7 +9,6 @@ import lombok.ToString;
 @Data
 @ToString
 public class CarDTO {
-
     String carID;
     String regNo;
     String type;

@@ -1,4 +1,5 @@
 
+$('#test').css('display','none');
 getAllCar();
 
 //Load All Car Details
@@ -8,6 +9,7 @@ function getAllCar() {
         method: "get",
         dataType:'json',
         success: function (res) {
+            showAlert("CAR LOAD SUCCUSS");
             bindCarEvent(res.data);
         },error:function (err) {
             alert("ERROR LOAD CARS hHHH")
@@ -63,21 +65,26 @@ function bindCarEvent(cars) {
                         </section>
 
                         <section class="d-flex justify-content-between flex-lg-row flex-column gap-1 mt-3">
-                            <button style="width: 5vw;" class="btn btn-success rent" data-bs-toggle="modal" data-bs-target="#testPoP"><p class="card-text "><i class="bi bi-upc-scan"></i> Rent </p></button>
+                            <button style="width: 5vw" class="btn btn-success rent" data-bs-toggle="modal" data-bs-target="#testPoP"><p class="card-text "><i class="bi bi-upc-scan"></i> Rent </p></button>
                             <button class="btn btn-warning cart" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><p class="card-text"><i class="bi bi-cart-check-fill"></i> Add to cart</p></button>
                         </section>
-
+                        
                     </div>
                 </div>
             </div>`);
     }
-    d();
+    bindRentBtn();
 }
+
 
 
 //Bind the Rent Button
 function bindRentBtn() {
     $('.rent').click(function () {
-        alert("DD");
+
+        document.getElementById("driverDetailsPopupBg").style.display="block";
+
+        $('#test').css('display','block');
     });
+
 }
