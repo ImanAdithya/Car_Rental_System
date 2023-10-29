@@ -69,3 +69,39 @@
     width: 30%;
     height: 85%;
 }
+
+tbody td {
+    background-color: white;
+    transition: all 0.2s linear;
+    transition-delay: 0.3s, 0s;
+    /* 2. Animate the opacity on hover */
+    opacity: 0.8;
+}
+tbody tr:hover td {
+    background-color: rgba(255,255,255,1);
+    transition-delay: 0s, 0s;
+    opacity: 1;
+    font-size: 2em;
+}
+
+td {
+    /* 3. Scale the text using transform on hover */
+    transform-origin: center left;
+    transition-property: transform;
+    transition-duration: 0.4s;
+    transition-timing-function: ease-in-out;
+    font-size: 15px;
+}
+tr:hover td {
+    transform: scale(0.9);
+}
+
+
+table {
+    width: 50vw;
+    margin: 0 5%;
+    text-align: left;
+}
+th, td {
+    padding: 0.4em;
+}

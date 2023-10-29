@@ -25,11 +25,6 @@ public class WebAppConfig implements WebMvcConfigurer {
         return multipartResolver;
     }
 
-//    @Bean
-//    public MultipartResolver multipartResolver() {
-//        return new StandardServletMultipartResolver();
-//    }
-
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

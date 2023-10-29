@@ -1,4 +1,4 @@
-
+let BASIC_URL='http://localhost:8080/Back_End_war/';
 $('#popUpRentPage').css('display','none');
 $('#cartPage').css('display','block');
 
@@ -37,32 +37,32 @@ function bindCarEvent(cars) {
                         </section>
 
                         <section class="d-flex gap-3 justify-content-between">
-                            <p class="card-text"><i class="bi bi-fuel-pump-diesel-fill me-1 text-success"></i>Petrol</p>
-                            <p class="card-text"><i class="bi bi-palette-fill me-1 text-danger"></i>red</p>
-                            <p class="card-text"><i class="bi bi-gear-wide-connected me-1 text-info"></i>Auto</p>
-                            <p class="card-text"><i class="bi bi-people-fill me-1 text-primary"></i>4</p>
+                            <p class="card-text"><i class="bi bi-fuel-pump-diesel-fill me-1 text-success"></i>${car.fuelType}</p>
+                            <p class="card-text"><i class="bi bi-palette-fill me-1 text-danger"></i>${car.color}</p>
+                            <p class="card-text"><i class="bi bi-gear-wide-connected me-1 text-info"></i>${car.transmissionType}</p>
+                            <p class="card-text"><i class="bi bi-people-fill me-1 text-primary"></i>${car.passenger}</p>
                         </section>
 
                         <section class="row justify-content-between p-0 m-0 g-0">
                             <p class="card-text col col-md-5">Free Mileage Daily</p>
-                            <p class="card-text text-secondary col col-lg-3 mb-lg-0 mb-4">100km</p>
-                            <p class="card-text text-secondary col col-lg-3 mb-lg-0 mb-4 text-end">3000</p>
+                            <p class="card-text text-secondary col col-lg-3 mb-lg-0 mb-4">${car.freeMilageDaily}</p>
+                            <p class="card-text text-secondary col col-lg-3 mb-lg-0 mb-4 text-end">${car.freeMilageDailyPrice}</p>
                         </section>
 
                         <section class="row justify-content-between p-0 m-0 g-0">
                             <p class="card-text col col-md-5">Free Mileage Monthly</p>
-                            <p class="card-text text-secondary col col-lg-3 mb-lg-0 mb-4">1000km</p>
-                            <p class="card-text text-secondary col col-lg-3 mb-lg-0 mb-4 text-end">30000</p>
+                            <p class="card-text text-secondary col col-lg-3 mb-lg-0 mb-4">${car.freeMilageMonthly}</p>
+                            <p class="card-text text-secondary col col-lg-3 mb-lg-0 mb-4 text-end">${car.freeMilageMonthlyPrice}</p>
                         </section>
 
 
                         <section class="row justify-content-between">
-                            <p class="card-text col col-lg-4">Lost Damage Cost</p>
-                            <p class="card-text text-secondary col text-end">25000</p>
+                            <p class="card-text col col-lg-4">Car ID</p>
+                            <p class="card-text text-secondary col text-end">${car.carID}</p>
                         </section>
 
                         <section class="row justify-content-between">
-                            <p class="card-text text-secondary col col-6" id="registerNum"><i class="bi bi-car-front me-1"></i>BAH-9832</p>
+                            <p class="card-text text-secondary col col-6" id="registerNum"><i class="bi bi-car-front me-1"></i>${car.regNo}</p>
                            
                         </section>
 
@@ -107,7 +107,41 @@ $('#cartBtn').click(function () {
 
 function bindCartBtn() {
     $('.cart').click(function () {
+        let cardCusID = $(this).parent().parent().children(":eq(4)").children(":eq(1)").text();
 
+        findCar(cardCusID,function (c) {
+            let row = `<tr>
+                           <td>${"R001"}</td>
+                            <td>${c.carID}</td>
+                            <td>${c.brand}</td>
+                            <td>${c.fuelType}</td>
+                            <td>${c.transmissionType}</td>
+                            <td>${c.currentMeterValue}</td>
+                            <td>${c.availability}</td>
+                         </tr>`;
+            $("#tblCustomerCart").append(row);
+            bindTrEvent();
+        });
+
+    });
+}
+
+//get Car Details
+function findCar(id,callback) {
+    $.ajax({
+        url:BASIC_URL+'car?id='+id,
+        method:'GET',
+        async:false,
+        success:function (res) {
+            callback(res.data);
+        },error:function (err) {
+            alert(err);
+        }
+    });
+}
+
+function bindTrEvent() {
+    $('#tblCustomerCart>tr').click(function () {
 
     });
 }

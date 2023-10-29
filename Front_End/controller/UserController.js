@@ -2,7 +2,6 @@ let BASIC_URL='http://localhost:8080/Back_End_war/';
 
 //Register Customer
 $('#btnRegister').click(function () {
-
     let formData= new FormData($("#userForm")[0]);
 
     let cusID=$('#cusID').val();
@@ -28,6 +27,8 @@ $('#btnRegister').click(function () {
             role:role,
         }
     }
+
+
     $.ajax({
         url:BASIC_URL+'customer',
         method:'POST',
