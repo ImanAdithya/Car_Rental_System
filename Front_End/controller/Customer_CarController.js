@@ -1,6 +1,6 @@
 
 $('#popUpRentPage').css('display','none');
-$('#cartPage').css('display','none');
+$('#cartPage').css('display','block');
 
 getAllCar();
 
@@ -76,6 +76,7 @@ function bindCarEvent(cars) {
             </div>`);
     }
     bindRentBtn();
+    bindCartBtn();
 }
 
 
@@ -103,3 +104,10 @@ $('#cartBtn').click(function () {
     $('#rentPage').css('display','none');
     $('#popUpRentPage').css('display','none');
 });
+
+function bindCartBtn() {
+    $('.cart').click(function () {
+
+
+    });
+}

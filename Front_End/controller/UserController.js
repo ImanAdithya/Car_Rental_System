@@ -5,8 +5,6 @@ $('#btnRegister').click(function () {
 
     let formData= new FormData($("#userForm")[0]);
 
-
-
     let cusID=$('#cusID').val();
     let cusName = $('#txtName').val();
     let contact = $('#txtContact').val();

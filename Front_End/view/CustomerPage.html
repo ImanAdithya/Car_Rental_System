@@ -100,7 +100,7 @@
             <div class="bg-white d-flex flex-column  z-3 rounded popupDetailDiv z-3 bg-light shadow mt-5" id="driverDetailPopup">
 
                 <div class="d-flex flex-row">
-                    <h3 class="mt-2 mx-2">RENT CAR</h3>
+                    <h3 class="mt-2 mx-2">Booking Detail</h3>
                     <button type="button" class="btn-close position-relative mt-2" id="closeBtn" aria-label="Close" style="left: 19vw"></button>
                 </div>
 
@@ -179,8 +179,18 @@
     </div>
 </main>
 
-<main id="cartPage">
-    <div style="width: 100vw;height: 100vh;background-color: red"></div>
+<main id="cartPage" style="width: 100vw;height: 100vh;overflow-x: hidden">
+    <section class="container-fluid">
+        <div>
+            <p class="mx-5" style="font-size: 2.5vw;margin: 0">Your Cart Items</p>
+        </div>
+
+        <div class="d-flex flex-row mx-4 justify-content-around" style="width: 95vw;height: 100vh;border:2px solid red">
+            <div style="width: 40%;height: 100vh;border: 1px solid green"></div>
+            <div style="width: 50%; height: 100%;border: 1px solid blue"></div>
+        </div>
+
+    </section>
 </main>
 
 

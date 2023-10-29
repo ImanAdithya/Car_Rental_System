@@ -16,7 +16,7 @@ import java.util.List;
 public class Rent {
     @Id
     private String RentID;
-    private String cusID;
+    //private String cusID;
     private String FullPaymentStatus;
     @ManyToOne(cascade = {CascadeType.REFRESH,CascadeType.DETACH})
     @JoinColumn(name = "customerID",referencedColumnName = "cusID",nullable = false)

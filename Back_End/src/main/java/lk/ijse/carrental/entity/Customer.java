@@ -15,6 +15,7 @@ import javax.persistence.*;
 public class Customer {
 
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //private Long id;
     @Id
     private String cusID;
     private String cusName;

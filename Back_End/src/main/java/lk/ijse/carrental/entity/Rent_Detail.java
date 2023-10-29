@@ -20,8 +20,8 @@ public class Rent_Detail implements Serializable {
     private String rentID;
     @Id
     private String carID;
-    private String driverID;
-    private String paymentID;
+   // private String driverID;
+    //private String paymentID;
     private String pickUpDate;
     private String pickUpTime;
     private String returnDate;
