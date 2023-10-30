@@ -4,7 +4,6 @@ $('#cartPage').css('display','none');
 
 getAllCar();
 
-
 //Navigations
 $('#cartBtn').click(function () {
     $('#cartPage').css('display','block');
@@ -125,12 +124,20 @@ function bindCartBtn() {
                             <td>${c.transmissionType}</td>
                             <td>${c.currentMeterValue}</td>
                             <td>${c.availability}</td>
+                            <td> <button id="cartDeleteBtn" type="button" class="btn btn-danger"><i class="text-light fa-solid fa-trash me-2"></i>DELETE</button></td>
                          </tr>`;
             $("#tblCustomerCart").append(row);
             bindTrEvent();
+            f();
         });
 
     });
+}
+
+function f() {
+    $('#cartDeleteBtn').click(function () {
+        alert("DD");
+    })
 }
 
 //get Car Details
@@ -148,9 +155,18 @@ function findCar(id,callback) {
 }
 
 function bindTrEvent() {
-    $('#tblCustomerCart>tr').click(function () {
-        $('#driverDetailsPopupBg').css('display','block');
-        $('#popUpRentPage').css('display','block');
+    $('#tblCustomerCart>tr>td:lt(7)').click(function () {
+        $('#driverDetailsPopupBg').css('display', 'block');
+        $('#popUpRentPage').css('display', 'block');
+
+        let pickUpDate=$('#txtPickUpdate').val();
+        let pickUpTime=$('#txtPickUpTime').val();
+        let returnDate=$('#txtReturnDate').val();
+        let returnTime=$('#txtReturnTime').val();
+        let driverSelect=$('#driverSelect option:selected').text();
+        let DriverPayment=$('#txtDriverPayment').val();
+        let txtTotalAmount=$('#driverSelect option:selected').text();
+
+
     });
 }
-
