@@ -124,7 +124,7 @@ function bindCartBtn() {
                             <td>${c.transmissionType}</td>
                             <td>${c.currentMeterValue}</td>
                             <td>${c.availability}</td>
-                            <td> <button id="cartDeleteBtn" type="button" class="btn btn-danger"><i class="text-light fa-solid fa-trash me-2"></i>DELETE</button></td>
+                            <td> <button type="button" class="btn btn-danger cartDeleteBtn"><i class="text-light fa-solid fa-trash me-2"></i>DELETE</button></td>
                          </tr>`;
             $("#tblCustomerCart").append(row);
             bindTrEvent();
@@ -134,10 +134,15 @@ function bindCartBtn() {
     });
 }
 
-function f() {
-    $('#cartDeleteBtn').click(function () {
-        alert("DD");
-    })
+//Remove row
+function removeRow() {
+    // Unbind the click event handler for the 'cartDeleteBtn' class
+    $('.cartDeleteBtn').off('click');
+
+    // Bind the click event handler for the 'cartDeleteBtn' class
+    $('.cartDeleteBtn').click(function () {
+        $(this).closest('tr').remove();
+    });
 }
 
 //get Car Details
@@ -154,19 +159,30 @@ function findCar(id,callback) {
     });
 }
 
+//Bind CartTable Data
+
 function bindTrEvent() {
-    $('#tblCustomerCart>tr>td:lt(7)').click(function () {
-        $('#driverDetailsPopupBg').css('display', 'block');
-        $('#popUpRentPage').css('display', 'block');
+    $('#tblCustomerCart>tr').on('click', function (event) {
+        if ($(event.target).is('td:nth-child(-n+4)')) {
+            $('#driverDetailsPopupBg').css('display', 'block');
+            $('#popUpRentPage').css('display', 'block');
+        }
+    });
+}
+function sendRequest() {
+    $('#requestRent').click(function () {
+        let carID='';
 
         let pickUpDate=$('#txtPickUpdate').val();
         let pickUpTime=$('#txtPickUpTime').val();
         let returnDate=$('#txtReturnDate').val();
         let returnTime=$('#txtReturnTime').val();
+        let wavierPayment=$('#txtWavierPayment').val();
+        let rentCost=$('#txtRentCoast').val();
         let driverSelect=$('#driverSelect option:selected').text();
         let DriverPayment=$('#txtDriverPayment').val();
-        let txtTotalAmount=$('#driverSelect option:selected').text();
-
-
+        let totalAmount=$('#txtTotalAmount').val();
     });
+
+
 }
