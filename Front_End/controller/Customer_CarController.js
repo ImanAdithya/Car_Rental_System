@@ -142,6 +142,7 @@ function findCar(id,callback) {
 
 function bindTrEvent() {
     $('#tblCustomerCart>tr').click(function () {
-
+        $('#driverDetailsPopupBg').css('display','block');
+        $('#popUpRentPage').css('display','block');
     });
 }
