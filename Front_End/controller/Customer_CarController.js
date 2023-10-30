@@ -1,8 +1,22 @@
 let BASIC_URL='http://localhost:8080/Back_End_war/';
 $('#popUpRentPage').css('display','none');
-$('#cartPage').css('display','block');
+$('#cartPage').css('display','none');
 
 getAllCar();
+
+
+//Navigations
+$('#cartBtn').click(function () {
+    $('#cartPage').css('display','block');
+    $('#rentPage').css('display','none');
+    $('#popUpRentPage').css('display','none');
+});
+$('#homeBtn').click(function () {
+    $('#cartPage').css('display','none');
+    $('#rentPage').css('display','block');
+    $('#popUpRentPage').css('display','none');
+});
+
 
 //Load All Car Details
 function getAllCar() {
@@ -98,13 +112,6 @@ $('#closeBtn').click(function () {
     $('#popUpRentPage').css('display','none');
 });
 
-//Show cartPage
-$('#cartBtn').click(function () {
-    $('#cartPage').css('display','block');
-    $('#rentPage').css('display','none');
-    $('#popUpRentPage').css('display','none');
-});
-
 function bindCartBtn() {
     $('.cart').click(function () {
         let cardCusID = $(this).parent().parent().children(":eq(4)").children(":eq(1)").text();
@@ -146,3 +153,4 @@ function bindTrEvent() {
         $('#popUpRentPage').css('display','block');
     });
 }
+

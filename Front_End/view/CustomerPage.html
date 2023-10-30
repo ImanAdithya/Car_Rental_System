@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../assets/styles/customerPage.css">
     <meta name="viewport" content="width=device-width initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <style>
 
@@ -23,7 +24,7 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav ">
                     <li class="nav-item">
-                        <a class="nav-link active"  aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" id="homeBtn" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="cartBtn" href="#">Cart</a>
@@ -182,12 +183,11 @@
 <main id="cartPage" style="width: 100vw;height: 100vh;overflow-x: hidden">
     <section class="container-fluid">
         <div>
-            <p class="mx-5" style="font-size: 2.5vw;margin: 0">Your Cart Items</p>
+            <p class="mx-5 mt-3" style="font-size: 2.5vw;margin: 0">Your Cart Items</p>
         </div>
 
-        <div class="d-flex flex-row mx-4 justify-content-around" style="width: 95vw;height: 100vh;border:2px solid red">
-            <div style="width: 40%;height: 100vh;border: 1px solid green"></div>
-            <div style="width: 55%; height: 100%;border: 1px solid blue">
+        <div class="d-flex flex-row mx-4 justify-content-around mt-5" style="width: 95vw">
+            <div style=" height: 100%;width: 94vw">
                 <table>
                     <thead>
                     <tr>
@@ -198,6 +198,9 @@
                         <th>TRANSMISSION</th>
                         <th>CURRENT METER VALUE</th>
                         <th>AVAILABILITY</th>
+                        <th>
+                            ACTION
+                        </th>
                     </tr>
                     </thead>
                     <tbody id="tblCustomerCart">
@@ -216,6 +219,6 @@
 <script src="../controller/Customer_CarController.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../util/Alert.js"></script>
-
+<!--                            <button type="button" class="btn btn-danger"><i class="text-light fa-solid fa-trash me-2"></i>DELETE</button>-->
 </body>
 </html>

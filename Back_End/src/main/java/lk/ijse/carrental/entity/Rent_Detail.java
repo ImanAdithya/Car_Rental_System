@@ -13,36 +13,31 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Data
 @ToString
-
-public class Rent_Detail implements Serializable {
+@IdClass(Rent_Detail_PK.class)
+public class Rent_Detail{
 
     @Id
     private String rentID;
     @Id
     private String carID;
-   // private String driverID;
-    //private String paymentID;
-    private String pickUpDate;
-    private String pickUpTime;
-    private String returnDate;
-    private String  returnTime;
-    private String wavierFilePath;
+
+    private String driverID;
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    private Payment payment;
+
+    //private String payID;
 
     @ManyToOne
-    @JoinColumn(name = "rentId",referencedColumnName = "rentID",insertable = false,updatable = false)
-    private Rent rents;
+    @JoinColumn(name = "rentID",referencedColumnName = "RentID",insertable = false,updatable = false)
+    private Rent rent;
 
     @ManyToOne
-    @JoinColumn(name = "carId",referencedColumnName = "carID",insertable = false,updatable = false)
-    private Car cars;
+    @JoinColumn(name = "carID",referencedColumnName = "carID",insertable = false,updatable = false)
+    private Car car;
 
-    @OneToOne(cascade = {CascadeType.REFRESH,CascadeType.DETACH})
-    @JoinColumn(name = "paymentId",referencedColumnName = "paymentID",nullable = false)
-    private Payment paymentId;
-
-    @ManyToOne(cascade = {CascadeType.REFRESH,CascadeType.DETACH})
-    @JoinColumn(name = "driverId",referencedColumnName = "driverID",nullable = false)
-    private Driver driverId;
-
+    @ManyToOne
+    @JoinColumn(name = "driverID",referencedColumnName = "driverID",insertable = false,updatable = false)
+    private Driver driver;
 
 }

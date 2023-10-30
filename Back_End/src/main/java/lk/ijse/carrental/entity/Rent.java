@@ -16,12 +16,10 @@ import java.util.List;
 public class Rent {
     @Id
     private String RentID;
-    //private String cusID;
     private String FullPaymentStatus;
     @ManyToOne(cascade = {CascadeType.REFRESH,CascadeType.DETACH})
     @JoinColumn(name = "customerID",referencedColumnName = "cusID",nullable = false)
     private Customer customerID;
-
-    @OneToMany(mappedBy = "rents",cascade = CascadeType.ALL)
-    private List<Rent_Detail> rentDetailList;
+    @OneToMany(mappedBy = "rent", cascade = CascadeType.ALL)
+    private List<Rent_Detail> rentDetails;
 }
