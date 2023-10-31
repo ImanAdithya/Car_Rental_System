@@ -1,10 +1,14 @@
 let BASIC_URL='http://localhost:8080/Back_End_war/';
 
+
+let car_ID;
+generateCustomerID();
 //Register Customer
 $('#btnRegister').click(function () {
+
     let formData= new FormData($("#userForm")[0]);
 
-    let cusID=$('#cusID').val();
+    let cusID=car_ID;
     let cusName = $('#txtName').val();
     let contact = $('#txtContact').val();
     let email = $('#txtEmail').val();
@@ -38,6 +42,7 @@ $('#btnRegister').click(function () {
         header:'Access-Control-Allow-Origin',
         origin:'*',
         success:function (res) {
+            generateCustomerID();
             alert("Customer SUCCUSS");
         },error:function (err) {
             alert(err+"ERROR");
@@ -62,6 +67,7 @@ $('#btnRegister').click(function () {
             alert(res.message);
         }
     });
+
 
 });
 
@@ -101,21 +107,25 @@ function getAllCustomer() {
 
 
 
-// //Generate a CustomerID
-// function generateNextCusID(callback){
-//     let nextCustomerCusID="";
-//     $.ajax({
-//         url:BASIC_URL+'customer?currentID',
-//         method:'GET',
-//         dataType:'json',
-//         success:function (res) {
-//             const numericPart = parseInt(res.substr(2), 10);
-//             const nextNumericPart = numericPart + 1;
-//
-//             // Format the next car ID with leading zeros
-//             const nextCarID = "CR" + String(nextNumericPart).padStart(3, '0');
-//             console.log(nextCarID);
-//             callback(nextCarID);
-//         }
-//     });
-// }
+function generateCustomerID() {
+    $.ajax({
+        url: BASIC_URL+'customer?generateID',
+        method: "GET",
+        contentType: "application/json",
+        dataType: "json",
+        success: function (resp) {
+            if (resp.data == null) {
+
+                car_ID = 'C00-001';
+            } else {
+                let number = parseInt(resp.data.slice(4), 7);
+                number++;
+                car_ID = "C00-" + number.toString().padStart(3, "0");
+            }
+            $('#cusID').val(car_ID);
+
+        },
+        error: function (ob, statusText, error) {
+        }
+    });
+}

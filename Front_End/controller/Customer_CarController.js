@@ -47,6 +47,7 @@ function bindCarEvent(cars) {
     $("#carsAppend").empty();
 
     for (let car of cars) {
+        let isAvailable = car.availability === "Yes";
 
         $("#carsAppend").append(`<div class="class=col col-lg-4">
                 <div class="card ">
@@ -90,8 +91,8 @@ function bindCarEvent(cars) {
                         </section>
 
                         <section class="d-flex justify-content-between flex-lg-row flex-column gap-1 mt-3">
-                            <button style="width: 5vw" class="btn btn-success rent" data-bs-toggle="modal" data-bs-target="#testPoP"><p class="card-text "><i class="bi bi-upc-scan"></i> Rent </p></button>
-                            <button class="btn btn-warning cart" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><p class="card-text"><i class="bi bi-cart-check-fill"></i> Add to cart</p></button>
+                            <button style="width: 5vw" id="test" class="btn btn-success rent ${isAvailable ? '' : 'disabled'}" data-bs-toggle="modal" data-bs-target="#testPoP"><p class="card-text "><i class="bi bi-upc-scan"></i> Rent </p></button>
+                            <button class="btn btn-warning cart ${isAvailable ? '' : 'disabled'}" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><p class="card-text"><i class="bi bi-cart-check-fill"></i> Add to cart</p></button>
                         </section>
                         
                     </div>
@@ -100,9 +101,13 @@ function bindCarEvent(cars) {
     }
     bindRentBtn();
     bindCartBtn();
+
 }
 
 
+//check Availability of car
+function checkCarAvailability(availability) {
+}
 
 //Bind the Rent Button
 function bindRentBtn() {
@@ -208,6 +213,11 @@ $('#btnRequestAll').click(function () {
     let returnTime=$('#txtReturnTime').val();
     let wavierPayment=$('#txtWavierPayment').val();
 
+    if (ValidateRent(pickUpDate,pickUpTime,returnDate,returnTime)){
+        alert('The time difference is more than three days.');
+        return;
+    }
+
     Rent={
         rent_ID:rental_ID,
         pickUpDate:pickUpDate,
@@ -241,7 +251,27 @@ $('#btnRequestAll').click(function () {
     })
 });
 
+//Calculate Wavier Payment
 function calculateWavierPayment(payment){
     wavierPayment=wavierPayment+parseInt(payment);
     $('#txtWavierPayment').val(wavierPayment);
+}
+
+
+//THE car rent more than 3 days give alert
+function ValidateRent(pickUpDate,pickUpTime,returnDate,returnTime) {
+    let pickUpDateTime = new Date(`${pickUpDate} ${pickUpTime}`);
+    let returnDateTime = new Date(`${returnDate} ${returnTime}`);
+
+// Calculate the time difference in milliseconds
+    let timeDifference = Math.abs(returnDateTime - pickUpDateTime);
+
+// Calculate the number of days
+    let daysDifference = timeDifference / (1000 * 60 * 60 * 24);
+
+    if (daysDifference > 3) {
+      return true;
+    }
+
+    return false;
 }

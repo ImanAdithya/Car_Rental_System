@@ -12,4 +12,5 @@ public interface CarService {
     void saveImage(CarImageDTO dto);
     List<CarDTO> getAllCars();
     CarDTO findCar(String id);
+    String carIdGenerate();
 }

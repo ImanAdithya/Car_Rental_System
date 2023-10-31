@@ -115,6 +115,11 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    public String carIdGenerate() {
+        return carRepo.getLastIndex ();
+    }
+
+    @Override
     public void saveImage(CarImageDTO dto) {
         Car car = carRepo.findById(dto.getCID ()).get();
 

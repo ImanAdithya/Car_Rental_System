@@ -1,7 +1,10 @@
 
 getAllDriver();
+generateDriverID();
+let driverIDNum;
+let driver_ID;
 
-let driverIDNum="";
+
 
 //Bind Table Values to TextFields
 function bindTrEvents() {
@@ -24,9 +27,10 @@ function bindTrEvents() {
 
 //Save Driver
 $('#btnSaveDriver').click(function () {
+
     let formDataDriver = new FormData($("#driverForm")[0]);
 
-    let driverID="D001"
+    let driverID=driver_ID;
     let driverName=$('#txtDriverName').val();
     let driverAddress=$('#txtDriverAddress').val();
     let driverContact=$('#txtDriverContact').val();
@@ -64,6 +68,7 @@ $('#btnSaveDriver').click(function () {
         origin:'*',
         success:function (res) {
             alert(res.message);
+            generateDriverID();
             getAllDriver();
             clearFields();
         },error:function (err) {
@@ -142,7 +147,7 @@ function findCustomer(id,callback) {
 }
 
 $('#btnUpdateDriver').click(function () {
-    let driverID="D001"
+    let driverID=driverIDNum;
     let driverName=$('#txtDriverName').val();
     let driverAddress=$('#txtDriverAddress').val();
     let driverContact=$('#txtDriverContact').val();
@@ -203,6 +208,25 @@ $('#btnDeleteDriver').click(function () {
     });
 });
 
+function generateDriverID() {
+    $.ajax({
+        url: BASIC_URL+'driver?generateID',
+        method: "GET",
+        contentType: "application/json",
+        dataType: "json",
+        success: function (res) {
+            if (res.data == null) {
+                driver_ID = 'D00-001';
+            } else {
+                let number = parseInt(res.data.slice(4), 7);
+                number++;
+                driver_ID = "D00-" + number.toString().padStart(3, "0");
+            }
+        },
+        error: function (ob, statusText, error) {
+        }
+    });
+}
 
 //Clear Text Fields
 function clearFields() {

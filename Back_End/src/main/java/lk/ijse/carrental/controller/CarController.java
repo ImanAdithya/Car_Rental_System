@@ -53,4 +53,11 @@ public class CarController {
         return new ResponseUtil ("OK","Image save  Success",cID);
     }
 
+    @GetMapping(params = {"generateID"})
+    public ResponseUtil customerIdGenerate() {
+        System.out.println ("+++++++++++++++++++++++++++++++++++++++");
+        String carId = carService.carIdGenerate ();
+        return new ResponseUtil ("OK","Photo uploaded succuss",carId);
+    }
+
 }

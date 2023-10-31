@@ -54,4 +54,11 @@ public class DriverController {
         driverService.saveDriverImage (dto);
         return new ResponseUtil ("OK","Successfully Loaded Image",dID);
     }
+
+    @GetMapping(params = {"generateID"})
+    public ResponseUtil generateDriverID(String id){
+        String driverID = driverService.driverIdGenerate ();
+        return new ResponseUtil ("OK","Successfully Loaded",driverID);
+    }
+
 }

@@ -12,4 +12,5 @@ public interface DriverService {
     void saveDriverImage(DriverImageDTO dto);
     DriverDTO findDriver(String id);
     List<DriverDTO> getAllDrivers();
+    String driverIdGenerate();
 }

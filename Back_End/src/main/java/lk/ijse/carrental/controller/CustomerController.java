@@ -1,5 +1,6 @@
 package lk.ijse.carrental.controller;
 
+import lk.ijse.carrental.dto.CustomDTO;
 import lk.ijse.carrental.dto.CustomerDTO;
 import lk.ijse.carrental.dto.CustomerImageDTO;
 import lk.ijse.carrental.dto.UserDTO;
@@ -38,9 +39,10 @@ public class CustomerController {
        return new ResponseUtil ("OK","Photo uploaded succuss",cID);
     }
 
-    @GetMapping(params = {"currentID"})
-    public  ResponseUtil nextCusID(){
-        String lastCusID = customerService.getLastCusID ();
-        return new ResponseUtil ("Ok","NEXT CUS ID",lastCusID);
+    @GetMapping(params = {"generateID"})
+    public ResponseUtil customerIdGenerate() {
+        System.out.println ("+++++++++++++++++++++++++++++++++++++++");
+        String s = customerService.customerIdGenerate ();
+        return new ResponseUtil ("OK","Photo uploaded succuss",s);
     }
 }

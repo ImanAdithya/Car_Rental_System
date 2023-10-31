@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface CustomerRepository extends JpaRepository<Customer,String> {
-    
-    @Query(value="SELECT cusID FROM customer ORDER BY  cusID DESC  LIMIT 1",nativeQuery = true)
-    String getCusID();
+
+    @Query(value = "SELECT cusID FROM Customer ORDER BY cusID DESC LIMIT 1", nativeQuery = true)
+    String getLastIndex();
 }

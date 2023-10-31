@@ -1,6 +1,8 @@
 getAllCars();
+generateCarID();
+let carIDNum;
 
-let carIDNum="";
+let c_ID;
 
 //Bind table values to Text Fields
 function bindTrEvent() {
@@ -32,7 +34,7 @@ function bindTrEvent() {
 $('#btnSaveCar').click(function () {
     let formDataCar = new FormData($("#carForm")[0]);
 
-    let carID="CR001";
+    let carID=c_ID;
     let regNO=$('#txtRegNum').val();
     let type=$('#txtCarType option:selected').text();
     let brand=$('#txtBrand').val();
@@ -77,6 +79,7 @@ $('#btnSaveCar').click(function () {
         origin:'*',
         success:function (res) {
             alert(res.message);
+            generateCarID();
             getAllCars();
         },error:function (err) {
             alert(err);
@@ -153,7 +156,7 @@ function findCar(id,callback) {
 
 //update car
 $('#btnUpdateCar').click(function () {
-    let carID="CR001";
+    let carID=carIDNum;
     let regNO=$('#txtRegNum').val();
     let type=$('#txtCarType option:selected').text();
     let brand=$('#txtBrand').val();
@@ -218,3 +221,23 @@ $('#btnDeleteCar').click(function () {
         }
     });
 });
+
+function generateCarID() {
+    $.ajax({
+        url: BASIC_URL+'car?generateID',
+        method: "GET",
+        contentType: "application/json",
+        dataType: "json",
+        success: function (res) {
+            if (res.data == null) {
+                c_ID = 'CR0-001';
+            } else {
+                let number = parseInt(res.data.slice(4), 7);
+                number++;
+                c_ID = "CR0-" + number.toString().padStart(3, "0");
+            }
+        },
+        error: function (ob, statusText, error) {
+        }
+    });
+}

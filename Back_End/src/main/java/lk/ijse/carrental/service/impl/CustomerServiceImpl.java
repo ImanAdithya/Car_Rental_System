@@ -1,9 +1,6 @@
 package lk.ijse.carrental.service.impl;
 
-import lk.ijse.carrental.dto.CustomerDTO;
-import lk.ijse.carrental.dto.CustomerImageDTO;
-import lk.ijse.carrental.dto.DriverDTO;
-import lk.ijse.carrental.dto.UserDTO;
+import lk.ijse.carrental.dto.*;
 import lk.ijse.carrental.entity.Customer;
 import lk.ijse.carrental.entity.Driver;
 import lk.ijse.carrental.entity.User;
@@ -58,9 +55,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public String getLastCusID() {
-        return customerRepo.getCusID ();
+    public String customerIdGenerate() {
+        return customerRepo.getLastIndex();
     }
+
 
     @Override
     public void saveCustomerImage(CustomerImageDTO dto) {

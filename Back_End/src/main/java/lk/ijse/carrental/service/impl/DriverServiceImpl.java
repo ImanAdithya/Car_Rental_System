@@ -96,6 +96,11 @@ public class DriverServiceImpl  implements DriverService {
     }
 
     @Override
+    public String driverIdGenerate() {
+        return driverRepo.getLastIndex ();
+    }
+
+    @Override
     public void saveDriverImage(DriverImageDTO dto) {
         Driver driver = driverRepo.findById(dto.getDID ()).get();
 
