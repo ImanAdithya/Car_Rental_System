@@ -1,6 +1,7 @@
 package lk.ijse.carrental.dto;
 
 import lk.ijse.carrental.entity.Customer;
+import lk.ijse.carrental.entity.Payment;
 import lk.ijse.carrental.entity.Rent_Detail;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,12 +12,16 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@ToString
 public class RentDTO {
-    private String RentID;
-    private String FullPaymentStatus;
-    private String customerID;
-    private String driverID;
-    private String carID;
-    private String paymentId;
-    private List<Rent_Detail> rentDetailList;
+    private String Rent_ID;
+    private String pickUpDate;
+    private String pickUpTime;
+    private String returnDate;
+    private String returnTime;
+    private String cusID;
+    private Payment payment;
+    private List<RentDetailDTO> rentDetailList;
+
+
 }

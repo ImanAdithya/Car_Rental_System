@@ -7,15 +7,17 @@ import lk.ijse.carrental.entity.Rent;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@ToString
 public class RentDetailDTO {
-    private String rentID;
+    private String rent_id;
     private String carID;
-    private String paymentID;
     private String driverID;
+    private String status;
 }

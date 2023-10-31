@@ -4,11 +4,21 @@ $('#cartPage').css('display','none');
 
 getAllCar();
 
+let car_ID;
+let rental_ID="RE001";
+let cus_ID="C001";
+let driver_ID="D001";
+let payment_ID="P001";
+let wavierPayment=0;
+let rentDetails=[];
+
+
 //Navigations
 $('#cartBtn').click(function () {
     $('#cartPage').css('display','block');
     $('#rentPage').css('display','none');
     $('#popUpRentPage').css('display','none');
+
 });
 $('#homeBtn').click(function () {
     $('#cartPage').css('display','none');
@@ -97,40 +107,33 @@ function bindCarEvent(cars) {
 //Bind the Rent Button
 function bindRentBtn() {
     $('.rent').click(function () {
-
-        $('#driverDetailsPopupBg').css('display','block');
-        $('#popUpRentPage').css('display','block');
-        let test=$(this).parent().parent().children(":eq(4)").children(":eq(0)").text();
-        console.log(test);
+       // $('#driverDetailsPopupBg').css('display','block');
+        //$('#popUpRentPage').css('display','block');
+        car_ID=$(this).parent().parent().children(":eq(4)").children(":eq(1)").text();
+        console.log(car_ID);
     });
-
 }
 
-//Close RentPopUp
-$('#closeBtn').click(function () {
-    $('#popUpRentPage').css('display','none');
-});
 
 function bindCartBtn() {
     $('.cart').click(function () {
-        let cardCusID = $(this).parent().parent().children(":eq(4)").children(":eq(1)").text();
+       let cardCarID = $(this).parent().parent().children(":eq(4)").children(":eq(1)").text();
 
-        findCar(cardCusID,function (c) {
+        findCar(cardCarID,function (c) {
             let row = `<tr>
-                           <td>${"R001"}</td>
-                            <td>${c.carID}</td>
+                           <td>${"R001"}</td>                        
+                            <td>${c.carID}</td>                         
+                            <td>${c.regNo}</td>
                             <td>${c.brand}</td>
                             <td>${c.fuelType}</td>
-                            <td>${c.transmissionType}</td>
-                            <td>${c.currentMeterValue}</td>
-                            <td>${c.availability}</td>
+                            <td>${c.wavierPayment}</td>
                             <td> <button type="button" class="btn btn-danger cartDeleteBtn"><i class="text-light fa-solid fa-trash me-2"></i>DELETE</button></td>
                          </tr>`;
             $("#tblCustomerCart").append(row);
-            bindTrEvent();
-            f();
+            calculateWavierPayment(c.wavierPayment);
         });
-
+        removeRow();
+        AddToCart(cardCarID)
     });
 }
 
@@ -141,6 +144,8 @@ function removeRow() {
 
     // Bind the click event handler for the 'cartDeleteBtn' class
     $('.cartDeleteBtn').click(function () {
+       //var firstCellValue = $("#tblCustomerCart tr td:nth-child(6)").text();
+        //alert(firstCellValue)
         $(this).closest('tr').remove();
     });
 }
@@ -160,29 +165,83 @@ function findCar(id,callback) {
 }
 
 //Bind CartTable Data
+// function bindTrEvent() {
+//     $('#tblCustomerCart>tr').on('click', function (event) {
+//         if ($(event.target).is('td:nth-child(-n+4)')) {
+//             $('#driverDetailsPopupBg').css('display', 'block');
+//             $('#popUpRentPage').css('display', 'block');
+//         }
+//
+//         if (!$(this).data('clicked')) { // Check if the row has been clicked before
+//             car_ID = $(this).find('td:nth-child(2)').text();
+//             rental_ID = $(this).find('td:nth-child(1)').text();
+//             console.log(rental_ID)
+//             console.log(car_ID);
+//             $(this).data('clicked', true); // Mark the row as clicked
+//         }
+//     });
+// }
 
-function bindTrEvent() {
-    $('#tblCustomerCart>tr').on('click', function (event) {
-        if ($(event.target).is('td:nth-child(-n+4)')) {
-            $('#driverDetailsPopupBg').css('display', 'block');
-            $('#popUpRentPage').css('display', 'block');
-        }
-    });
+let customerID;
+let driverID;
+let paymentID;
+
+
+
+//Send Rent Request
+function AddToCart(carId) {
+    let Rent_Detail={
+        rent_id:rental_ID,
+        carID:carId,
+        driverID:driver_ID,
+        status:"Pending"
+    }
+    rentDetails.push(Rent_Detail);
 }
-function sendRequest() {
-    $('#requestRent').click(function () {
-        let carID='';
-
-        let pickUpDate=$('#txtPickUpdate').val();
-        let pickUpTime=$('#txtPickUpTime').val();
-        let returnDate=$('#txtReturnDate').val();
-        let returnTime=$('#txtReturnTime').val();
-        let wavierPayment=$('#txtWavierPayment').val();
-        let rentCost=$('#txtRentCoast').val();
-        let driverSelect=$('#driverSelect option:selected').text();
-        let DriverPayment=$('#txtDriverPayment').val();
-        let totalAmount=$('#txtTotalAmount').val();
-    });
 
 
+$('#btnRequestAll').click(function () {
+
+    let pickUpDate=$('#txtPickUpdate').val();
+    let pickUpTime=$('#txtPickUpTime').val();
+    let  returnDate=$('#txtReturnDate').val();
+    let returnTime=$('#txtReturnTime').val();
+    let wavierPayment=$('#txtWavierPayment').val();
+
+    Rent={
+        rent_ID:rental_ID,
+        pickUpDate:pickUpDate,
+        pickUpTime:pickUpTime,
+        returnDate:returnDate,
+        returnTime:returnTime,
+        cusID:cus_ID,
+        payment: {
+            paymentID:payment_ID,
+            paymentAmount: "",
+            paymentExtraMilage:"",
+            wavierPayment:wavierPayment
+        },
+        rentDetailList:rentDetails
+    }
+
+    console.log(Rent);
+    $.ajax({
+        url:BASIC_URL+'rent',
+        method:'POST',
+        async: false,
+        data : JSON.stringify(Rent),
+        contentType : 'application/json',
+        header:'Access-Control-Allow-Origin',
+        origin:'*',
+        success:function (res) {
+            alert("rent Succuss");
+        },error:function (err) {
+            alert(err+"ERROR");
+        }
+    })
+});
+
+function calculateWavierPayment(payment){
+    wavierPayment=wavierPayment+parseInt(payment);
+    $('#txtWavierPayment').val(wavierPayment);
 }

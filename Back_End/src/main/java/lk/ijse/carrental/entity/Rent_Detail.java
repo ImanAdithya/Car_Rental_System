@@ -23,10 +23,7 @@ public class Rent_Detail{
 
     private String driverID;
 
-    @OneToOne(cascade = {CascadeType.ALL})
-    private Payment payment;
-
-    //private String payID;
+    private String status;
 
     @ManyToOne
     @JoinColumn(name = "rentID",referencedColumnName = "RentID",insertable = false,updatable = false)

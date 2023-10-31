@@ -16,10 +16,19 @@ import java.util.List;
 public class Rent {
     @Id
     private String RentID;
-    private String FullPaymentStatus;
+    private String pickUpDate;
+
+    private String pickUpTime;
+
+    private String returnDate;
+    private String returnTime;
+
     @ManyToOne(cascade = {CascadeType.REFRESH,CascadeType.DETACH})
     @JoinColumn(name = "customerID",referencedColumnName = "cusID",nullable = false)
     private Customer customerID;
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    private Payment payment;
     @OneToMany(mappedBy = "rent", cascade = CascadeType.ALL)
     private List<Rent_Detail> rentDetails;
 }
