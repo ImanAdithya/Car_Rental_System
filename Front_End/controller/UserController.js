@@ -129,3 +129,7 @@ function generateCustomerID() {
         }
     });
 }
+
+function checkUserName() {
+    let userName = $('#txtUserName').val();
+}
