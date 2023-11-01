@@ -45,7 +45,7 @@ $('#btnRegister').click(function () {
             generateCustomerID();
             alert("Customer SUCCUSS");
         },error:function (err) {
-            alert(err+"ERROR");
+            alert(err.responseJSON.message);
         }
     })
 
@@ -130,6 +130,3 @@ function generateCustomerID() {
     });
 }
 
-function checkUserName() {
-    let userName = $('#txtUserName').val();
-}

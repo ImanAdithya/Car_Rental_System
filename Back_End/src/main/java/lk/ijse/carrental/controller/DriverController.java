@@ -51,7 +51,11 @@ public class DriverController {
     @PostMapping(params = {"dID"})
     public ResponseUtil saveImage(@ModelAttribute DriverImageDTO dto,String dID){
         dto.setDID (dID);
+        System.out.println ("=========================================");
+        System.out.println (dto);
+        System.out.println ("=========================================");
         driverService.saveDriverImage (dto);
+
         return new ResponseUtil ("OK","Successfully Loaded Image",dID);
     }
 
@@ -59,6 +63,12 @@ public class DriverController {
     public ResponseUtil generateDriverID(String id){
         String driverID = driverService.driverIdGenerate ();
         return new ResponseUtil ("OK","Successfully Loaded",driverID);
+    }
+
+    @GetMapping(params = "getLastDriver")
+    public ResponseUtil getLastDriver(){
+        DriverDTO driverDto = driverService.getLastDriver ();
+        return new ResponseUtil ("OK","Driver Get Successfully",driverDto);
     }
 
 }

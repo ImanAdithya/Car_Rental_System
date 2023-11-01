@@ -1,13 +1,13 @@
 getAllCars();
 generateCarID();
 let carIDNum;
-
 let c_ID;
 
 //Bind table values to Text Fields
 function bindTrEvent() {
     $('#tblCar>tr').click(function () {
         carIDNum=$(this).children().eq(0).text();
+        console.log(carIDNum);
 
         findCar(carIDNum,function (c) {
             $('#txtRegNum').val(c.regNo);
@@ -25,6 +25,14 @@ function bindTrEvent() {
             $('#txtFMM').val(c.freeMilageMonthly);
             $('#txtFMMPrice').val(c.freeMilageMonthlyPrice);
             $('#txtAvailabilityType option:selected').text(c.availability);
+            console.log(c.filePath_1);
+            console.log(c.filePath_2);
+            console.log(c.filePath_3);
+            console.log(c.filePath_4);
+            $('#imgFront').attr('src', c.filePath_1);
+            $('#imgBack').attr('src', c.filePath_2);
+            $('#imgSide').attr('src', c.filePath_3);
+            $('#imgInterio').attr('src', c.filePath_4);
         });
 
     });
@@ -32,7 +40,7 @@ function bindTrEvent() {
 
 //save Car
 $('#btnSaveCar').click(function () {
-    let formDataCar = new FormData($("#carForm")[0]);
+
 
     let carID=c_ID;
     let regNO=$('#txtRegNum').val();
@@ -79,28 +87,34 @@ $('#btnSaveCar').click(function () {
         origin:'*',
         success:function (res) {
             alert(res.message);
-            generateCarID();
+            saveCarImage(carID);
             getAllCars();
-        },error:function (err) {
-            alert(err);
-        }
-    });
-
-    $.ajax({
-        url:BASIC_URL+'car?cID='+carID,
-        method:'POST',
-        async: false,
-        data:formDataCar,
-        contentType:false,
-        processData:false,
-        success:function (res) {
-            alert(res.message);
+            generateCarID();
         },error:function (err) {
             alert(err);
         }
     });
 
 });
+
+function saveCarImage(cusID) {
+    let formDataCar = new FormData($("#carForm")[0]);
+    $.ajax({
+        url:BASIC_URL+'car?cID='+cusID,
+        method:'POST',
+        async:false,
+        data:formDataCar,
+        contentType:false,
+        processData:false,
+        success:function (res) {
+            //generateCarID();
+            alert(res.message);
+        },error:function (err) {
+            alert(err);
+        }
+    });
+
+}
 
 //Load All cars to table
 function getAllCars() {
@@ -241,3 +255,51 @@ function generateCarID() {
         }
     });
 }
+
+$(document).ready(function() {
+    $('#front').change(function() {
+        var selectedFile = this.files[0];
+        if (selectedFile) {
+            var fileURL = URL.createObjectURL(selectedFile);
+            $('#imgFront').attr('src', fileURL);
+        } else {
+            $('#imgFront').attr('src', '');
+        }
+    });
+});
+
+$(document).ready(function() {
+    $('#back').change(function() {
+        var selectedFile = this.files[0];
+        if (selectedFile) {
+            var fileURL = URL.createObjectURL(selectedFile);
+            $('#imgBack').attr('src', fileURL);
+        } else {
+            $('#imgBack').attr('src', '');
+        }
+    });
+});
+
+$(document).ready(function() {
+    $('#side').change(function() {
+        var selectedFile = this.files[0];
+        if (selectedFile) {
+            var fileURL = URL.createObjectURL(selectedFile);
+            $('#imgSide').attr('src', fileURL);
+        } else {
+            $('#imgSide').attr('src', '');
+        }
+    });
+});
+
+$(document).ready(function() {
+    $('#interio').change(function() {
+        var selectedFile = this.files[0];
+        if (selectedFile) {
+            var fileURL = URL.createObjectURL(selectedFile);
+            $('#imgInterio').attr('src', fileURL);
+        } else {
+            $('#imgInterio').attr('src', '');
+        }
+    });
+});

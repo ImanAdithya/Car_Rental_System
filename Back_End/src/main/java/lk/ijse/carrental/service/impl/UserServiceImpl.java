@@ -45,7 +45,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO findUser(String id) {
-        return null;
+    public UserDTO findUser(String userName) {
+        User user = userRepo.findByUserName (userName);
+        return new UserDTO (user.getUserName (),user.getPassword (),user.getRole ());
     }
+
+
 }

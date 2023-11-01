@@ -20,10 +20,25 @@ function bindTrEvents() {
             $('#txtDriverLicense').val(d.driverLicence);
             $('#txtDUserName').val(d.user.userName);
             $('#txtDUserPass').val(d.user.password);
-
+            $('#driverImage').attr('src', d.filePath);
         });
     });
 }
+
+//load Image click upload
+$(document).ready(function() {
+    $('#fileDriverImg').change(function() {
+        var selectedFile = this.files[0];
+        if (selectedFile) {
+            var fileURL = URL.createObjectURL(selectedFile);
+            $('#driverImage').attr('src', fileURL);
+        } else {
+            $('#driverImage').attr('src', '');
+        }
+    });
+});
+
+
 
 //Save Driver
 $('#btnSaveDriver').click(function () {
@@ -37,10 +52,10 @@ $('#btnSaveDriver').click(function () {
     let driverEmail=$('#txtDriverEmail').val();
     let driverNIC=$('#txtDriverNic').val();
     let driverLicence=$('#txtDriverLicense').val();
-    let availability="True";
+    let availability="YES";
     let userName=$('#txtDUserName').val();
     let password=$('#txtDUserPass').val();
-    let role="Driver";
+    let role="DRIVER";
 
     let driver={
          driverID:driverID,
@@ -239,6 +254,7 @@ function clearFields() {
     $('#txtDUserName').val("");
     $('#txtDUserPass').val("");
     $('#txtDRePass').val("");
+    $('#driverImage').attr('src', '');
 }
 
 

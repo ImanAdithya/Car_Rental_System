@@ -132,6 +132,7 @@ function bindCartBtn() {
                             <td>${c.brand}</td>
                             <td>${c.fuelType}</td>
                             <td>${c.wavierPayment}</td>
+                            <td><input class="form-check-input form-check form-switch " type="checkbox" id="flexSwitchCheckDefault"></td>
                             <td> <button type="button" class="btn btn-danger cartDeleteBtn"><i class="text-light fa-solid fa-trash me-2"></i>DELETE</button></td>
                          </tr>`;
             $("#tblCustomerCart").append(row);

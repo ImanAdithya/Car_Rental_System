@@ -31,10 +31,20 @@ public class CustomerServiceImpl implements CustomerService {
     CustomerRepository customerRepo;
 
     @Autowired
+    UserRepository userRepository;
+
+    @Autowired
     ModelMapper mapper;
 
     @Override
     public void saveCustomer(CustomerDTO dto) {
+
+        boolean b = userRepository.existsByUserName (dto.getUser ().getUserName ());
+
+        if(b){
+            throw new RuntimeException ("This User Name Not a Valid UserName...");
+        }
+
        customerRepo.save (new Customer(
                 dto.getCusID (),
                 dto.getCusName (),

@@ -123,6 +123,10 @@ public class CarServiceImpl implements CarService {
     public void saveImage(CarImageDTO dto) {
         Car car = carRepo.findById(dto.getCID ()).get();
 
+        System.out.println ("+===+======+=====+=====+=====+=====+====+====");
+        System.out.println ("car"+car.toString ());
+        System.out.println ("+===+======+=====+=====+=====+=====+====+====");
+
         try {
             byte[] file_1 = dto.getFilePath_1 ().getBytes ();
             byte[] file_2 = dto.getFilePath_2 ().getBytes ();
@@ -150,9 +154,9 @@ public class CarServiceImpl implements CarService {
         }
 
         car.setFilePath_1 ("/assets/projectImages/bucket/car/file_1/file_1" + dto.getCID ()+".jpeg");
-        car.setFilePath_1 ("/assets/projectImages/bucket/car/file_2/file_2" + dto.getCID ()+".jpeg");
-        car.setFilePath_1 ("/assets/projectImages/bucket/car/file_3/file_3" + dto.getCID ()+".jpeg");
-        car.setFilePath_1 ("/assets/projectImages/bucket/car/file_4/file_4" + dto.getCID ()+".jpeg");
+        car.setFilePath_2 ("/assets/projectImages/bucket/car/file_2/file_2" + dto.getCID ()+".jpeg");
+        car.setFilePath_3 ("/assets/projectImages/bucket/car/file_3/file_3" + dto.getCID ()+".jpeg");
+        car.setFilePath_4("/assets/projectImages/bucket/car/file_4/file_4" + dto.getCID ()+".jpeg");
 
         carRepo.save(car);
     }

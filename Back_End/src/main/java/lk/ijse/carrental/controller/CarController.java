@@ -3,6 +3,7 @@ package lk.ijse.carrental.controller;
 
 import lk.ijse.carrental.dto.CarDTO;
 import lk.ijse.carrental.dto.CarImageDTO;
+import lk.ijse.carrental.entity.Car;
 import lk.ijse.carrental.service.CarService;
 import lk.ijse.carrental.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,13 +50,22 @@ public class CarController {
 
     @PostMapping(params = {"cID"})
     public  ResponseUtil saveCarImage(@ModelAttribute CarImageDTO carImageDTO,String cID){
+        System.out.println ("++++++++++++++++++++++++");
+
+        System.out.println (cID);
         carImageDTO.setCID (cID);
+
+        System.out.println ("++++++++++++++++++++++++");
+        System.out.println ("COME TO SAVE CAR IMAGE CONTROLLER");
+        System.out.println (carImageDTO.toString ());
+        System.out.println ("++++++++++++++++++++++++");
+
+        carService.saveImage (carImageDTO);
         return new ResponseUtil ("OK","Image save  Success",cID);
     }
 
     @GetMapping(params = {"generateID"})
     public ResponseUtil customerIdGenerate() {
-        System.out.println ("+++++++++++++++++++++++++++++++++++++++");
         String carId = carService.carIdGenerate ();
         return new ResponseUtil ("OK","Photo uploaded succuss",carId);
     }
