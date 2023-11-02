@@ -31,11 +31,6 @@ $('#homeBtn').click(function () {
     $('#popUpRentPage').css('display','none');
 });
 
-
-console.log("DD1 "+rental_ID)
-console.log("DD2 "+payment_ID)
-
-
 //Load All Car Details
 function getAllCar() {
     $.ajax({
@@ -114,11 +109,6 @@ function bindCarEvent(cars) {
 
 }
 
-
-//check Availability of car
-function checkCarAvailability(availability) {
-}
-
 //Bind the Rent Button
 function bindRentBtn() {
     $('.rent').click(function () {
@@ -128,7 +118,6 @@ function bindRentBtn() {
         console.log(car_ID);
     });
 }
-
 
 function bindCartBtn() {
     $('.cart').click(function () {
@@ -152,7 +141,6 @@ function bindCartBtn() {
         AddToCart(cardCarID)
     });
 }
-
 //Remove row
 function removeRow() {
     // Unbind the click event handler for the 'cartDeleteBtn' class
@@ -179,31 +167,6 @@ function findCar(id,callback) {
         }
     });
 }
-
-//Bind CartTable Data
-// function bindTrEvent() {
-//     $('#tblCustomerCart>tr').on('click', function (event) {
-//         if ($(event.target).is('td:nth-child(-n+4)')) {
-//             $('#driverDetailsPopupBg').css('display', 'block');
-//             $('#popUpRentPage').css('display', 'block');
-//         }
-//
-//         if (!$(this).data('clicked')) { // Check if the row has been clicked before
-//             car_ID = $(this).find('td:nth-child(2)').text();
-//             rental_ID = $(this).find('td:nth-child(1)').text();
-//             console.log(rental_ID)
-//             console.log(car_ID);
-//             $(this).data('clicked', true); // Mark the row as clicked
-//         }
-//     });
-// }
-
-let customerID;
-let driverID;
-let paymentID;
-
-
-
 function getDriverCount() {
     $.ajax({
         url:BASIC_URL+'driver?driverCount',
@@ -221,6 +184,7 @@ function getDriverCount() {
 function AddToCart(carId) {
     generateRentID();
     generatePaymentID();
+    updateCarAvailability(carId);
 
     let Rent_Detail={
         rent_id:rental_ID,
@@ -231,18 +195,11 @@ function AddToCart(carId) {
    // getDriverCount();
 }
 
-
-
-
-
-
-
 //Calculate Wavier Payment
 function calculateWavierPayment(payment){
     wavierPayment=wavierPayment+parseInt(payment);
     $('#txtWavierPayment').val(wavierPayment);
 }
-
 
 //THE car rent more than 3 days give alert
 function ValidateRent(pickUpDate,pickUpTime,returnDate,returnTime) {
@@ -299,7 +256,6 @@ function generateRentID() {
     });
 }
 
-
 function generatePaymentID() {
     $.ajax({
         url: BASIC_URL+'payment?generateID',
@@ -338,7 +294,6 @@ function savePaymentSlip(rID) {
         }
     });
 }
-
 $(document).ready(function() {
     $('#paymentSlip').change(function() {
         var selectedFile = this.files[0];
@@ -351,10 +306,9 @@ $(document).ready(function() {
     });
 });
 
-
 $('#btnRequestAll').click(function () {
 
-    // getDriverCount();
+     getDriverCount();
 
     let pickUpDate=$('#txtPickUpdate').val();
     let pickUpTime=$('#txtPickUpTime').val();
@@ -423,9 +377,22 @@ $('#btnRequestAll').click(function () {
         origin:'*',
         success:function (res) {
             alert("rent Succuss");
-            //savePaymentSlip(rental_ID);
+            savePaymentSlip(rental_ID);
         },error:function (err) {
             alert(err+"ERROR");
         }
     })
 });
+
+function updateCarAvailability(carID) {
+    $.ajax({
+        url:BASIC_URL+'car?availableCarID='+carID,
+        method:'POST',
+        async:false,
+        success:function (res) {
+            alert(res.message);
+        },error:function (err) {
+            alert("Car Availability Updated Succuss");
+        }
+    });
+}

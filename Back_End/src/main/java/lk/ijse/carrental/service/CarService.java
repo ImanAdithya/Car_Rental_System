@@ -13,4 +13,5 @@ public interface CarService {
     List<CarDTO> getAllCars();
     CarDTO findCar(String id);
     String carIdGenerate();
+    void carAvailability(String carID);
 }

@@ -70,4 +70,10 @@ public class CarController {
         return new ResponseUtil ("OK","Photo uploaded succuss",carId);
     }
 
+    @PostMapping(params = {"availableCarID"})
+    public ResponseUtil updateAvailability(String availableCarID){
+        carService.carAvailability (availableCarID);
+        return new ResponseUtil ("OK","Car Available Updated",availableCarID);
+    }
+
 }
