@@ -17,12 +17,10 @@ public class Rent {
     @Id
     private String RentID;
     private String pickUpDate;
-
     private String pickUpTime;
-
     private String returnDate;
     private String returnTime;
-
+    private String filePath_1;
     @ManyToOne(cascade = {CascadeType.REFRESH,CascadeType.DETACH})
     @JoinColumn(name = "customerID",referencedColumnName = "cusID",nullable = false)
     private Customer customerID;

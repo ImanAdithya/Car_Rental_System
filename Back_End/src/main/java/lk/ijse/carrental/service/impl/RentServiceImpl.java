@@ -1,5 +1,6 @@
 package lk.ijse.carrental.service.impl;
 
+import lk.ijse.carrental.dto.PaymentSlipDTO;
 import lk.ijse.carrental.dto.RentDTO;
 import lk.ijse.carrental.dto.RentDetailDTO;
 import lk.ijse.carrental.entity.*;
@@ -9,6 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,12 +42,12 @@ public class RentServiceImpl implements RentService {
         System.out.println (dto.getRent_ID ());
         System.out.println ("=================================================");
 
-        Customer customer = customerRepo.findById(dto.getCusID ()).get();
+        Customer customer = customerRepo.findById (dto.getCusID ()).get ();
 
-        List<Rent_Detail> rentDetailList=new ArrayList<> ();
+        List<Rent_Detail> rentDetailList = new ArrayList<> ();
 
-        for (RentDetailDTO d: dto.getRentDetailList ()) {
-            Rent_Detail r=new Rent_Detail ();
+        for (RentDetailDTO d : dto.getRentDetailList ()) {
+            Rent_Detail r = new Rent_Detail ();
             r.setRentID (d.getRent_id ());
             r.setCarID (d.getCarID ());
             r.setDriverID (d.getDriverID ());
@@ -57,14 +62,42 @@ public class RentServiceImpl implements RentService {
                 dto.getPickUpTime (),
                 dto.getReturnDate (),
                 dto.getReturnTime (),
+                "",
                 customer,
-                new Payment (dto.getPayment ().getPaymentID (),dto.getPayment ().getPayment (),dto.getPayment ().getPaymentExtraMilage (),dto.getPayment ().getWavierPayment ()),
+                new Payment (dto.getPayment ().getPaymentID (), dto.getPayment ().getPayment (), dto.getPayment ().getPaymentExtraMilage (), dto.getPayment ().getWavierPayment ()),
                 rentDetailList
 
         ));
     }
+
+    @Override
+    public String rentIDGenerate() {
+        return rentRepo.getLastIndex ();
+    }
+
+    @Override
+    public void savePaymentImage(PaymentSlipDTO dto) {
+        Rent rent = rentRepo.findById(dto.getPaymentID ()).get();
+
+        try {
+            byte[] pLicenseBytes = dto.getWavierSlip ().getBytes ();
+
+            String projectPath="/Users/imanadithya/Software Engineering/IJSE/PROJECTS/Car_Rental_System/Front_End/assets";
+            Path pLicenceLocation = Paths.get(projectPath + "/projectImages/bucket/payment/pay_" + dto.getPaymentID () + ".jpeg");
+
+            Files.write(pLicenceLocation, pLicenseBytes);
+            dto.getWavierSlip ().transferTo(pLicenceLocation);
+
+
+        } catch (IOException e) {
+            throw new RuntimeException (e);
+        }
+
+        rent.setFilePath_1 ("/assets/projectImages/bucket/payment/pay_" + dto.getPaymentID ()+".jpeg");
+        rentRepo.save(rent);
+    }
     //@Override
-  //  public void saveRent(RentDTO dto) {
+    //  public void saveRent(RentDTO dto) {
 //        dto.setRentID ("RE001");
 //        dto.setFullPaymentStatus ("Yes");
 //
@@ -95,5 +128,6 @@ public class RentServiceImpl implements RentService {
 //
 //         rentRepo.save (new Rent (dto.getRentID (), dto.getFullPaymentStatus (),customer,rentDetailList));
 
- //   }
+    //   }
+
 }

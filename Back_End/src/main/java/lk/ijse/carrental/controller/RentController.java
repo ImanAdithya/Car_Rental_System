@@ -22,4 +22,9 @@ public class RentController {
         rentService.saveRent (rentDTO);
         return new ResponseUtil ("OK","Rent Added Succuss",rentDTO);
     }
+    @GetMapping(params = {"generateID"})
+    public ResponseUtil rentIDGenerate() {
+        String rentID = rentService.rentIDGenerate ();
+        return new ResponseUtil ("OK","Rent ID GET..",rentID);
+    }
 }

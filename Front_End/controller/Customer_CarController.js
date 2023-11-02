@@ -3,12 +3,13 @@ $('#popUpRentPage').css('display','none');
 $('#cartPage').css('display','none');
 
 getAllCar();
-
+generatePaymentID();
+generateRentID();
 let car_ID;
-let rental_ID="RE001";
-let cus_ID="C001";
-let driver_ID="D001";
-let payment_ID="P001";
+let rental_ID;
+let cus_ID="C00-001";
+let driver_ID;
+let payment_ID;
 let wavierPayment=0;
 let rentDetails=[];
 
@@ -191,22 +192,41 @@ function findCar(id,callback) {
 let customerID;
 let driverID;
 let paymentID;
+let driverCount;
+let lastDriverID;
+let validDriverArray=[];
 
 
+function getDriverCount() {
+    $.ajax({
+        url:BASIC_URL+'driver?driverCount',
+        method:'GET',
+        dataType:'json',
+        async:false,
+        success:function (res) {
+            driverCount=res.data;
+        },error:function (err) {
+            alert(err+" Driver count load err")
+        }
+    });
+}
 
-//Send Rent Request
 function AddToCart(carId) {
+
     let Rent_Detail={
         rent_id:rental_ID,
         carID:carId,
-        driverID:driver_ID,
+        driverID:null,
         status:"Pending"
     }
     rentDetails.push(Rent_Detail);
+   // getDriverCount();
 }
 
 
 $('#btnRequestAll').click(function () {
+    getDriverCount();
+
 
     let pickUpDate=$('#txtPickUpdate').val();
     let pickUpTime=$('#txtPickUpTime').val();
@@ -214,9 +234,37 @@ $('#btnRequestAll').click(function () {
     let returnTime=$('#txtReturnTime').val();
     let wavierPayment=$('#txtWavierPayment').val();
 
-    if (ValidateRent(pickUpDate,pickUpTime,returnDate,returnTime)){
-        alert('The time difference is more than three days.');
-        return;
+    let rows=$('#tblCustomerCart').children().length;
+    let tblDriverCount=0;
+
+
+
+    for (let i = 0; i < rows; i++) {
+        if ($("#tblCustomerCart tr:eq(" + i + ") td:eq(6) input[type='checkbox']").prop('checked')) {
+            validDriverArray.push( $("#tblCustomerCart tr:eq(" + i + ") td:eq(1)").text());
+            tblDriverCount++;
+        }
+    }
+
+
+    if (driverCount<tblDriverCount){
+        alert("Driver Have Enough Driver..We Have Only "+driverCount);
+        if (ValidateRent(pickUpDate,pickUpTime,returnDate,returnTime)){
+            alert('The time difference is more than three days.');
+            return;
+        }
+    }
+
+    for (let i = 0; i < rentDetails.length; i++) {
+        for (let j = 0; j < validDriverArray.length; j++) {
+            if (rentDetails[i].carID===validDriverArray[j]){
+                assignDriver();
+                console.log("BEH"+lastDriverID);
+                rentDetails[i].driverID=lastDriverID;
+            }else{
+                rentDetails[i].driverID=null;
+            }
+        }
     }
 
     Rent={
@@ -275,4 +323,61 @@ function ValidateRent(pickUpDate,pickUpTime,returnDate,returnTime) {
     }
 
     return false;
+}
+
+function assignDriver() {
+    $.ajax({
+        url:BASIC_URL+'driver?getLastDriver',
+        method:'GET',
+        dataType:'json',
+        async:false,
+        success:function (res) {
+            lastDriverID=res.data.driverID;
+            console.log("funtion :"+res.data.driverID);
+        },error:function () {
+            alert("ERR LOAD LAST DRIVER");
+        }
+
+    });
+}
+
+function generateRentID() {
+    $.ajax({
+        url: BASIC_URL+'rent?generateID',
+        method: "GET",
+        contentType: "application/json",
+        dataType: "json",
+        success: function (res) {
+            if (res.data == null) {
+                rental_ID = 'R00-001';
+            } else {
+                let number = parseInt(res.data.slice(4), 7);
+                number++;
+                rental_ID = "R00-" + number.toString().padStart(3, "0");
+            }
+        },
+        error: function (ob, statusText, error) {
+        }
+    });
+}
+
+
+function generatePaymentID() {
+    $.ajax({
+        url: BASIC_URL+'payment?generateID',
+        method: "GET",
+        contentType: "application/json",
+        dataType: "json",
+        success: function (res) {
+            if (res.data == null) {
+                payment_ID = 'P00-001';
+            } else {
+                let number = parseInt(res.data.slice(4), 7);
+                number++;
+                payment_ID = "P00-" + number.toString().padStart(3, "0");
+            }
+        },
+        error: function (ob, statusText, error) {
+        }
+    });
 }

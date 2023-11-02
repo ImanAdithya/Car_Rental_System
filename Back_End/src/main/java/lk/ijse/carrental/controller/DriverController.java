@@ -65,10 +65,18 @@ public class DriverController {
         return new ResponseUtil ("OK","Successfully Loaded",driverID);
     }
 
-    @GetMapping(params = "getLastDriver")
+    @GetMapping(params = {"getLastDriver"})
     public ResponseUtil getLastDriver(){
         DriverDTO driverDto = driverService.getLastDriver ();
         return new ResponseUtil ("OK","Driver Get Successfully",driverDto);
+    }
+
+
+    @GetMapping(params = {"driverCount"})
+    public ResponseUtil getAvailableDriverCount(){
+        int driverCount = driverService.getAvailableDrivers ();
+        return new ResponseUtil ("OK","Driver Count is ",driverCount);
+
     }
 
 }
