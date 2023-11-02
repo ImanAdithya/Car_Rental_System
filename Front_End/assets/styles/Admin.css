@@ -316,3 +316,22 @@ table {
 th, td {
     padding: 0.4em;
 }
+
+#driverDetailsPopupBg{
+    width: 80%;
+    height: 80%;
+    left: 17vw;
+    position: absolute;
+    z-index: 4;
+    backdrop-filter: blur(10px);
+}
+#driverDetailPopup{
+    width: 83%;
+    height: 70%;
+}
+
+#tblCusBooking{
+    width: 40vw;
+    margin: 0 5%;
+    text-align: left;
+}

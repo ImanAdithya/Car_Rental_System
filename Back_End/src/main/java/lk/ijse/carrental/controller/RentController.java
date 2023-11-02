@@ -1,5 +1,6 @@
 package lk.ijse.carrental.controller;
 
+import lk.ijse.carrental.dto.DriverDTO;
 import lk.ijse.carrental.dto.DriverImageDTO;
 import lk.ijse.carrental.dto.PaymentSlipDTO;
 import lk.ijse.carrental.dto.RentDTO;
@@ -7,6 +8,8 @@ import lk.ijse.carrental.service.RentService;
 import lk.ijse.carrental.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -35,5 +38,11 @@ public class RentController {
         dto.setRentID (rentID);
         rentService.savePaymentImage (dto);
         return new ResponseUtil ("OK","Successfully Payment Image Upload",rentID);
+    }
+
+    @GetMapping
+    public ResponseUtil getAllRent(){
+        List<RentDTO> allRent=rentService.getAllRent ();
+        return new ResponseUtil ("OK","Successfully Loaded...",allRent);
     }
 }

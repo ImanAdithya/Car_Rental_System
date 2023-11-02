@@ -11,7 +11,6 @@
     <link href="../assets/styles/custom/sb-admin-2.min.css" rel="stylesheet">
 
 
-
 </head>
 
 <body style="overflow-x: hidden">
@@ -531,6 +530,8 @@
                 <h1 class="h3 mb-0 text-gray-800">Booking</h1>
             </div>
 
+            <button type="button" id="clickmE"> CLICK MEE</button>
+
             <div class="d-flex justify-content-center mt-5">
                 <table>
                     <thead>
@@ -545,8 +546,8 @@
                         <th>STATUS</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    
+                    <tbody id="tblBooking">
+
                     </tbody>
                 </table>
             </div>
@@ -731,6 +732,62 @@
 
 </section>
 
+<main class="position-fixed top-0 start-0 vh-100 w-100 " style="z-index: 6" id="popUpRentPage">
+    <div class="vh-100 w-100 position-absolute">
+        <section class="popupSecAdminPanel container-fluid bg-transparent d-flex justify-content-center" id="driverDetailsPopupBg">
+            <div class="bg-white d-flex flex-column  z-3 rounded popupDetailDiv z-3 bg-light shadow mt-5" id="driverDetailPopup">
+
+                <div class="d-flex flex-row justify-content-between">
+                    <h3 class="mt-2 mx-2">CUSTOMER RESERVATION</h3>
+                    <button id="closePopUp" type="button" class="btn btn-danger mt-2 position-relative" style="width: 5vw;height: 3.5vh;right: 1vw">CLOSE</button>
+                </div>
+                <div style="width: 64vw;height: 2px;background-color: black;opacity: 0.2"></div>
+
+                <div class="d-flex flex-row mt-3">
+                    <div >
+                        <div>
+                            <table id="tblCusBooking">
+                                <thead>
+                                <tr>
+                                    <th>CAR_ID</th>
+                                    <th>BRAND</th>
+                                    <th>DRIVER_STATUS</th>
+                                    <th>WAVIER PAYMENT</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tBodyCusBooking">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div style="border-radius: 3px">
+                            <img src="" style="width: 22vw;height: 32vh;box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px" class="mx-2">
+                        </div>
+
+                        <div class="mt-2">
+                            <label for="fullWavierCoast" class="form-label mx-2">Full Wavier Coast</label>
+                            <input type="text" class="form-control mx-1" id="fullWavierCoast" style="width: 23vw" >
+                        </div>
+
+                        <div class="d-flex flex-row mt-4 justify-content-around">
+                            <div>
+                                <button type="button" class="btn btn-outline-success" style="width: 10.5vw">ACCEPT</button>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-outline-danger" style="width: 10.5vw">DECLINE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+</main>
+
 
 <script src="../assets/js/jquery-3.6.1.min.js"></script>
 <script src="../controller/navigations.js"></script>
@@ -738,6 +795,11 @@
 <script src="../controller/DriverController.js"></script>
 <script src="../controller/CarController.js"></script>
 <script src="../assets/script/Dashboard.js"></script>
+<script src="../controller/BookingController.js"></script>
+<script>
+
+
+</script>
 </body>
 
 </html>
