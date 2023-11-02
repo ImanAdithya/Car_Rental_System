@@ -1,17 +1,21 @@
 let BASIC_URL='http://localhost:8080/Back_End_war/';
 $('#popUpRentPage').css('display','none');
 $('#cartPage').css('display','none');
-
-getAllCar();
-generatePaymentID();
 generateRentID();
-let car_ID;
-let rental_ID;
-let cus_ID="C00-001";
+generatePaymentID();
+getAllCar();
+
+
+var car_ID;
+var rental_ID;
+let cus_ID="C00-002";
 let driver_ID;
-let payment_ID;
+var payment_ID;
 let wavierPayment=0;
 let rentDetails=[];
+let driverCount;
+var lastDriverID;
+let validDriverArray=[];
 
 
 //Navigations
@@ -28,12 +32,17 @@ $('#homeBtn').click(function () {
 });
 
 
+console.log("DD1 "+rental_ID)
+console.log("DD2 "+payment_ID)
+
+
 //Load All Car Details
 function getAllCar() {
     $.ajax({
         url: 'http://localhost:8080/Back_End_war/car',
         method: "get",
         dataType:'json',
+        async:false,
         success: function (res) {
            // showAlert("CAR LOAD SUCCUSS");
             bindCarEvent(res.data);
@@ -127,7 +136,7 @@ function bindCartBtn() {
 
         findCar(cardCarID,function (c) {
             let row = `<tr>
-                           <td>${"R001"}</td>                        
+                           <td>${rental_ID}</td>                        
                             <td>${c.carID}</td>                         
                             <td>${c.regNo}</td>
                             <td>${c.brand}</td>
@@ -192,9 +201,7 @@ function findCar(id,callback) {
 let customerID;
 let driverID;
 let paymentID;
-let driverCount;
-let lastDriverID;
-let validDriverArray=[];
+
 
 
 function getDriverCount() {
@@ -212,21 +219,142 @@ function getDriverCount() {
 }
 
 function AddToCart(carId) {
+    generateRentID();
+    generatePaymentID();
 
     let Rent_Detail={
         rent_id:rental_ID,
         carID:carId,
         driverID:null,
-        //status:"Pending"
     }
     rentDetails.push(Rent_Detail);
    // getDriverCount();
 }
 
 
-$('#btnRequestAll').click(function () {
-    getDriverCount();
 
+
+
+
+
+//Calculate Wavier Payment
+function calculateWavierPayment(payment){
+    wavierPayment=wavierPayment+parseInt(payment);
+    $('#txtWavierPayment').val(wavierPayment);
+}
+
+
+//THE car rent more than 3 days give alert
+function ValidateRent(pickUpDate,pickUpTime,returnDate,returnTime) {
+    let pickUpDateTime = new Date(`${pickUpDate} ${pickUpTime}`);
+    let returnDateTime = new Date(`${returnDate} ${returnTime}`);
+
+// Calculate the time difference in milliseconds
+    let timeDifference = Math.abs(returnDateTime - pickUpDateTime);
+
+// Calculate the number of days
+    let daysDifference = timeDifference / (1000 * 60 * 60 * 24);
+
+    if (daysDifference > 3) {
+      return true;
+    }
+
+    return false;
+}
+
+function assignDriver() {
+    $.ajax({
+        url:BASIC_URL+'driver?getLastDriver',
+        method:'GET',
+        dataType:'json',
+        async:false,
+        success:function (res) {
+            lastDriverID=res.data.driverID;
+            console.log("funtion :"+res.data.driverID);
+        },error:function () {
+            alert("ERR LOAD LAST DRIVER");
+        }
+
+    });
+}
+
+function generateRentID() {
+    $.ajax({
+        url: BASIC_URL+'rent?generateID',
+        method: "GET",
+        contentType: "application/json",
+        dataType: "json",
+        async:false,
+        success: function (res) {
+            if (res.data == null) {
+                rental_ID = 'R00-001';
+            } else {
+                let number = parseInt(res.data.slice(4), 7);
+                number++;
+                rental_ID = "R00-" + number.toString().padStart(3, "0");
+            }
+        },
+        error: function (ob, statusText, error) {
+        }
+    });
+}
+
+
+function generatePaymentID() {
+    $.ajax({
+        url: BASIC_URL+'payment?generateID',
+        method: "GET",
+        contentType: "application/json",
+        dataType: "json",
+        async:false,
+        success: function (res) {
+            if (res.data == null) {
+                payment_ID = 'P00-001';
+            } else {
+                let number = parseInt(res.data.slice(4), 7);
+                number++;
+                payment_ID = "P00-" + number.toString().padStart(3, "0");
+            }
+        },
+        error: function (ob, statusText, error) {
+        }
+    });
+}
+
+function savePaymentSlip(rID) {
+    let formDataSlip = new FormData($("#rentForm")[0]);
+    console.log("------------------------"+rID)
+    $.ajax({
+        url:BASIC_URL+'rent?rentID='+rID,
+        method:'POST',
+        async:false,
+        data:formDataSlip,
+        contentType:false,
+        processData:false,
+        success:function (res) {
+            alert(res.message);
+        },error:function (err) {
+            alert(err);
+        }
+    });
+}
+
+$(document).ready(function() {
+    $('#paymentSlip').change(function() {
+        var selectedFile = this.files[0];
+        if (selectedFile) {
+            var fileURL = URL.createObjectURL(selectedFile);
+            $('#paymentSlipImg').attr('src', fileURL);
+        } else {
+            $('#paymentSlipImg').attr('src', '');
+        }
+    });
+});
+
+
+$('#btnRequestAll').click(function () {
+
+    // getDriverCount();
 
     let pickUpDate=$('#txtPickUpdate').val();
     let pickUpTime=$('#txtPickUpTime').val();
@@ -277,8 +405,8 @@ $('#btnRequestAll').click(function () {
         cusID:cus_ID,
         payment: {
             paymentID:payment_ID,
-            paymentAmount: "",
-            paymentExtraMilage:"",
+            paymentAmount:"",
+            paymentExtraMilage:"789",
             wavierPayment:wavierPayment
         },
         rentDetailList:rentDetails
@@ -295,121 +423,9 @@ $('#btnRequestAll').click(function () {
         origin:'*',
         success:function (res) {
             alert("rent Succuss");
-            savePaymentSlip(rental_ID);
+            //savePaymentSlip(rental_ID);
         },error:function (err) {
             alert(err+"ERROR");
         }
     })
-});
-
-//Calculate Wavier Payment
-function calculateWavierPayment(payment){
-    wavierPayment=wavierPayment+parseInt(payment);
-    $('#txtWavierPayment').val(wavierPayment);
-}
-
-
-//THE car rent more than 3 days give alert
-function ValidateRent(pickUpDate,pickUpTime,returnDate,returnTime) {
-    let pickUpDateTime = new Date(`${pickUpDate} ${pickUpTime}`);
-    let returnDateTime = new Date(`${returnDate} ${returnTime}`);
-
-// Calculate the time difference in milliseconds
-    let timeDifference = Math.abs(returnDateTime - pickUpDateTime);
-
-// Calculate the number of days
-    let daysDifference = timeDifference / (1000 * 60 * 60 * 24);
-
-    if (daysDifference > 3) {
-      return true;
-    }
-
-    return false;
-}
-
-function assignDriver() {
-    $.ajax({
-        url:BASIC_URL+'driver?getLastDriver',
-        method:'GET',
-        dataType:'json',
-        async:false,
-        success:function (res) {
-            lastDriverID=res.data.driverID;
-            console.log("funtion :"+res.data.driverID);
-        },error:function () {
-            alert("ERR LOAD LAST DRIVER");
-        }
-
-    });
-}
-
-function generateRentID() {
-    $.ajax({
-        url: BASIC_URL+'rent?generateID',
-        method: "GET",
-        contentType: "application/json",
-        dataType: "json",
-        success: function (res) {
-            if (res.data == null) {
-                rental_ID = 'R00-001';
-            } else {
-                let number = parseInt(res.data.slice(4), 7);
-                number++;
-                rental_ID = "R00-" + number.toString().padStart(3, "0");
-            }
-        },
-        error: function (ob, statusText, error) {
-        }
-    });
-}
-
-
-function generatePaymentID() {
-    $.ajax({
-        url: BASIC_URL+'payment?generateID',
-        method: "GET",
-        contentType: "application/json",
-        dataType: "json",
-        success: function (res) {
-            if (res.data == null) {
-                payment_ID = 'P00-001';
-            } else {
-                let number = parseInt(res.data.slice(4), 7);
-                number++;
-                payment_ID = "P00-" + number.toString().padStart(3, "0");
-            }
-        },
-        error: function (ob, statusText, error) {
-        }
-    });
-}
-
-function savePaymentSlip(rID) {
-    let formDataSlip = new FormData($("#rentForm")[0]);
-    console.log("------------------------"+rID)
-    $.ajax({
-        url:BASIC_URL+'rent?rentID='+rID,
-        method:'POST',
-        async:false,
-        data:formDataSlip,
-        contentType:false,
-        processData:false,
-        success:function (res) {
-            alert(res.message);
-        },error:function (err) {
-            alert(err);
-        }
-    });
-}
-
-$(document).ready(function() {
-    $('#paymentSlip').change(function() {
-        var selectedFile = this.files[0];
-        if (selectedFile) {
-            var fileURL = URL.createObjectURL(selectedFile);
-            $('#paymentSlipImg').attr('src', fileURL);
-        } else {
-            $('#paymentSlipImg').attr('src', '');
-        }
-    });
 });

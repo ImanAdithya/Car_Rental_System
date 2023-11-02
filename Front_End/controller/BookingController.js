@@ -13,6 +13,7 @@ let allRent;
 let carDetail;
 let cusDetail;
 let fullWavierPayment=0;
+let rentID;
 
 //getAllRent();
 function getAllRent() {
@@ -62,7 +63,7 @@ function bindBookingTblEvnet() {
     });
 
     console.log(allRent);
-    let rentID = $('#tblBooking tr> td:first').text();
+     rentID = $('#tblBooking tr> td:first').text();
 
     for (let i = 0; i < allRent.length; i++) {
         if(allRent[i].rent_ID===rentID){
@@ -127,10 +128,11 @@ function getCusDetail(cusID) {
 
 $('#btnAccept').click(function () {
     $.ajax({
-        url:BASIC_URL+'rent?accept'+allRent.rent_ID,
+        url:BASIC_URL+'rent?acceptRentID='+rentID,
         method:'POST',
         success:function (res) {
             alert(res.message);
+            getAllRent();
         },error:function (err) {
             alert("SOMETHING WENT WRONG..");
         }

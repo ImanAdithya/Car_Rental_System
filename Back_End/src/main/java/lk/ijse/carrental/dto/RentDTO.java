@@ -22,7 +22,7 @@ public class RentDTO {
     private String filePath_1;
     private String status;
     private String cusID;
-    private Payment payment;
+    private PaymentDTO payment;
     private List<RentDetailDTO> rentDetailList;
 
 

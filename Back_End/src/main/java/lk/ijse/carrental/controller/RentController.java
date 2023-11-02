@@ -45,4 +45,10 @@ public class RentController {
         List<RentDTO> allRent=rentService.getAllRent ();
         return new ResponseUtil ("OK","Successfully Loaded...",allRent);
     }
+
+    @PostMapping(params = {"acceptRentID"})
+    public ResponseUtil updateAccept(String acceptRentID){
+        rentService.updateRent (acceptRentID);
+        return new ResponseUtil ("OK","Rent Update Successfully...",acceptRentID);
+    }
 }

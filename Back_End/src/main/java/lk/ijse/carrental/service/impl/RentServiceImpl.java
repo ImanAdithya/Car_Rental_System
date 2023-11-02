@@ -58,7 +58,7 @@ public class RentServiceImpl implements RentService {
             rentDetailList.add (r);
         }
 
-        rentRepo.save (new Rent (
+        Rent rent=new Rent (
                 dto.getRent_ID (),
                 dto.getPickUpDate (),
                 dto.getPickUpTime (),
@@ -67,10 +67,15 @@ public class RentServiceImpl implements RentService {
                 "",
                 dto.getStatus (),
                 customer,
-                new Payment (dto.getPayment ().getPaymentID (), dto.getPayment ().getPayment (), dto.getPayment ().getPaymentExtraMilage (), dto.getPayment ().getWavierPayment ()),
+                new Payment (dto.getPayment ().getPaymentID (), dto.getPayment ().getPaymentAmount (), dto.getPayment ().getPaymentExtraMilage (), dto.getPayment ().getWavierPayment ()),
                 rentDetailList
 
-        ));
+        );
+
+        System.out.println ("+++++++++++++++++++++++");
+        System.out.println (rent);
+        System.out.println ("+++++++++++++++++++++++");
+        rentRepo.save (rent);
     }
 
     @Override
@@ -114,7 +119,8 @@ public class RentServiceImpl implements RentService {
             rentDTO.setReturnTime (rent.getReturnTime ());
             rentDTO.setFilePath_1 (rent.getFilePath_1 ());
             rentDTO.setCusID (rent.getCustomerID ().getCusID ());
-            rentDTO.setPayment (rent.getPayment ());
+            Payment p = rent.getPayment ();
+            rentDTO.setPayment (new PaymentDTO (p.getPayment (),p.getPayment (),p.getPaymentExtraMilage (),p.getWavierPayment ()));
             rentDTO.setStatus (rent.getStatus ());
 
             List<RentDetailDTO> detailsDTOS=new ArrayList<>();
@@ -134,7 +140,6 @@ public class RentServiceImpl implements RentService {
         return allRentDTOS;
 
     }
-
     @Override
     public void updateRent(String rentID) {
          rentRepo.updateRent (rentID);
