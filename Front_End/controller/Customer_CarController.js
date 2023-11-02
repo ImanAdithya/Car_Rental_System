@@ -294,6 +294,7 @@ $('#btnRequestAll').click(function () {
         origin:'*',
         success:function (res) {
             alert("rent Succuss");
+            savePaymentSlip(rental_ID);
         },error:function (err) {
             alert(err+"ERROR");
         }
@@ -381,3 +382,33 @@ function generatePaymentID() {
         }
     });
 }
+
+function savePaymentSlip(rID) {
+    let formDataSlip = new FormData($("#rentForm")[0]);
+    console.log("------------------------"+rID)
+    $.ajax({
+        url:BASIC_URL+'rent?rentID='+rID,
+        method:'POST',
+        async:false,
+        data:formDataSlip,
+        contentType:false,
+        processData:false,
+        success:function (res) {
+            alert(res.message);
+        },error:function (err) {
+            alert(err);
+        }
+    });
+}
+
+$(document).ready(function() {
+    $('#paymentSlip').change(function() {
+        var selectedFile = this.files[0];
+        if (selectedFile) {
+            var fileURL = URL.createObjectURL(selectedFile);
+            $('#paymentSlipImg').attr('src', fileURL);
+        } else {
+            $('#paymentSlipImg').attr('src', '');
+        }
+    });
+});

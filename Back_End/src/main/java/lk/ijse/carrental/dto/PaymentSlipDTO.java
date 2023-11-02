@@ -11,6 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 @Data
 @ToString
 public class PaymentSlipDTO {
-    String  paymentID;
+    String  rentID;
     MultipartFile wavierSlip;
 }

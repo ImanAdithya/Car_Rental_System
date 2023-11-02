@@ -77,13 +77,13 @@ public class RentServiceImpl implements RentService {
 
     @Override
     public void savePaymentImage(PaymentSlipDTO dto) {
-        Rent rent = rentRepo.findById(dto.getPaymentID ()).get();
+        Rent rent = rentRepo.findById(dto.getRentID ()).get();
 
         try {
             byte[] pLicenseBytes = dto.getWavierSlip ().getBytes ();
 
             String projectPath="/Users/imanadithya/Software Engineering/IJSE/PROJECTS/Car_Rental_System/Front_End/assets";
-            Path pLicenceLocation = Paths.get(projectPath + "/projectImages/bucket/payment/pay_" + dto.getPaymentID () + ".jpeg");
+            Path pLicenceLocation = Paths.get(projectPath + "/projectImages/bucket/payment/pay_" + dto.getRentID () + ".jpeg");
 
             Files.write(pLicenceLocation, pLicenseBytes);
             dto.getWavierSlip ().transferTo(pLicenceLocation);
@@ -93,7 +93,7 @@ public class RentServiceImpl implements RentService {
             throw new RuntimeException (e);
         }
 
-        rent.setFilePath_1 ("/assets/projectImages/bucket/payment/pay_" + dto.getPaymentID ()+".jpeg");
+        rent.setFilePath_1 ("/assets/projectImages/bucket/payment/pay_" + dto.getRentID ()+".jpeg");
         rentRepo.save(rent);
     }
     //@Override

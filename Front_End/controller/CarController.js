@@ -113,7 +113,6 @@ function saveCarImage(cusID) {
             alert(err);
         }
     });
-
 }
 
 //Load All cars to table
