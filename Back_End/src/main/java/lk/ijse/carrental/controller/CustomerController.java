@@ -45,4 +45,10 @@ public class CustomerController {
         String s = customerService.customerIdGenerate ();
         return new ResponseUtil ("OK","Photo uploaded succuss",s);
     }
+
+    @GetMapping(params = {"cusID"})
+    public ResponseUtil findCustomer(String cusID){
+        CustomerDTO cusDTO = customerService.findCustomer (cusID);
+        return new ResponseUtil ("OK","customer find succuss",cusDTO);
+    }
 }

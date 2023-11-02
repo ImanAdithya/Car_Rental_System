@@ -1,6 +1,7 @@
 package lk.ijse.carrental.service.impl;
 
 import lk.ijse.carrental.dto.*;
+import lk.ijse.carrental.entity.Car;
 import lk.ijse.carrental.entity.Customer;
 import lk.ijse.carrental.entity.Driver;
 import lk.ijse.carrental.entity.User;
@@ -22,6 +23,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -67,6 +69,15 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public String customerIdGenerate() {
         return customerRepo.getLastIndex();
+    }
+
+    @Override
+    public CustomerDTO findCustomer(String cID) {
+        if (!customerRepo.existsById (cID)){
+            throw new RuntimeException (cID +"This Customer not in System");
+        }
+        Customer cus = customerRepo.findById (cID).get ();
+        return mapper.map (cus, CustomerDTO.class);
     }
 
 

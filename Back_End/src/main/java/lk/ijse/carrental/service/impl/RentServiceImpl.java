@@ -134,4 +134,9 @@ public class RentServiceImpl implements RentService {
         return allRentDTOS;
 
     }
+
+    @Override
+    public void updateRent(String rentID) {
+         rentRepo.updateRent (rentID);
+    }
 }

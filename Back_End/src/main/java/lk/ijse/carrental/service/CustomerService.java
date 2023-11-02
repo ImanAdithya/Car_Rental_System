@@ -11,5 +11,6 @@ public interface CustomerService {
     void saveCustomerImage(CustomerImageDTO dto);
     List<CustomerDTO> getAllCustomer();
     String customerIdGenerate();
+    CustomerDTO findCustomer(String cID);
 
 }

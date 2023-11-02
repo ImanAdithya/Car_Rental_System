@@ -11,6 +11,8 @@ getAllRent();
 
 let allRent;
 let carDetail;
+let cusDetail;
+let fullWavierPayment=0;
 
 //getAllRent();
 function getAllRent() {
@@ -27,7 +29,8 @@ function getAllRent() {
                 let r=rent[i];
                 let rentID = r.rent_ID;
                 let cusID = r.cusID;
-                 let cusName = "DD";
+                getCusDetail(r.cusID)
+                let cusName = cusDetail.cusName;
                 let pickupDate = r.pickUpDate;
                 let pickUpTime = r.pickUpTime;
                 let returnData = r.returnDate;
@@ -63,17 +66,25 @@ function bindBookingTblEvnet() {
 
     for (let i = 0; i < allRent.length; i++) {
         if(allRent[i].rent_ID===rentID){
+
             $('#imgSlip').attr('src', allRent[i].filePath_1);
-
             for (let j = 0; j < allRent[i].rentDetailList.length; j++) {
-                    let rd=allRent[i].rentDetailList;
-
+                let rd=allRent[i].rentDetailList;
                 getCarDetail(rd[j].carID);
 
+                fullWavierPayment=fullWavierPayment+parseFloat(carDetail.wavierPayment);
+                $('#fullWavierCoast').val(fullWavierPayment);
+                let driverStatus;
+
+                if (rd[j].driverID==null){
+                    driverStatus="NO";
+                }else{
+                    driverStatus="YES";
+                }
                 let row = `<tr>
                              <td>${rd[j].carID}</td>
                               <td>${carDetail.brand}</td>   
-                             <td>${rd[j].driverID}</td>
+                             <td>${driverStatus}</td>
                              <td>${carDetail.wavierPayment}</td>
 
                            </tr>`;
@@ -99,3 +110,29 @@ function getCarDetail(carID) {
         }
     });
 }
+
+function getCusDetail(cusID) {
+    $.ajax({
+        url: BASIC_URL+'customer?cusID='+cusID,
+        method: 'GET',
+        async:false,
+        dataType: 'json',
+        success:function (res) {
+            cusDetail=res.data;
+        },error:function (err) {
+            alert("error load customer");
+        }
+    });
+}
+
+$('#btnAccept').click(function () {
+    $.ajax({
+        url:BASIC_URL+'rent?accept'+allRent.rent_ID,
+        method:'POST',
+        success:function (res) {
+            alert(res.message);
+        },error:function (err) {
+            alert("SOMETHING WENT WRONG..");
+        }
+    });
+});
