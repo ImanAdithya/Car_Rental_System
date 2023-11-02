@@ -23,7 +23,6 @@ public class Rent_Detail{
 
     private String driverID;
 
-    private String status;
 
     @ManyToOne
     @JoinColumn(name = "rentID",referencedColumnName = "RentID",insertable = false,updatable = false)

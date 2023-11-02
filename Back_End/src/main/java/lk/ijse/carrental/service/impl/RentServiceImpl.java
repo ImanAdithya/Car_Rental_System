@@ -54,7 +54,6 @@ public class RentServiceImpl implements RentService {
             r.setRentID (d.getRent_id ());
             r.setCarID (d.getCarID ());
             r.setDriverID (d.getDriverID ());
-            r.setStatus (d.getStatus ());
 
             rentDetailList.add (r);
         }
@@ -66,6 +65,7 @@ public class RentServiceImpl implements RentService {
                 dto.getReturnDate (),
                 dto.getReturnTime (),
                 "",
+                dto.getStatus (),
                 customer,
                 new Payment (dto.getPayment ().getPaymentID (), dto.getPayment ().getPayment (), dto.getPayment ().getPaymentExtraMilage (), dto.getPayment ().getWavierPayment ()),
                 rentDetailList
@@ -115,6 +115,7 @@ public class RentServiceImpl implements RentService {
             rentDTO.setFilePath_1 (rent.getFilePath_1 ());
             rentDTO.setCusID (rent.getCustomerID ().getCusID ());
             rentDTO.setPayment (rent.getPayment ());
+            rentDTO.setStatus (rent.getStatus ());
 
             List<RentDetailDTO> detailsDTOS=new ArrayList<>();
 
@@ -124,8 +125,6 @@ public class RentServiceImpl implements RentService {
                 rentDetails.setRent_id (rentDetail.getRentID());
                 rentDetails.setCarID(rentDetail.getCarID());
                 rentDetails.setDriverID(rentDetail.getDriverID());
-                rentDetails.setStatus (rentDetail.getStatus ());
-
                 detailsDTOS.add(rentDetails);
             }
             rentDTO.setRentDetailList (detailsDTOS);

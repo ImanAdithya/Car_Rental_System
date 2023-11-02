@@ -4,6 +4,7 @@ let Rent={
     pickUpTime:"",
     returnDate:"",
     returnTime:"",
+    status:"",
     cusID:"",
     payment:null,
     rentDetailList:[],

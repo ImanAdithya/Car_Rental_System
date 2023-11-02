@@ -20,6 +20,7 @@ public class RentDTO {
     private String returnDate;
     private String returnTime;
     private String filePath_1;
+    private String status;
     private String cusID;
     private Payment payment;
     private List<RentDetailDTO> rentDetailList;

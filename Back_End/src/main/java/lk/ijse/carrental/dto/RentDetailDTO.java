@@ -19,5 +19,4 @@ public class RentDetailDTO {
     private String rent_id;
     private String carID;
     private String driverID;
-    private String status;
 }

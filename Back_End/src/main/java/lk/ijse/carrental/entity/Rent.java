@@ -21,6 +21,8 @@ public class Rent {
     private String returnDate;
     private String returnTime;
     private String filePath_1;
+
+    private String status;
     @ManyToOne(cascade = {CascadeType.REFRESH,CascadeType.DETACH})
     @JoinColumn(name = "customerID",referencedColumnName = "cusID",nullable = false)
     private Customer customerID;

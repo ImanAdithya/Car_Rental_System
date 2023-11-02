@@ -217,7 +217,7 @@ function AddToCart(carId) {
         rent_id:rental_ID,
         carID:carId,
         driverID:null,
-        status:"Pending"
+        //status:"Pending"
     }
     rentDetails.push(Rent_Detail);
    // getDriverCount();
@@ -273,6 +273,7 @@ $('#btnRequestAll').click(function () {
         pickUpTime:pickUpTime,
         returnDate:returnDate,
         returnTime:returnTime,
+        status:"Pending",
         cusID:cus_ID,
         payment: {
             paymentID:payment_ID,
