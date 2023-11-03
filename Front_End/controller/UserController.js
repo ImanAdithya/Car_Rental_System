@@ -43,7 +43,7 @@ $('#btnRegister').click(function () {
         origin:'*',
         success:function (res) {
             generateCustomerID();
-            alert("Customer SUCCUSS");
+            showAlert("CUSTOMER ADDED SUCCUSS")
         },error:function (err) {
             alert(err.responseJSON.message);
         }
