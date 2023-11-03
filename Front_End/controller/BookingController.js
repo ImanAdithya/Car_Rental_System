@@ -45,7 +45,7 @@ function getAllRent() {
                              <td>${pickUpTime}</td>
                              <td>${returnData}</td>
                              <td>${returnTime}</td>
-                              <td>${status}</td>
+                              <td style=" font-size:${'1.5rem'} ;color: ${status === 'Pending' ? 'orange' : (status === 'accept' ? 'green' : 'black')}">${status}</td>
                            </tr>`;
                 $("#tblBooking").append(row);
             }
@@ -137,4 +137,16 @@ $('#btnAccept').click(function () {
             alert("SOMETHING WENT WRONG..");
         }
     });
+});
+
+
+$('#btnDecline').click(function () {
+
+    let rows=$('#tBodyCusBooking').children().length;
+
+    for (let i = 0; i < rows; i++) {
+        let avCarID = $("#tBodyCusBooking tr:eq(" + i + ") td:eq(0)").text();
+        updateCarAvailability(avCarID);
+    }
+
 });
