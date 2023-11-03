@@ -80,6 +80,12 @@ public class CustomerServiceImpl implements CustomerService {
         return mapper.map (cus, CustomerDTO.class);
     }
 
+    @Override
+    public CustomerDTO getCustomerByUserName(String userName) {
+        Customer customer = customerRepo.getCustomerByUserName (userName);
+        return mapper.map(customer, CustomerDTO.class);
+    }
+
 
     @Override
     public void saveCustomerImage(CustomerImageDTO dto) {

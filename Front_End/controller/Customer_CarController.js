@@ -5,10 +5,9 @@ generateRentID();
 generatePaymentID();
 getAllCar();
 
-
 var car_ID;
 var rental_ID;
-let cus_ID="C00-001";
+let cus_ID;
 let driver_ID;
 var payment_ID;
 let wavierPayment=0;
@@ -16,6 +15,10 @@ let rentDetails=[];
 let driverCount;
 var lastDriverID;
 let validDriverArray=[];
+
+cus_ID=localStorage.getItem('cusID');
+let cus_Name=localStorage.getItem('cusName');
+
 
 
 //Navigations
@@ -46,7 +49,6 @@ function getAllCar() {
         }
     });
 }
-
 //Bind the Car Details to div as a card items
 function bindCarEvent(cars) {
     $("#carsAppend").empty();
@@ -96,8 +98,7 @@ function bindCarEvent(cars) {
                         </section>
 
                         <section class="d-flex justify-content-between flex-lg-row flex-column gap-1 mt-3">
-                            <button style="width: 5vw" id="test" class="btn btn-success rent ${isAvailable ? '' : 'disabled'}" data-bs-toggle="modal" data-bs-target="#testPoP"><p class="card-text "><i class="bi bi-upc-scan"></i> Rent </p></button>
-                            <button class="btn btn-warning cart ${isAvailable ? '' : 'disabled'}" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><p class="card-text"><i class="bi bi-cart-check-fill"></i> Add to cart</p></button>
+                            <button style="width: 27vw" class="btn btn-warning cart ${isAvailable ? 'disabled' : ''}" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><p class="card-text"><i class="bi bi-cart-check-fill"></i> Add to cart</p></button>
                         </section>
                         
                     </div>
@@ -108,7 +109,6 @@ function bindCarEvent(cars) {
     bindCartBtn();
 
 }
-
 //Bind the Rent Button
 function bindRentBtn() {
     $('.rent').click(function () {

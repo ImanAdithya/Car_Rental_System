@@ -23,7 +23,7 @@ public class LoginServiceImpl implements LoginService {
                 dto.getLoginID (),
                 dto.getDate (),
                 dto.getTime (),
-                new User (dto.getUser ().getUserName (),dto.getUser ().getPassword (),dto.getUser ().getPassword ())
+                new User (dto.getUser ().getUserName (),dto.getUser ().getPassword (),dto.getUser ().getRole ())
         ));
     }
 

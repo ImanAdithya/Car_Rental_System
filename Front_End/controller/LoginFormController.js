@@ -1,9 +1,12 @@
 let BASIC_URL='http://localhost:8080/Back_End_war/';
+
 generateLoginID();
 let userName;
 let password;
 let role;
 var login_ID;
+var cusID;
+var cusName;
 $('#subBtn').click(function () {
     generateLoginID();
     console.log(login_ID)
@@ -21,26 +24,31 @@ $('#subBtn').click(function () {
            password=res.data.password;
            role=res.data.role;
            if (inputUserName===userName && inputUserPass===password){
+               getCustomer(userName);
                saveLoginDetail();
-               // switch (role){
-               //     case "ADMIN":
-               //         window.location.href = '../view/AdiminPage.html';
-               //         break;
-               //     case "CUS":
-               //         window.location.href = '../view/CustomerPage.html';
-               //         break;
-               //     case  "DRI":
-               //         window.location.href = '../view/DriverPage.html';
-               //         break;
-               //     default:
-               //         console.log("INVALID ROLE")
-               // }
+              localStorage.setItem('cusID',cusID);
+               localStorage.setItem('cusName',cusName);
+               switch (role){
+                   case "ADMIN":
+                       window.location.href = '../view/AdiminPage.html';
+                       break;
+                   case "CUS":
+                       window.location.href = '../view/CustomerPage.html';
+                       break;
+                   case  "DRI":
+                       window.location.href = '../view/DriverPage.html';
+                       break;
+                   default:
+                       console.log("INVALID ROLE")
+               }
            }
        },error:function (err) {
            alert(err);
        }
    });
 });
+
+
 
 function generateLoginID() {
     $.ajax({
@@ -50,6 +58,7 @@ function generateLoginID() {
         dataType: "json",
         header:'Access-Control-Allow-Origin',
         origin:'*',
+        async:false,
         success: function (res) {
             if (res.data == null) {
                 login_ID = 'L00-001';
@@ -87,10 +96,28 @@ function saveLoginDetail() {
         contentType: "application/json",
         header:'Access-Control-Allow-Origin',
         origin:'*',
+        async:false,
         success:function (res) {
             alert(res.message);
         },error:function (err) {
             alert("Login Save Unsuccuss");
+        }
+
+    });
+}
+
+function getCustomer(user_Name) {
+    $.ajax({
+        url:BASIC_URL+'customer?getCustomer='+user_Name,
+        method:'GET',
+        async:false,
+        contentType: "application/json",
+        dataType: "json",
+        success:function (res) {
+            cusID=res.data[0].cusID;
+            cusName=res.data[0].cusName;
+        },error:function (err) {
+            alert("Customer Get Error");
         }
 
     });

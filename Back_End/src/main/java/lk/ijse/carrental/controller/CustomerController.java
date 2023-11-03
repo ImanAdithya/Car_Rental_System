@@ -52,4 +52,12 @@ public class CustomerController {
         return new ResponseUtil ("OK","customer find succuss",cusDTO);
     }
 
+    @GetMapping(params = {"getCustomer"})
+    public ResponseUtil getCustomerByUserName(String getCustomer){
+        CustomerDTO customerDTO = customerService.getCustomerByUserName (getCustomer);
+        return new ResponseUtil ("OK","customer Get succuss",customerDTO);
+    }
+
+
+
 }
