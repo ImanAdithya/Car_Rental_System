@@ -8,7 +8,7 @@ getAllCar();
 
 var car_ID;
 var rental_ID;
-let cus_ID="C00-002";
+let cus_ID="C00-001";
 let driver_ID;
 var payment_ID;
 let wavierPayment=0;
@@ -52,7 +52,7 @@ function bindCarEvent(cars) {
     $("#carsAppend").empty();
 
     for (let car of cars) {
-        let isAvailable = car.availability === "Yes";
+        let isAvailable = car.availability === "YES";
 
         $("#carsAppend").append(`<div class="class=col col-lg-4">
                 <div class="card ">
@@ -180,11 +180,10 @@ function getDriverCount() {
         }
     });
 }
-
 function AddToCart(carId) {
     generateRentID();
     generatePaymentID();
-    updateCarAvailability(carId);
+    //updateCarAvailability(carId);
 
     let Rent_Detail={
         rent_id:rental_ID,
@@ -192,7 +191,6 @@ function AddToCart(carId) {
         driverID:null,
     }
     rentDetails.push(Rent_Detail);
-   // getDriverCount();
 }
 
 //Calculate Wavier Payment
@@ -321,13 +319,18 @@ $('#btnRequestAll').click(function () {
 
 
 
+
     for (let i = 0; i < rows; i++) {
+
+        let avCarID = $("#tblCustomerCart tr:eq(" + i + ") td:eq(1)").text();
+        updateCarAvailability(avCarID);
+
+
         if ($("#tblCustomerCart tr:eq(" + i + ") td:eq(6) input[type='checkbox']").prop('checked')) {
             validDriverArray.push( $("#tblCustomerCart tr:eq(" + i + ") td:eq(1)").text());
             tblDriverCount++;
         }
     }
-
 
     if (driverCount<tblDriverCount){
         alert("Driver Have Enough Driver..We Have Only "+driverCount);
@@ -365,7 +368,6 @@ $('#btnRequestAll').click(function () {
         },
         rentDetailList:rentDetails
     }
-
     console.log(Rent);
     $.ajax({
         url:BASIC_URL+'rent',

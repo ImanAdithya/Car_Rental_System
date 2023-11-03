@@ -18,6 +18,6 @@ public class Login_Detail {
     private String date;
     private String time;
     @ManyToOne(cascade = {CascadeType.REFRESH,CascadeType.DETACH})
-    @JoinColumn(name ="userName",referencedColumnName = "userName",nullable = false)
+   // @JoinColumn(name ="userName",referencedColumnName = "userName",nullable = false)
     private User user;
 }
