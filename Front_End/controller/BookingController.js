@@ -57,7 +57,6 @@ function getAllRent() {
     });
 }
 
-
 function getCarDetail(carID) {
     $.ajax({
         url: BASIC_URL+'car?id='+carID,
@@ -140,19 +139,6 @@ function updateStatus(rent_ID) {
     });
 }
 
-function getRent(rentID) {
-    $.ajax({
-        url:BASIC_URL+'rent?getRentID='+rentID,
-        method:'GET',
-        async:false,
-        success:function (res) {
-            console.log(res.data);
-        },error:function (err) {
-            alert("ERROR");
-        }
-    });
-}
-
 var clickedRentId;
 function rentReqTableBindEvents() {
     $('#tblBooking>tr').click(function () {
@@ -161,7 +147,7 @@ function rentReqTableBindEvents() {
         $('#popUpRentPage').css('display', 'block');
 
 
-         clickedRentId = $(this).children().eq(0).text();
+        clickedRentId = $(this).children().eq(0).text();
         console.log(clickedRentId);
         console.log(allRent)
         $('#tBodyCusBooking').empty();
