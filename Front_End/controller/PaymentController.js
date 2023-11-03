@@ -8,6 +8,8 @@ $('#closePopUp2').click(function () {
     $('#driverDetailsPopupBg2').css('display', 'none');
     $('#popUpRentPage2').css('display', 'none');
 });
+
+let allRentDetails;
 function getAllRentDetails() {
     $('#tblPayment').empty();
 
@@ -16,7 +18,7 @@ function getAllRentDetails() {
         method: 'GET',
         dataType:'json',
         success:function (res) {
-            allRent = res.data;
+            allRentDetails = res.data;
             let rent = res.data;
             for (let i in rent) {
                 let r = rent[i];
@@ -70,6 +72,13 @@ function bindPaymentTblEvnet() {
         $('#driverDetailsPopupBg2').css('display', 'block');
         $('#popUpRentPage2').css('display', 'block');
     });
+
+    for (let i = 0; i < allRentDetails.length; i++) {
+
+    }
+
+
+
 
     // rentID = $('#tblPayment tr> td:first').text();
     //

@@ -12,5 +12,6 @@ public interface RentService {
     String rentIDGenerate();
     void savePaymentImage(PaymentSlipDTO dto);
     List<RentDTO> getAllRent();
+    RentDTO getRent(String id);
     void updateRent(String rentID);
 }

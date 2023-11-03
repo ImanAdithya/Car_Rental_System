@@ -5,7 +5,7 @@ let allRent;
 let carDetail;
 let cusDetail;
 let fullWavierPayment=0;
-let rentID;
+var rentID;
 
 $('#driverDetailsPopupBg').css('display', 'none');
 $('#popUpRentPage').css('display', 'none');
@@ -49,53 +49,14 @@ function getAllRent() {
                            </tr>`;
                 $("#tblBooking").append(row);
             }
-            bindBookingTblEvnet();
+           //bindBookingTblEvnet();
+            rentReqTableBindEvents();
         },error(err){
             alert(err+"rent Loaded Failed");
         }
     });
 }
 
-function bindBookingTblEvnet() {
-    $('#tblBooking>tr').click(function () {
-        $('#driverDetailsPopupBg').css('display', 'block');
-        $('#popUpRentPage').css('display', 'block');
-    });
-
-    console.log(allRent);
-     rentID = $('#tblBooking tr> td:first').text();
-
-    for (let i = 0; i < allRent.length; i++) {
-        if(allRent[i].rent_ID===rentID){
-
-            $('#imgSlip').attr('src', allRent[i].filePath_1);
-            for (let j = 0; j < allRent[i].rentDetailList.length; j++) {
-                let rd=allRent[i].rentDetailList;
-                getCarDetail(rd[j].carID);
-
-                fullWavierPayment=fullWavierPayment+parseFloat(carDetail.wavierPayment);
-                $('#fullWavierCoast').val(fullWavierPayment);
-                let driverStatus;
-
-                if (rd[j].driverID==null){
-                    driverStatus="NO";
-                }else{
-                    driverStatus="YES";
-                }
-                let row = `<tr>
-                             <td>${rd[j].carID}</td>
-                              <td>${carDetail.brand}</td>   
-                             <td>${driverStatus}</td>
-                             <td>${carDetail.wavierPayment}</td>
-
-                           </tr>`;
-                $("#tBodyCusBooking").append(row);
-            }
-            break;
-        }
-    }
-
-}
 
 function getCarDetail(carID) {
     $.ajax({
@@ -127,7 +88,7 @@ function getCusDetail(cusID) {
 
 $('#btnAccept').click(function () {
     $.ajax({
-        url:BASIC_URL+'rent?acceptRentID='+rentID,
+        url:BASIC_URL+'rent?acceptRentID='+clickedRentId,
         method:'POST',
         success:function (res) {
             alert(res.message);
@@ -176,5 +137,70 @@ function updateStatus(rent_ID) {
         },error:function (err) {
             alert("Rent status Updated Succuss");
         }
+    });
+}
+
+function getRent(rentID) {
+    $.ajax({
+        url:BASIC_URL+'rent?getRentID='+rentID,
+        method:'GET',
+        async:false,
+        success:function (res) {
+            console.log(res.data);
+        },error:function (err) {
+            alert("ERROR");
+        }
+    });
+}
+
+var clickedRentId;
+function rentReqTableBindEvents() {
+    $('#tblBooking>tr').click(function () {
+
+        $('#driverDetailsPopupBg').css('display', 'block');
+        $('#popUpRentPage').css('display', 'block');
+
+
+         clickedRentId = $(this).children().eq(0).text();
+        console.log(clickedRentId);
+        console.log(allRent)
+        $('#tBodyCusBooking').empty();
+
+
+        for(let k = 0; k < allRent.length; k++){
+
+            if(allRent[k].rent_ID == clickedRentId){
+                $('#imgSlip').attr('src', allRent[k].filePath_1);
+
+                for(let u = 0; u < allRent[k].rentDetailList.length; u++){
+
+                let rd=allRent[k].rentDetailList;
+                getCarDetail(rd[u].carID);
+
+                fullWavierPayment=fullWavierPayment+parseFloat(carDetail.wavierPayment);
+                $('#fullWavierCoast').val(fullWavierPayment);
+                let driverStatus;
+
+                if (rd[u].driverID==null){
+                    driverStatus="NO";
+                }else{
+                    driverStatus="YES";
+                }
+                let row = `<tr>
+                             <td>${rd[u].carID}</td>
+                              <td>${carDetail.brand}</td>
+                             <td>${driverStatus}</td>
+                             <td>${carDetail.wavierPayment}</td>
+
+                           </tr>`;
+                $("#tBodyCusBooking").append(row);
+
+                }
+
+                break;
+            }
+
+        }
+
     });
 }

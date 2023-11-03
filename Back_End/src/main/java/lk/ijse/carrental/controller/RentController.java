@@ -51,4 +51,14 @@ public class RentController {
         rentService.updateRent (acceptRentID);
         return new ResponseUtil ("OK","Rent Update Successfully...",acceptRentID);
     }
+
+    @GetMapping(params = {"getRentID"})
+    public ResponseUtil getAllRent(String getRentID){
+        //System.out.println ("awawawawawawawawawawawawawawawaw");
+        //RentDTO rent = rentService.getRent (getRentID);
+        //System.out.println ("************************************************************");
+        //System.out.println (rent);
+        //System.out.println ("************************************************************");
+        return new ResponseUtil ("OK","Successfully Loaded...","oh");
+    }
 }

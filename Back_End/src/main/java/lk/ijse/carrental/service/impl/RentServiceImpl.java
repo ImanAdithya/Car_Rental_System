@@ -140,6 +140,39 @@ public class RentServiceImpl implements RentService {
         return allRentDTOS;
 
     }
+
+    @Override
+    public RentDTO getRent(String id) {
+        Rent rent = rentRepo.findById (id).get ();
+
+        System.out.println ("DDDDDDDDDDDD");
+        System.out.println (rent.toString ());
+        System.out.println ("DDDDDDDDDDDD");
+
+        List<RentDetailDTO> detailsDTO=new ArrayList<>();
+        RentDetailDTO rentDetails = new RentDetailDTO();
+
+        for (Rent_Detail rentDetail :rent.getRentDetails ()) {
+            rentDetails.setRent_id (rentDetail.getRentID());
+            rentDetails.setCarID(rentDetail.getCarID());
+            rentDetails.setDriverID(rentDetail.getDriverID());
+        }
+        detailsDTO.add (rentDetails);
+
+        return new RentDTO (
+                rent.getRentID (),
+                rent.getPickUpDate (),
+                rent.getPickUpTime (),
+                rent.getReturnDate (),
+                rent.getReturnTime (),
+                rent.getFilePath_1 (),
+                rent.getStatus (),
+                rent.getCustomerID ().getCusID (),
+                new PaymentDTO (rent.getPayment ().getPaymentID (),rent.getPayment ().getPayment (),rent.getPayment ().getPaymentExtraMilage (),rent.getPayment ().getWavierPayment ()),
+                detailsDTO
+        );
+    }
+
     @Override
     public void updateRent(String rentID) {
          rentRepo.updateRent (rentID);
