@@ -125,6 +125,11 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    public void changeAvailability(String carID) {
+        carRepo.changeAvailability (carID);
+    }
+
+    @Override
     public void saveImage(CarImageDTO dto) {
         Car car = carRepo.findById(dto.getCID ()).get();
 

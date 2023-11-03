@@ -318,8 +318,6 @@ $('#btnRequestAll').click(function () {
     let tblDriverCount=0;
 
 
-
-
     for (let i = 0; i < rows; i++) {
 
         let avCarID = $("#tblCustomerCart tr:eq(" + i + ") td:eq(1)").text();

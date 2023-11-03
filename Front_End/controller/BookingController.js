@@ -1,12 +1,4 @@
 
-$('#driverDetailsPopupBg').css('display', 'none');
-$('#popUpRentPage').css('display', 'none');
-
-$('#closePopUp').click(function () {
-    $('#driverDetailsPopupBg').css('display', 'none');
-    $('#popUpRentPage').css('display', 'none');
-});
-
 getAllRent();
 
 let allRent;
@@ -14,6 +6,14 @@ let carDetail;
 let cusDetail;
 let fullWavierPayment=0;
 let rentID;
+
+$('#driverDetailsPopupBg').css('display', 'none');
+$('#popUpRentPage').css('display', 'none');
+
+$('#closePopUp').click(function () {
+    $('#driverDetailsPopupBg').css('display', 'none');
+    $('#popUpRentPage').css('display', 'none');
+});
 
 //getAllRent();
 function getAllRent() {
@@ -95,7 +95,6 @@ function bindBookingTblEvnet() {
         }
     }
 
-
 }
 
 function getCarDetail(carID) {
@@ -139,14 +138,43 @@ $('#btnAccept').click(function () {
     });
 });
 
-
 $('#btnDecline').click(function () {
 
-    let rows=$('#tBodyCusBooking').children().length;
+    updateStatus(rentID);
 
+    let rows=$('#tBodyCusBooking').children().length;
     for (let i = 0; i < rows; i++) {
         let avCarID = $("#tBodyCusBooking tr:eq(" + i + ") td:eq(0)").text();
-        updateCarAvailability(avCarID);
+        changeCarAvailability(avCarID);
     }
 
+    $('#driverDetailsPopupBg').css('display', 'none');
+    $('#popUpRentPage').css('display', 'none');
+
 });
+
+function changeCarAvailability(carID) {
+    $.ajax({
+        url:BASIC_URL+'car?changeAvailableCarID='+carID,
+        method:'POST',
+        async:false,
+        success:function (res) {
+            alert(res.message);
+        },error:function (err) {
+            alert("Car Available Not Updated..");
+        }
+    });
+}
+
+function updateStatus(rent_ID) {
+    $.ajax({
+        url:BASIC_URL+'rent?changeStatusID='+rent_ID,
+        method:'POST',
+        async:false,
+        success:function (res) {
+            alert(res.data);
+        },error:function (err) {
+            alert("Rent status Updated Succuss");
+        }
+    });
+}
