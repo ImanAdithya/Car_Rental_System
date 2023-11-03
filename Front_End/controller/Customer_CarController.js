@@ -19,6 +19,7 @@ let validDriverArray=[];
 cus_ID=localStorage.getItem('cusID');
 let cus_Name=localStorage.getItem('cusName');
 
+$('#logUserName').text(cus_Name);
 
 
 //Navigations
@@ -54,7 +55,7 @@ function bindCarEvent(cars) {
     $("#carsAppend").empty();
 
     for (let car of cars) {
-        let isAvailable = car.availability === "YES";
+        let isAvailable = car.availability === "NO";
 
         $("#carsAppend").append(`<div class="class=col col-lg-4">
                 <div class="card ">

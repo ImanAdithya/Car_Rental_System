@@ -344,3 +344,24 @@ th, td {
 .green-text {
     color: green;
 }
+
+
+ #tblCheckOut{
+      width: 40vw;
+      margin: 0 5%;
+      text-align: left;
+  }
+
+#driverDetailsPopupBg2{
+    width: 94%;
+    height: 80%;
+    left: 11vw;
+    top: -6vw;
+    position: absolute;
+    z-index: 4;
+    backdrop-filter: blur(10px);
+}
+#driverDetailPopup2{
+    width: 83%;
+    height: 80%;
+}
