@@ -9,7 +9,7 @@ $('#closePopUp2').click(function () {
     $('#popUpRentPage2').css('display', 'none');
 });
 
-
+var fullPayment=0
 var allRentDetails;
 function getAllRentDetails() {
     $('#tblPayment').empty();
@@ -74,10 +74,14 @@ function bindPaymentTblEvnet() {
         console.log(clickedPayRentId)
         console.log(allRentDetails)
 
+
+
     for (let a = 0; a < allRentDetails.length; a++) {
             if(allRentDetails[a].rent_ID == clickedPayRentId){
                 $("#tblCheckOutTbody").empty();
                 var payment=0;
+                var x=0;
+
 
                 $('#txtPaymentPickupDate').val(allRentDetails[a].pickUpDate);
                 $('#txtPaymentReturnDate').val(allRentDetails[a].returnDate);
@@ -96,40 +100,51 @@ function bindPaymentTblEvnet() {
                 let rd=allRentDetails[a].rentDetailList;
                 getCarDetail(rd[b].carID);
 
-                let currentMilage=carDetail.currentMeterValue;
+                var carOldMillage=carDetail.currentMeterValue;
+               // let extraKm = $("#tblCheckOutTbody tr:eq(" + x + ") td:eq(3)").val();
+                //let driver = $("#tblCheckOutTbody tr:eq(" + x + ") td:eq(4)").val();
+                //let damage = $("#tblCheckOutTbody tr:eq(" + x + ") td:eq(5)").val();
+                // let extraKm = $("#tblCheckOutTbody tr:eq(" + x + ") td:eq(" + 3 + ") input").val();
+                // let driver = $("#tblCheckOutTbody tr:eq(" + x + ") td:eq(" + 4 + ") input").val();
+                // let damage = $("#tblCheckOutTbody tr:eq(" + x + ") td:eq(" + 5 + ") input").val();
+                //console.log(extraKm+" "+driver+" "+damage)
+                //calculate(extraKm,driver,damage);
+
+                calculate(carDetail.priceForExtra_Km);
+
+
 
 
                 if (daysDifference<30) {
                     console.log(carDetail.type)
                     switch (carDetail.type) {
                         case 'Premium':
-                            payment = 5500 * Number(daysDifference);
+                            payment = carDetail.freeMilageDailyPrice * Number(daysDifference);
                             break;
                         case 'Luxury':
-                            payment = 10000 * Number(daysDifference);
+                            payment = carDetail.freeMilageDailyPrice * Number(daysDifference);
                     }
                 }else {
                     switch (carDetail.type) {
                         case 'Premium':
-                            payment = 120330;
+                            payment =carDetail.freeMilageMonthlyPrice;
                             break;
                         case 'Luxury':
-                            payment = 227150;
+                            payment = carDetail.freeMilageMonthlyPrice;
                     }
                 }
-
-
-
-
 
                 let row = `<tr>
                              <td>${rd[b].carID}</td>
                               <td>${carDetail.brand}</td>
                              <td>${payment}</td>
-                             <td>${"D"}</td>
+                             <td><input id="rowCMilage" style="width: 84px" type="text"></td>
+                          
+                            <td><input style="width: 84px" type="text"></td>
+                            <td><input style="width: 84px" type="text"></td>
                            </tr>`;
                 $("#tblCheckOutTbody").append(row);
-
+                   x++;
             }
 
             break;
@@ -139,4 +154,34 @@ function bindPaymentTblEvnet() {
 }
 
 
+function calculate(priceExtraPrice) {
+    $('#btnCalculate').click(function () {
 
+        let rows=$('#tblCheckOutTbody>tr').length;
+
+        for (let i = 0; i < rows; i++) {
+            let pay = parseFloat($("#tblCheckOutTbody tr:eq(" + i + ") td:eq(" + 2 + ") input").val());
+            let extraKm = parseFloat($("#tblCheckOutTbody tr:eq(" + i + ") td:eq(" + 3 + ") input").val());
+            let driver = parseFloat($("#tblCheckOutTbody tr:eq(" + i + ") td:eq(" + 4 + ") input").val());
+            let damage = parseFloat($("#tblCheckOutTbody tr:eq(" + i + ") td:eq(" + 5 + ") input").val());
+             let x = (extraKm * parseFloat(priceExtraPrice)) + driver + damage+ pay;
+             fullPayment=fullPayment+x;
+        }
+        console.log(fullPayment);
+        $('#txtHaveToPay').val(fullPayment);
+
+    });
+}
+
+function changePaymentRentStatus() {
+    $.ajax({
+        url:BASIC_URL+'rent?changeAvailableCarID='+carID,
+        method:'POST',
+        async:false,
+        success:function (res) {
+            alert(res.message);
+        },error:function (err) {
+            alert("Car Available Not Updated..");
+        }
+    });
+}

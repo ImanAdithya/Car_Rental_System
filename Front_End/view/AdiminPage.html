@@ -660,7 +660,7 @@
                 </div>
                 <div style="width: 75.5vw;height: 2px;background-color: black;opacity: 0.2"></div>
 
-                <div class="d-flex flex-row mt-3">
+                <div class="d-flex flex-row mt-3 justify-content-between">
                     <div>
                         <div>
                             <table id="tblCheckOut">
@@ -669,9 +669,10 @@
                                     <th>CAR ID</th>
                                     <th>BRAND</th>
                                     <th>PAYMENT</th>
-                                    <th>TOTAL_KM</th>
+                                    <th>EXTRA_KM</th>
                                     <th>DRIVER</th>
                                     <th>DAMAGE</th>
+
                                 </tr>
                                 </thead>
                                 <tbody id="tblCheckOutTbody">
@@ -681,7 +682,7 @@
                         </div>
                     </div>
 
-                    <div class="" style="width: 20vw;height: 55vh">
+                    <div class="position-relative" style="left: -1.7vw">
 
                         <div class="d-flex flex-row justify-content-between">
                           <div style="width: 9.5vw">
@@ -694,13 +695,9 @@
                           </div>
                       </div>
 
-                        <div class="d-flex flex-row justify-content-between mt-3">
-                            <div style="width: 9.5vw">
-                                <label  class="form-label">TOTAL SPEND DAYS</label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="" style="width: 10.5vw">
-                                <button type="button" class="btn btn-warning mt-4 mx-3 position-relative" style="width: 9.5vw;top: 0.3vw">CALCULATE</button>
+                        <div class="d-flex flex-row justify-content-between ">
+                            <div class="" style="width: 17.5vw">
+                                <button id="btnCalculate" type="button" class="btn btn-warning mt-4 mx-1 position-relative" style="width: 19.5vw;top: 0.3vw">CALCULATE</button>
                             </div>
                         </div>
 
