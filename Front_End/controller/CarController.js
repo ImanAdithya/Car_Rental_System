@@ -86,7 +86,7 @@ $('#btnSaveCar').click(function () {
         header:'Access-Control-Allow-Origin',
         origin:'*',
         success:function (res) {
-            alert(res.message);
+            showAlert("CAR ADDED SUCCUSS")
             saveCarImage(carID);
             getAllCars();
             generateCarID();
@@ -108,7 +108,7 @@ function saveCarImage(cusID) {
         processData:false,
         success:function (res) {
             //generateCarID();
-            alert(res.message);
+           // alert(res.message);
         },error:function (err) {
             alert(err);
         }
@@ -213,7 +213,7 @@ $('#btnUpdateCar').click(function () {
         header:'Access-Control-Allow-Origin',
         origin:'*',
         success:function (res) {
-            alert(res.message);
+            showAlert("Car UPDATE SUCCUSS")
             getAllCars();
         },error:function (err) {
             alert(err);
@@ -227,7 +227,7 @@ $('#btnDeleteCar').click(function () {
         url:BASIC_URL+'car?id='+carIDNum,
         method:'DELETE',
         success:function (res) {
-            alert(res.message);
+            showAlert("CAR DELETED SUCCUSS")
             getAllCars();
         },error:function (err) {
             alert(err)

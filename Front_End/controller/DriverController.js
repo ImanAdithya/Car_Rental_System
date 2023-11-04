@@ -82,7 +82,8 @@ $('#btnSaveDriver').click(function () {
         header:'Access-Control-Allow-Origin',
         origin:'*',
         success:function (res) {
-            alert(res.message);
+            showAlert("DRIVER ADDED SUCCUSS")
+          //  alert(res.message);
             generateDriverID();
             getAllDriver();
             clearFields();
@@ -99,7 +100,7 @@ $('#btnSaveDriver').click(function () {
         contentType:false,
         processData:false,
         success:function (res) {
-            alert(res.message);
+            //alert(res.message);
         },error:function (err) {
             alert(err);
         }
@@ -198,7 +199,8 @@ $('#btnUpdateDriver').click(function () {
         header:'Access-Control-Allow-Origin',
         origin:'*',
         success:function (res) {
-            alert(res.message);
+            //alert(res.message);
+            showAlert("DRIVER UPDATE SUCCUSS")
             getAllDriver();
             clearFields();
         },error:function (err) {
@@ -215,6 +217,7 @@ $('#btnDeleteDriver').click(function () {
         method: 'DELETE',
         success:function (res) {
             console.log(res.message);
+            showAlert("DRIVER DELETED SUCCUSS")
             getAllDriver();
             clearFields();
         },error:function (err) {

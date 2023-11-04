@@ -14,4 +14,6 @@ public interface RentService {
     List<RentDTO> getAllRent();
     RentDTO getRent(String id);
     void updateRent(String rentID);
+    void updateRentAsPayed(String rentID);
+
 }

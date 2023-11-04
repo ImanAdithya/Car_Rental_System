@@ -287,7 +287,7 @@ function savePaymentSlip(rID) {
         contentType:false,
         processData:false,
         success:function (res) {
-            alert(res.message);
+            //alert(res.message);
         },error:function (err) {
             alert(err);
         }
@@ -377,7 +377,8 @@ $('#btnRequestAll').click(function () {
         header:'Access-Control-Allow-Origin',
         origin:'*',
         success:function (res) {
-            alert("rent Succuss");
+          //  alert("rent Succuss");
+            showAlert("RENT ADDED SUCCUSS")
             savePaymentSlip(rental_ID);
         },error:function (err) {
             alert(err+"ERROR");
@@ -391,7 +392,7 @@ function updateCarAvailability(carID) {
         method:'POST',
         async:false,
         success:function (res) {
-            alert(res.message);
+           // alert(res.message);
         },error:function (err) {
             alert("Car Availability Updated Succuss");
         }

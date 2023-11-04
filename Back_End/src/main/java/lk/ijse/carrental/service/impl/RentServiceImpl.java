@@ -177,4 +177,9 @@ public class RentServiceImpl implements RentService {
     public void updateRent(String rentID) {
          rentRepo.updateRent (rentID);
     }
+
+    @Override
+    public void updateRentAsPayed(String rentID) {
+        rentRepo.updateRentAsPayed (rentID);
+    }
 }

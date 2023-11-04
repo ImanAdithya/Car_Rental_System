@@ -9,7 +9,7 @@ $('#closePopUp2').click(function () {
     $('#popUpRentPage2').css('display', 'none');
 });
 
-var fullPayment=0
+let fullPayment=0
 var allRentDetails;
 function getAllRentDetails() {
     $('#tblPayment').empty();
@@ -23,7 +23,7 @@ function getAllRentDetails() {
             let rent = res.data;
             for (let i in rent) {
                 let r = rent[i];
-                if (r.status == "Accepted") {
+                if (r.status == "Accepted" || r.status=="Payed") {
                     let rentID = r.rent_ID;
                     let cusID = r.cusID;
                     getCustomerPayment(r.cusID)
@@ -100,17 +100,7 @@ function bindPaymentTblEvnet() {
                 let rd=allRentDetails[a].rentDetailList;
                 getCarDetail(rd[b].carID);
 
-                var carOldMillage=carDetail.currentMeterValue;
-               // let extraKm = $("#tblCheckOutTbody tr:eq(" + x + ") td:eq(3)").val();
-                //let driver = $("#tblCheckOutTbody tr:eq(" + x + ") td:eq(4)").val();
-                //let damage = $("#tblCheckOutTbody tr:eq(" + x + ") td:eq(5)").val();
-                // let extraKm = $("#tblCheckOutTbody tr:eq(" + x + ") td:eq(" + 3 + ") input").val();
-                // let driver = $("#tblCheckOutTbody tr:eq(" + x + ") td:eq(" + 4 + ") input").val();
-                // let damage = $("#tblCheckOutTbody tr:eq(" + x + ") td:eq(" + 5 + ") input").val();
-                //console.log(extraKm+" "+driver+" "+damage)
-                //calculate(extraKm,driver,damage);
-
-                calculate(carDetail.priceForExtra_Km);
+                changeCarAvailability(rd[b].carID);
 
 
 
@@ -127,12 +117,15 @@ function bindPaymentTblEvnet() {
                 }else {
                     switch (carDetail.type) {
                         case 'Premium':
-                            payment =carDetail.freeMilageMonthlyPrice;
+                            payment =Number(carDetail.freeMilageMonthlyPrice);
                             break;
                         case 'Luxury':
-                            payment = carDetail.freeMilageMonthlyPrice;
+                            payment = Number(carDetail.freeMilageMonthlyPrice
+                            );
                     }
                 }
+
+
 
                 let row = `<tr>
                              <td>${rd[b].carID}</td>
@@ -154,34 +147,59 @@ function bindPaymentTblEvnet() {
 }
 
 
-function calculate(priceExtraPrice) {
+
+
     $('#btnCalculate').click(function () {
 
         let rows=$('#tblCheckOutTbody>tr').length;
 
         for (let i = 0; i < rows; i++) {
-            let pay = parseFloat($("#tblCheckOutTbody tr:eq(" + i + ") td:eq(" + 2 + ") input").val());
+            let pay  = $("#tblCheckOutTbody tr:eq(" +i+ ") td:eq("+2+")").text();
+            let payValue = parseFloat(pay);
             let extraKm = parseFloat($("#tblCheckOutTbody tr:eq(" + i + ") td:eq(" + 3 + ") input").val());
             let driver = parseFloat($("#tblCheckOutTbody tr:eq(" + i + ") td:eq(" + 4 + ") input").val());
             let damage = parseFloat($("#tblCheckOutTbody tr:eq(" + i + ") td:eq(" + 5 + ") input").val());
-             let x = (extraKm * parseFloat(priceExtraPrice)) + driver + damage+ pay;
+            console.log(payValue+" "+extraKm+" "+driver+" "+damage);
+             let x = (extraKm * 30) + driver + damage+ payValue;
              fullPayment=fullPayment+x;
         }
         console.log(fullPayment);
         $('#txtHaveToPay').val(fullPayment);
-
     });
-}
+
+
+
+$('#btnCheckOut').click(function () {
+    changePaymentRentStatus();
+    getAllRentDetails();
+    $('#driverDetailsPopupBg2').css('display', 'none');
+    $('#popUpRentPage2').css('display', 'none');
+    showAlert("PAYMENT CHECK OUT SUCCUSS")
+
+});
 
 function changePaymentRentStatus() {
     $.ajax({
-        url:BASIC_URL+'rent?changeAvailableCarID='+carID,
+        url:BASIC_URL+'rent?changePayedRentID='+clickedPayRentId,
         method:'POST',
         async:false,
         success:function (res) {
-            alert(res.message);
+           // alert(res.message);
         },error:function (err) {
-            alert("Car Available Not Updated..");
+            alert("payment chnage..");
+        }
+    });
+}
+
+function changeCarAvailability(carID) {
+    $.ajax({
+        url:BASIC_URL+'car?changeAvailableCarID='+carID,
+        method:'POST',
+        async:false,
+        success:function (res) {
+           // alert(res.message);
+        },error:function (err) {
+            alert("car Update UnSuccess..");
         }
     });
 }

@@ -52,13 +52,10 @@ public class RentController {
         return new ResponseUtil ("OK","Rent Update Successfully...",acceptRentID);
     }
 
-    @GetMapping(params = {"getRentID"})
-    public ResponseUtil getAllRent(String getRentID){
-        //System.out.println ("awawawawawawawawawawawawawawawaw");
-        //RentDTO rent = rentService.getRent (getRentID);
-        //System.out.println ("************************************************************");
-        //System.out.println (rent);
-        //System.out.println ("************************************************************");
-        return new ResponseUtil ("OK","Successfully Loaded...","oh");
+    @PostMapping(params = {"changePayedRentID"})
+    public ResponseUtil updateAcceptAsPayed(String changePayedRentID){
+        rentService.updateRentAsPayed (changePayedRentID);
+        return new ResponseUtil ("OK","Rent Update Successfully...",changePayedRentID);
     }
+
 }

@@ -13,4 +13,8 @@ public interface RentRepository extends JpaRepository<Rent,String> {
     @Modifying
     @Query(value = "UPDATE Rent set status='Accepted' where RentID=:rentID ", nativeQuery = true)
     void updateRent(@Param("rentID") String id);
+
+    @Modifying
+    @Query(value = "UPDATE Rent set status='Payed' where RentID=:rID ", nativeQuery = true)
+    void updateRentAsPayed(@Param("rID") String id);
 }
