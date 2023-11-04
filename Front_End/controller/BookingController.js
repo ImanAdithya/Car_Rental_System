@@ -92,6 +92,9 @@ $('#btnAccept').click(function () {
         success:function (res) {
             alert(res.message);
             getAllRent();
+            $('#driverDetailsPopupBg').css('display', 'none');
+            $('#popUpRentPage').css('display', 'none');
+
         },error:function (err) {
             alert("SOMETHING WENT WRONG..");
         }
@@ -99,6 +102,9 @@ $('#btnAccept').click(function () {
 });
 
 $('#btnDecline').click(function () {
+    $('#driverDetailsPopupBg').css('display', 'none');
+    $('#popUpRentPage').css('display', 'none');
+
 
     updateStatus(rentID);
 

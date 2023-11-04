@@ -203,3 +203,16 @@ function changeCarAvailability(carID) {
         }
     });
 }
+
+function updatePayment(payID,payment) {
+    $.ajax({
+        url:BASIC_URL+'payment/updatePayment',
+        method:'PUT',
+        async:false,
+        success:function (res) {
+            // alert(res.message);
+        },error:function (err) {
+            alert("car Update UnSuccess..");
+        }
+    });
+}

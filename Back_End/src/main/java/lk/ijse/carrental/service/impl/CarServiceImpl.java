@@ -91,9 +91,6 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void deleteCar(String id) {
-        if(!carRepo.existsById (id)){
-            throw new RuntimeException (id+" This Car not in system..");
-        }
         carRepo.deleteById (id);
     }
 

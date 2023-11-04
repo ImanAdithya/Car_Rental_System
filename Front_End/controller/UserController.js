@@ -1,6 +1,8 @@
 let BASIC_URL='http://localhost:8080/Back_End_war/';
 
-
+$('#btnClose').click(function () {
+    window.location.href = '../view/LoginForm.html';
+});
 let car_ID;
 generateCustomerID();
 //Register Customer
@@ -42,8 +44,9 @@ $('#btnRegister').click(function () {
         header:'Access-Control-Allow-Origin',
         origin:'*',
         success:function (res) {
+            showAlert("CUSTOMER ADDED SUCCUSS");
             generateCustomerID();
-            showAlert("CUSTOMER ADDED SUCCUSS")
+
         },error:function (err) {
             alert(err.responseJSON.message);
         }
@@ -61,7 +64,7 @@ $('#btnRegister').click(function () {
         contentType: false,
         processData: false,
         success: function (res) {
-          alert(res.message);
+         // alert(res.message);
         },
         error: function (res) {
             alert(res.message);

@@ -12,6 +12,6 @@ public interface CustomerService {
     List<CustomerDTO> getAllCustomer();
     String customerIdGenerate();
     CustomerDTO findCustomer(String cID);
-    CustomerDTO getCustomerByUserName(String userName);
+    List<CustomerDTO> getCustomerByUserName(String userName);
 
 }

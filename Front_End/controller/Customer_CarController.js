@@ -17,10 +17,11 @@ var lastDriverID;
 let validDriverArray=[];
 
 cus_ID=localStorage.getItem('cusID');
-let cus_Name=localStorage.getItem('cusName');
+console.log(cus_ID)
+var cus_Name=localStorage.getItem('cusName');
+console.log(cus_Name)
 
 $('#logUserName').text(cus_Name);
-
 
 //Navigations
 $('#cartBtn').click(function () {
@@ -59,13 +60,14 @@ function bindCarEvent(cars) {
 
         $("#carsAppend").append(`<div class="class=col col-lg-4">
                 <div class="card ">
-                    <img src="../assets/img/booking_cars/c5.jpeg"  id="kl" style="width: 26vw;border-radius: 9px" class="card-img-top m-3" alt="">
+                    <img  src="${car.filePath_1}"  id="kl" style="height:25vh;width: 26vw;border-radius: 9px" class="card-img-top m-3" alt="">
+                 
                     <div class="card-body">
 
                         <section class="mb-4">
-                            <img src="../assets/img/booking_cars/c1.jpg" class="w-25" alt="">
-                            <img src="../assets/img/booking_cars/c2.jpeg" class="w-25" alt="car">
-                            <img src="../assets/img/booking_cars/c3.jpeg" class="w-25" alt="car">
+                            <img src="${car.filePath_2}" class="w-25" style="height: 7vh" alt="">
+                            <img src="${car.filePath_4}" class="w-25"style="height: 7vh" alt="car">
+                            <img src="${car.filePath_4}" class="w-25" style="height: 7vh" alt="car">
                         </section>
 
                         <section class="d-flex gap-3 justify-content-between">
@@ -380,6 +382,7 @@ $('#btnRequestAll').click(function () {
           //  alert("rent Succuss");
             showAlert("RENT ADDED SUCCUSS")
             savePaymentSlip(rental_ID);
+            cleaFields();
         },error:function (err) {
             alert(err+"ERROR");
         }
@@ -397,4 +400,9 @@ function updateCarAvailability(carID) {
             alert("Car Availability Updated Succuss");
         }
     });
+}
+
+function cleaFields() {
+    $('#tblCustomerCart').empty();
+    $('#paymentSlipImg').attr('src', "");
 }

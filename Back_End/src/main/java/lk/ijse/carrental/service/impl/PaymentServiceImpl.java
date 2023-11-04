@@ -24,4 +24,9 @@ public class PaymentServiceImpl implements PaymentService {
         return paymentRepo.getLastIndex ();
     }
 
+    @Override
+    public void updatePayment(String id, String payment) {
+        paymentRepo.updatePayment (id,payment);
+    }
+
 }

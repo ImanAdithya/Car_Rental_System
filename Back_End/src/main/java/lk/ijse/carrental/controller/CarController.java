@@ -30,10 +30,14 @@ public class CarController {
         return new ResponseUtil ("OK","Car Updated Success",carDTO);
     }
 
-    @DeleteMapping(params = {"id"})
-    public ResponseUtil deleteCar(String id){
-        carService.deleteCar (id);
-        return new ResponseUtil ("OK","Car Deleted Success",id);
+    @DeleteMapping(params = {"carID"})
+    public ResponseUtil deleteCar(String carID){
+
+        System.out.println ("{}{}{}{{{{}{}{{{{}{}{{}{{{}}{{}}{}{}{{}{{{}{}}{}{");
+        System.out.println (carID );
+        System.out.println ("{}{}{}{{{{}{}{{{{}{}{{}{{{}}{{}}{}{}{{}{{{}{}}{}{");
+        carService.deleteCar (carID);
+        return new ResponseUtil ("OK","Car Deleted Success",carID);
     }
 
     @GetMapping

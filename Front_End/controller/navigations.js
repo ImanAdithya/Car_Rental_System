@@ -31,6 +31,12 @@ $(document).ready(function() {
         $("#dashboard, #customer, #car, #driver, #booking, #payment").hide();
         $("#payment").show();
     });
+
+    $("#logOutBtn").on("click", function() {
+        window.location.href = '../view/LoginForm.html';
+    });
+
+
 });
 
 //  document.getElementById("customer").style.display="none";

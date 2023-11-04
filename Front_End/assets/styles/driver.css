@@ -1,0 +1,98 @@
+*{
+    margin: 0;
+    font-family:"Apple SD Gothic Neo";
+}
+
+#logo{
+    width: 8.5vw;
+    height: 6vh;
+}
+
+.nav-link{
+    font-size: 1.1vw;
+}
+.nav-item{
+    margin-left: 1vw;
+}
+.container{
+    display: flex;
+    flex-direction: row;
+    top: 10vw;
+    position: relative;
+}
+
+.container>div:nth-child(1){
+    width: 40vw;
+
+}
+
+.container>div:nth-child(2){
+    height: 50vh;
+    width: 40vw;
+}
+
+.container>div:nth-child(1)>h1{
+    font-size: 4vw;
+}
+
+.container>div:nth-child(1)>h1:nth-child(2){
+    color: #FF6B17;
+}
+.container>div:nth-child(1)>p{
+    font-size: 1.1vw;
+}
+#img{
+    position: relative;
+    left: 6vw;
+}
+#img>#car{
+    width:43vw ;
+}
+
+#mainSection{
+    width: 100vw;
+}
+
+#tblArea{
+    width: 90vw;
+    height: 80vh;
+    position: relative;
+    top: 2vw;
+    left: 5vw;
+}
+
+tbody td {
+    background-color: white;
+    transition: all 0.3s linear;
+    transition-delay: 0.3s, 0s;
+    /* 2. Animate the opacity on hover */
+    opacity: 0.8;
+}
+tbody tr:hover td {
+    background-color: rgba(255,255,255,1);
+    /*transition-delay: 0s, 0s;*/
+    opacity: 1;
+    font-size: 1.3em;
+}
+
+td {
+    /* 3. Scale the text using transform on hover */
+    /*transform-origin: center ;*/
+    /*transition-property: transform;*/
+    /*transition-duration: 0.4s;*/
+    /*transition-timing-function: ease-in-out;*/
+    font-size: 15px;
+}
+/*tr:hover td {*/
+/*    transform: scale(0.9);*/
+/*}*/
+
+
+table {
+    width: 80vw;
+    margin: 0 5%;
+    text-align: center;
+}
+th, td {
+    padding: 0.4em;
+}

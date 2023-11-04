@@ -73,3 +73,30 @@
     background-color: #002864;
 }
 
+.imgPremium {
+    width: 40px;
+    height: 40px;
+    background: url("../mainPageImages/headPhone.jpeg");
+    background-size: cover;
+}
+
+.star {
+    width: 40px;
+    height: 40px;
+    background: url("../mainPageImages/star.jpeg");
+    background-size: cover;
+}
+
+.hart {
+    width: 40px;
+    height: 40px;
+    background: url("../mainPageImages/heart.jpeg");
+    background-size: cover;
+}
+
+.cancle {
+    width: 40px;
+    height: 40px;
+    background: url("../mainPageImages/close.jpeg");
+    background-size: cover;
+}

@@ -20,14 +20,16 @@ $('#subBtn').click(function () {
        method:'GET',
        dataType:'json',
        success:function (res) {
+           console.log(res.data)
            userName=res.data.userName;
            password=res.data.password;
            role=res.data.role;
+           localStorage.setItem('cusID',"C00-001");
+           localStorage.setItem('cusName',"Iman Adithya");
            if (inputUserName===userName && inputUserPass===password){
-               getCustomer(userName);
+               console.log("DD")
+               getCustomer(res.data.userName);
                saveLoginDetail();
-              localStorage.setItem('cusID',cusID);
-               localStorage.setItem('cusName',cusName);
                switch (role){
                    case "ADMIN":
                        window.location.href = '../view/AdiminPage.html';
@@ -35,15 +37,17 @@ $('#subBtn').click(function () {
                    case "CUS":
                        window.location.href = '../view/CustomerPage.html';
                        break;
-                   case  "DRI":
+                   case  "DRIVER":
                        window.location.href = '../view/DriverPage.html';
                        break;
                    default:
                        console.log("INVALID ROLE")
                }
+           }else{
+               showAlert("INVALID USERNAME OR PASSWORD")
            }
        },error:function (err) {
-           alert(err);
+           showAlert("INVALID USERNAME OR PASSWORD")
        }
    });
 });
@@ -98,7 +102,7 @@ function saveLoginDetail() {
         origin:'*',
         async:false,
         success:function (res) {
-            alert(res.message);
+           // alert(res.message);
         },error:function (err) {
             alert("Login Save Unsuccuss");
         }
@@ -114,10 +118,10 @@ function getCustomer(user_Name) {
         contentType: "application/json",
         dataType: "json",
         success:function (res) {
-            cusID=res.data[0].cusID;
-            cusName=res.data[0].cusName;
+            console.log(res.data)
+            console.log("DWDEW"+res.data[0].cusID);
         },error:function (err) {
-            alert("Customer Get Error");
+            //alert("Customer Get Error");
         }
 
     });

@@ -1,13 +1,12 @@
 getAllCars();
 generateCarID();
-let carIDNum;
-let c_ID;
+var carIDNum;
+var c_ID;
 
 //Bind table values to Text Fields
 function bindTrEvent() {
     $('#tblCar>tr').click(function () {
         carIDNum=$(this).children().eq(0).text();
-        console.log(carIDNum);
 
         findCar(carIDNum,function (c) {
             $('#txtRegNum').val(c.regNo);
@@ -87,9 +86,11 @@ $('#btnSaveCar').click(function () {
         origin:'*',
         success:function (res) {
             showAlert("CAR ADDED SUCCUSS")
+            clearFeilds();
             saveCarImage(carID);
             getAllCars();
             generateCarID();
+
         },error:function (err) {
             alert(err);
         }
@@ -108,6 +109,7 @@ function saveCarImage(cusID) {
         processData:false,
         success:function (res) {
             //generateCarID();
+            clearFeilds();
            // alert(res.message);
         },error:function (err) {
             alert(err);
@@ -123,6 +125,7 @@ function getAllCars() {
         url:BASIC_URL+'car',
         method:'GET',
         dataType:'json',
+        async:false,
         success:function (res) {
             let car=res.data;
             for (let i in car) {
@@ -215,6 +218,7 @@ $('#btnUpdateCar').click(function () {
         success:function (res) {
             showAlert("Car UPDATE SUCCUSS")
             getAllCars();
+            clearFeilds();
         },error:function (err) {
             alert(err);
         }
@@ -223,14 +227,17 @@ $('#btnUpdateCar').click(function () {
 
 //delete car
 $('#btnDeleteCar').click(function () {
+    console.log(carIDNum);
     $.ajax({
-        url:BASIC_URL+'car?id='+carIDNum,
+        url:BASIC_URL+'car?carID='+carIDNum,
         method:'DELETE',
+        async:false,
         success:function (res) {
             showAlert("CAR DELETED SUCCUSS")
             getAllCars();
+            clearFeilds();
         },error:function (err) {
-            alert(err)
+          //  alert(err)
         }
     });
 });
@@ -302,3 +309,23 @@ $(document).ready(function() {
         }
     });
 });
+
+function clearFeilds() {
+
+    $('#txtRegNum').val("");
+    $('#txtCarType').val('');
+    $('#txtBrand').val('');
+    $('#txtColor').val('');
+    $('#txtPassenger').val('');
+    $('#txtFuelType').val('');
+    $('#txtTransmissionType').val('');
+    $('#txtCurrentMValue').val('');
+    $('#txtPriceExtraKm').val('');
+    $('#txtWavierPayment').val('');
+    $('#txtFMD').val('');
+    $('#txtFMDPrice').val('');
+    $('#txtFMM').val('');
+    $('#txtFMMPrice').val('');
+    $('#txtAvailabilityType').val('');
+
+}

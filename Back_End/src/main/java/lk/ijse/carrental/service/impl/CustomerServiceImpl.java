@@ -81,9 +81,15 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDTO getCustomerByUserName(String userName) {
-        Customer customer = customerRepo.getCustomerByUserName (userName);
-        return mapper.map(customer, CustomerDTO.class);
+    public List<CustomerDTO> getCustomerByUserName(String userName) {
+        List<Customer> cusList = customerRepo.getCustomerByUserName (userName);
+        List<CustomerDTO> dtoList=new ArrayList<> ();
+
+        for (Customer c : cusList) {
+          CustomerDTO dto= new CustomerDTO (c.getCusID (),c.getCusName (),c.getContact (),c.getCusEmail (),c.getCusAddress (),c.getLicenceNumber (),new UserDTO (c.getUser ().getUserName (),c.getUser ().getPassword (),c.getUser ().getRole ()),c.getFilePath_1 (),c.getFilePath_2 ());
+            dtoList.add (dto);
+        }
+        return dtoList;
     }
 
 

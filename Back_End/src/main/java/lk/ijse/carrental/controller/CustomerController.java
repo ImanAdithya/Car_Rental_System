@@ -54,8 +54,11 @@ public class CustomerController {
 
     @GetMapping(params = {"getCustomer"})
     public ResponseUtil getCustomerByUserName(String getCustomer){
-        CustomerDTO customerDTO = customerService.getCustomerByUserName (getCustomer);
-        return new ResponseUtil ("OK","customer Get succuss",customerDTO);
+        List<CustomerDTO> list = customerService.getCustomerByUserName (getCustomer);
+        System.out.println ("{}{}{}{}{}{{}{}{}}{}}{{{{}{}{}{}{");
+        System.out.println (list);
+        System.out.println ("{}{}{}{}{}{{}{}{}}{}}{{{{}{}{}{}{");
+        return new ResponseUtil ("OK","customer Get succuss",list);
     }
 
 
