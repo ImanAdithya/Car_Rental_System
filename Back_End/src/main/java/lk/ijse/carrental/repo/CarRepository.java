@@ -17,4 +17,9 @@ public interface CarRepository extends JpaRepository<Car,String> {
     @Modifying
     @Query(value = "UPDATE Car set availability='YES' where carID=:id ", nativeQuery = true)
     void changeAvailability(@Param("id") String id);
+
+    @Modifying
+    @Query(value = "UPDATE Car SET currentMeterValue = :mileage WHERE carID = :id", nativeQuery = true)
+    void changeMileage(@Param("mileage") String mileage, @Param("id") String id);
+
 }

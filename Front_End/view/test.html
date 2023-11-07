@@ -4,30 +4,16 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
-
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 </head>
 <body>
-<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-
-</div>
-
-<script>
-    function generateNextCarID(currentCarID) {
-        // Extract the numeric part of the current car ID and increment it
-        const numericPart = parseInt(currentCarID.substr(2), 10);
-        const nextNumericPart = numericPart + 1;
-
-        // Format the next car ID with leading zeros
-        const nextCarID = "CR" + String(nextNumericPart).padStart(3, '0');
-
-        return nextCarID;
-    }
-
-    // Example usage:
-    const currentCarID = "CR0056";
-    const nextCarID = generateNextCarID(currentCarID);
-    console.log(nextCarID); // Output: "CR002"
-
-</script>
+<h1>Contact Us</h1>
+<form action="mailto:you@yourdmainhere.com" method="post" enctype="text/plain">
+    FirstName: <input type="text" name="FirstName">
+    Email: <input type="text" name="Email">
+    <input type="submit" name="submit" value="Submit">
+</form>
 </body>
+
+<script></script>
 </html>

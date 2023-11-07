@@ -137,7 +137,6 @@ function getAllDriver() {
                              <td>${userName}</td>
                            </tr>`;
                 $("#tblDriver").append(row);
-                showAlert("ADMIN LOGIN SUCCESS");
             }
             bindTrEvents();
         },error(err){
@@ -259,6 +258,7 @@ function clearFields() {
     $('#txtDUserPass').val("");
     $('#txtDRePass').val("");
     $('#driverImage').attr('src', '');
+
 }
 
 

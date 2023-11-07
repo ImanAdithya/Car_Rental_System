@@ -36,30 +36,35 @@ public class CustomerController {
     public ResponseUtil saveImage(@ModelAttribute CustomerImageDTO customerImageDTO,String cID){
        customerImageDTO.setCID (cID);
         customerService.saveCustomerImage (customerImageDTO);
-       return new ResponseUtil ("OK","Photo uploaded succuss",cID);
+       return new ResponseUtil ("OK","Photo uploaded success",cID);
     }
 
     @GetMapping(params = {"generateID"})
     public ResponseUtil customerIdGenerate() {
-        System.out.println ("+++++++++++++++++++++++++++++++++++++++");
         String s = customerService.customerIdGenerate ();
-        return new ResponseUtil ("OK","Photo uploaded succuss",s);
+        return new ResponseUtil ("OK","Photo uploaded success",s);
     }
 
     @GetMapping(params = {"cusID"})
     public ResponseUtil findCustomer(String cusID){
         CustomerDTO cusDTO = customerService.findCustomer (cusID);
-        return new ResponseUtil ("OK","customer find succuss",cusDTO);
+        return new ResponseUtil ("OK","customer find success",cusDTO);
     }
 
     @GetMapping(params = {"getCustomer"})
     public ResponseUtil getCustomerByUserName(String getCustomer){
         List<CustomerDTO> list = customerService.getCustomerByUserName (getCustomer);
-        System.out.println ("{}{}{}{}{}{{}{}{}}{}}{{{{}{}{}{}{");
-        System.out.println (list);
-        System.out.println ("{}{}{}{}{}{{}{}{}}{}}{{{{}{}{}{}{");
-        return new ResponseUtil ("OK","customer Get succuss",list);
+        return new ResponseUtil ("OK","customer Get success",list);
     }
+
+    @PutMapping
+    public ResponseUtil updateCustomer(@RequestBody CustomerDTO customerDTO){
+        customerService.updateCustomer (customerDTO);
+        return new ResponseUtil("Ok","Successfully Updated",customerDTO);
+    }
+
+
+
 
 
 

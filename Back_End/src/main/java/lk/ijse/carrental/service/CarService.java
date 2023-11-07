@@ -15,4 +15,5 @@ public interface CarService {
     String carIdGenerate();
     void carAvailability(String carID);
     void changeAvailability(String carID);
+    void changeMilage(String milage,String id);
 }

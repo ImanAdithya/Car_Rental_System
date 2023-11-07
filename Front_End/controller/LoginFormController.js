@@ -24,8 +24,10 @@ $('#subBtn').click(function () {
            userName=res.data.userName;
            password=res.data.password;
            role=res.data.role;
+
            localStorage.setItem('cusID',"C00-001");
            localStorage.setItem('cusName',"Iman Adithya");
+
            if (inputUserName===userName && inputUserPass===password){
                console.log("DD")
                getCustomer(res.data.userName);
@@ -51,6 +53,7 @@ $('#subBtn').click(function () {
        }
    });
 });
+
 
 
 

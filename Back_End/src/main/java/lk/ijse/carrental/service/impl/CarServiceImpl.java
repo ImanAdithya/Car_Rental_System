@@ -127,6 +127,14 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    public void changeMilage(String milage, String id) {
+        System.out.println ("{}{}{}{}{}{{{{{");
+        System.out.println (milage);
+        System.out.println (id);
+        carRepo.changeMileage (milage,id);
+    }
+
+    @Override
     public void saveImage(CarImageDTO dto) {
         Car car = carRepo.findById(dto.getCID ()).get();
 

@@ -3,6 +3,7 @@ package lk.ijse.carrental.controller;
 
 import lk.ijse.carrental.dto.CarDTO;
 import lk.ijse.carrental.dto.CarImageDTO;
+import lk.ijse.carrental.dto.ChangeMilage;
 import lk.ijse.carrental.entity.Car;
 import lk.ijse.carrental.service.CarService;
 import lk.ijse.carrental.util.ResponseUtil;
@@ -86,4 +87,13 @@ public class CarController {
         return new ResponseUtil ("OK","Car Available Updated",changeAvailableCarID);
     }
 
+    @PutMapping(params = {"changeCarMilage"})
+    public ResponseUtil updateMilage(@RequestBody ChangeMilage cm) {
+        System.out.println("+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+");
+        System.out.println (cm.toString ());
+        carService.changeMilage(cm.getMileage (),cm.getCarID ());
+        return new ResponseUtil("OK", "Car Milage Updated", cm);
+    }
+
 }
+

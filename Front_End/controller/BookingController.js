@@ -90,8 +90,9 @@ $('#btnAccept').click(function () {
         url:BASIC_URL+'rent?acceptRentID='+clickedRentId,
         method:'POST',
         success:function (res) {
-            alert(res.message);
-            getAllRent();
+            showAlert("RENT ACCEPT SUCCESS");
+            //getAllRent();
+            getAllRentDetails();
             $('#driverDetailsPopupBg').css('display', 'none');
             $('#popUpRentPage').css('display', 'none');
 

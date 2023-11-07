@@ -24,10 +24,6 @@ function bindTrEvent() {
             $('#txtFMM').val(c.freeMilageMonthly);
             $('#txtFMMPrice').val(c.freeMilageMonthlyPrice);
             $('#txtAvailabilityType option:selected').text(c.availability);
-            console.log(c.filePath_1);
-            console.log(c.filePath_2);
-            console.log(c.filePath_3);
-            console.log(c.filePath_4);
             $('#imgFront').attr('src', c.filePath_1);
             $('#imgBack').attr('src', c.filePath_2);
             $('#imgSide').attr('src', c.filePath_3);
@@ -233,7 +229,7 @@ $('#btnDeleteCar').click(function () {
         method:'DELETE',
         async:false,
         success:function (res) {
-            showAlert("CAR DELETED SUCCUSS")
+
             getAllCars();
             clearFeilds();
         },error:function (err) {
@@ -327,5 +323,8 @@ function clearFeilds() {
     $('#txtFMM').val('');
     $('#txtFMMPrice').val('');
     $('#txtAvailabilityType').val('');
-
+    $('#imgFront').attr('src','');
+    $('#imgBack').attr('src', '');
+    $('#imgSide').attr('src', '');
+    $('#imgInterio').attr('src','');
 }

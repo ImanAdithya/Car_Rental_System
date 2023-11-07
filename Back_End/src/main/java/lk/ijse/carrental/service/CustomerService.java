@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface CustomerService {
     void saveCustomer(CustomerDTO dto);
+    void updateCustomer(CustomerDTO dto);
     void saveCustomerImage(CustomerImageDTO dto);
     List<CustomerDTO> getAllCustomer();
     String customerIdGenerate();

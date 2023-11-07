@@ -1,6 +1,10 @@
 let BASIC_URL='http://localhost:8080/Back_End_war/';
+
+
 $('#popUpRentPage').css('display','none');
 $('#cartPage').css('display','none');
+$('#customerEditProfile').css('display','none');
+
 generateRentID();
 generatePaymentID();
 getAllCar();
@@ -22,6 +26,14 @@ var cus_Name=localStorage.getItem('cusName');
 console.log(cus_Name)
 
 $('#logUserName').text(cus_Name);
+
+$('#profile').click(function () {
+    $('#customerEditProfile').css('display','block');
+});
+
+$('#closeEdit').click(function () {
+    $('#customerEditProfile').css('display','none');
+});
 
 //Navigations
 $('#cartBtn').click(function () {
@@ -401,6 +413,49 @@ function updateCarAvailability(carID) {
         }
     });
 }
+
+$('#btnEditCustomer').click(function () {
+    let cusName = $('#txtName').val();
+    let contact = $('#txtContact').val();
+    let email = $('#txtEmail').val();
+    let address = $('#txtAddress').val();
+    let licenceNum = $('#txtLicense').val();
+    let userName = $('#txtUserName').val();
+    let newPassword = $('#txtNewPassword').val();
+    let role="CUS";
+
+    let customer={
+        cusID:cus_ID,
+        cusName:cusName,
+        contact:contact,
+        cusEmail:email,
+        cusAddress:address,
+        licenceNumber:licenceNum,
+        user:{
+            userName:userName,
+            password:newPassword,
+            role:role,
+        }
+    }
+
+    $.ajax({
+        url:BASIC_URL+'customer',
+        method:'PUT',
+        async: false,
+        data : JSON.stringify(customer),
+        contentType : 'application/json',
+        header:'Access-Control-Allow-Origin',
+        origin:'*',
+        success:function (res) {
+            showAlert("PROFILE UPDATED");
+            generateCustomerID();
+
+        },error:function (err) {
+            alert(err.responseJSON.message);
+        }
+    })
+
+});
 
 function cleaFields() {
     $('#tblCustomerCart').empty();
