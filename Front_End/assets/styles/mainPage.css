@@ -100,3 +100,50 @@
     background: url("../mainPageImages/close.jpeg");
     background-size: cover;
 }
+
+#btnAllCArs{
+    width: 12vw;
+    height: 4.5vh;
+    border: none;
+    background:#FF6B17;
+    color: white;
+    border-radius: 5px;
+}
+
+#btnAllCArs:hover{
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+}
+
+.bookNow{
+    width: 22.5vw;
+    height: 5vh;
+    border: none;
+    background:#FF6B17;
+    color: white;
+    border-radius: 5px;
+}
+
+.bookNow:hover{
+    background-color: #002864;
+}
+
+#ourCar{
+    width: 12vw;
+    height: 4.5vh;
+    border: none;
+    background:#002864;
+    color: white;
+    border-radius: 9px;
+}
+
+#booACar{
+    width: 13.5vw;
+    height: 4.5vh;
+    border: none;
+    background:#FF6B17;
+    color: white;
+    border-radius: 9px;
+}
+
