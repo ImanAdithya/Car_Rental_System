@@ -1,5 +1,6 @@
 package lk.ijse.carrental.controller;
 
+import lk.ijse.carrental.dto.CustomerDTO;
 import lk.ijse.carrental.dto.DriverDTO;
 import lk.ijse.carrental.dto.DriverImageDTO;
 import lk.ijse.carrental.dto.UserDTO;
@@ -76,7 +77,12 @@ public class DriverController {
     public ResponseUtil getAvailableDriverCount(){
         int driverCount = driverService.getAvailableDrivers ();
         return new ResponseUtil ("OK","Driver Count is ",driverCount);
+    }
 
+    @GetMapping(params = {"getDriver"})
+    public ResponseUtil getDriverDetail(String getDriver){
+        DriverDTO driver = driverService.getDriverDetail (getDriver);
+        return new ResponseUtil ("OK","customer Get success",driver);
     }
 
 }

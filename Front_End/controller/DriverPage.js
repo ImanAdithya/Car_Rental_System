@@ -1,5 +1,6 @@
 let BASIC_URL='http://localhost:8080/Back_End_war/';
-
+var driverID=localStorage.getItem('driverID');
+console.log(driverID)
 
 getAllRentDriver();
 function getAllRentDriver() {
@@ -14,14 +15,18 @@ function getAllRentDriver() {
             let rent=res.data;
             for(let i in rent){
                 let r=rent[i];
-                let cusID = r.cusID;
-                getCusDetailDriver(r.cusID)
-                let cusName = cusDetail.cusName;
-                let pickupDate = r.pickUpDate;
-                let pickUpTime = r.pickUpTime;
-                let returnData = r.returnDate;
-                let returnTime = r.returnTime;
-                let row = `<tr>
+                let rentDetailList=rent[i].rentDetailList;
+
+                for (let j in rentDetailList){
+                   if (rentDetailList[j].driverID===driverID){
+                       let cusID = r.cusID;
+                       getCusDetailDriver(r.cusID)
+                       let cusName = cusDetail.cusName;
+                       let pickupDate = r.pickUpDate;
+                       let pickUpTime = r.pickUpTime;
+                       let returnData = r.returnDate;
+                       let returnTime = r.returnTime;
+                       let row = `<tr>
                              <td>${cusID}</td>
                              <td>${cusName}</td>
                              <td>${cusDetail.cusAddress}</td>
@@ -32,8 +37,11 @@ function getAllRentDriver() {
                              <td>${returnTime}</td>
                            
                            </tr>`;
-                $("#tblDriverPage").append(row);
-                showAlert("DRIVER LOGIN SUCCESS");
+                       $("#tblDriverPage").append(row);
+                       showAlert("DRIVER LOGIN SUCCESS");
+                   }
+                }
+
             }
         },error(err){
             alert(err+"rent Loaded Failed");

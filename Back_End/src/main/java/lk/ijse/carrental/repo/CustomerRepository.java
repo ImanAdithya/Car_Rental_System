@@ -13,6 +13,6 @@ public interface CustomerRepository extends JpaRepository<Customer,String> {
     @Query(value = "SELECT cusID FROM Customer ORDER BY cusID DESC LIMIT 1", nativeQuery = true)
     String getLastIndex();
 
-    @Query(value = "SELECT *  FROM Customer where userName=:userName", nativeQuery = true)
-    List<Customer> getCustomerByUserName(@Param ("userName") String user_name);
+    @Query(value = "SELECT *  FROM Customer where user_userName=:userName", nativeQuery = true)
+    Customer getCus(@Param ("userName") String user_name);
 }

@@ -6,7 +6,8 @@ let password;
 let role;
 var login_ID;
 var cusID;
-var cusName;
+var driverID;
+
 $('#subBtn').click(function () {
     generateLoginID();
     console.log(login_ID)
@@ -19,27 +20,32 @@ $('#subBtn').click(function () {
        url:BASIC_URL+'user?userName='+inputUserName,
        method:'GET',
        dataType:'json',
+       async:false,
        success:function (res) {
            console.log(res.data)
            userName=res.data.userName;
            password=res.data.password;
            role=res.data.role;
+           console.log(userName)
 
-           localStorage.setItem('cusID',"C00-001");
-           localStorage.setItem('cusName',"Iman Adithya");
-
+           if (role==="CUS"){
+               getCustomer(userName);
+           }else if (role==="DRIVER"){
+               getDriver(userName);
+           }
            if (inputUserName===userName && inputUserPass===password){
-               console.log("DD")
-               getCustomer(res.data.userName);
                saveLoginDetail();
                switch (role){
                    case "ADMIN":
                        window.location.href = '../view/AdiminPage.html';
                        break;
                    case "CUS":
+                       localStorage.setItem('userName',userName);
+                       localStorage.setItem('cusID',cusID);
                        window.location.href = '../view/CustomerPage.html';
                        break;
                    case  "DRIVER":
+                       localStorage.setItem('driverID',driverID);
                        window.location.href = '../view/DriverPage.html';
                        break;
                    default:
@@ -113,19 +119,34 @@ function saveLoginDetail() {
     });
 }
 
-function getCustomer(user_Name) {
+function getCustomer(userName) {
+    console.log("PPP  "+userName)
     $.ajax({
-        url:BASIC_URL+'customer?getCustomer='+user_Name,
+        url:BASIC_URL+'customer?getCustomer='+userName,
         method:'GET',
         async:false,
-        contentType: "application/json",
-        dataType: "json",
         success:function (res) {
             console.log(res.data)
-            console.log("DWDEW"+res.data[0].cusID);
+            cusID=res.data.cusID;
         },error:function (err) {
-            //alert("Customer Get Error");
+            alert("Customer Get Error");
         }
 
     });
 }
+
+function getDriver(userName) {
+    $.ajax({
+        url:BASIC_URL+'driver?getDriver='+userName,
+        method:'GET',
+        async:false,
+        success:function (res) {
+            console.log(res.data)
+            driverID=res.data.driverID
+        },error:function (err) {
+            alert("Driver Get Error");
+        }
+
+    });
+}
+

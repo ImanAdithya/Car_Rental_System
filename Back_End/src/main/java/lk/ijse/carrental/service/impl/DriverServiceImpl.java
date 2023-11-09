@@ -1,5 +1,6 @@
 package lk.ijse.carrental.service.impl;
 
+import lk.ijse.carrental.dto.CustomerDTO;
 import lk.ijse.carrental.dto.DriverDTO;
 import lk.ijse.carrental.dto.DriverImageDTO;
 import lk.ijse.carrental.entity.Customer;
@@ -109,6 +110,12 @@ public class DriverServiceImpl  implements DriverService {
     @Override
     public int getAvailableDrivers() {
         return driverRepo.getAvailableDrivers ();
+    }
+
+    @Override
+    public DriverDTO getDriverDetail(String userName) {
+        Driver driver = driverRepo.getDriver (userName);
+        return mapper.map (driver, DriverDTO.class);
     }
 
     @Override

@@ -15,4 +15,5 @@ public interface DriverService {
     String driverIdGenerate();
     DriverDTO getLastDriver();
     int getAvailableDrivers();
+    DriverDTO getDriverDetail(String userName);
 }

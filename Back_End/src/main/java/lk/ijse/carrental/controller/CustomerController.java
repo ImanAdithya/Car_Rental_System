@@ -53,8 +53,8 @@ public class CustomerController {
 
     @GetMapping(params = {"getCustomer"})
     public ResponseUtil getCustomerByUserName(String getCustomer){
-        List<CustomerDTO> list = customerService.getCustomerByUserName (getCustomer);
-        return new ResponseUtil ("OK","customer Get success",list);
+        CustomerDTO customer = customerService.getCustomer (getCustomer);
+        return new ResponseUtil ("OK","customer Get success",customer);
     }
 
     @PutMapping

@@ -11,7 +11,6 @@ getAllCar();
 
 var car_ID;
 var rental_ID;
-let cus_ID;
 let driver_ID;
 var payment_ID;
 let wavierPayment=0;
@@ -20,12 +19,14 @@ let driverCount;
 var lastDriverID;
 let validDriverArray=[];
 
-cus_ID=localStorage.getItem('cusID');
-console.log(cus_ID)
-var cus_Name=localStorage.getItem('cusName');
-console.log(cus_Name)
 
-$('#logUserName').text(cus_Name);
+var userName=localStorage.getItem('userName');
+var cus_ID=localStorage.getItem('cusID');
+console.log(cus_ID);
+console.log(userName)
+
+$('#logUserName').text(userName);
+
 
 $('#profile').click(function () {
     $('#customerEditProfile').css('display','block');

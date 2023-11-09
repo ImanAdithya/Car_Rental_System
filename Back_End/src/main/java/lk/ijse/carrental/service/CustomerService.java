@@ -13,6 +13,6 @@ public interface CustomerService {
     List<CustomerDTO> getAllCustomer();
     String customerIdGenerate();
     CustomerDTO findCustomer(String cID);
-    List<CustomerDTO> getCustomerByUserName(String userName);
+    CustomerDTO getCustomer(String userName);
 
 }
