@@ -12,4 +12,5 @@ public interface UserService {
     UserDTO findUser(String userName);
     boolean existsByUserName(String userName);
     int sendMail(String userName);
+    void changePassword(String password,String userName);
 }

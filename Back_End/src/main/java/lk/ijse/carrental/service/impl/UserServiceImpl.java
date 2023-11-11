@@ -86,5 +86,10 @@ public class UserServiceImpl implements UserService {
         return otp;
     }
 
+    @Override
+    public void changePassword(String password, String userName) {
+        userRepo.changePassword (password,userName);
+    }
+
 
 }

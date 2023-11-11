@@ -9,6 +9,7 @@ var cusID;
 var driverID;
 let otp;
 let existUser;
+let verifyUserName;
 
 $('#forgetPasswordPane').css('display','none');
 
@@ -16,12 +17,12 @@ $('#verifyPasswordPane').css('display','none');
 
 $('#sendOtpBtn').click(function () {
 
-    let userName=$('#txtForgetUserName').val();
+    verifyUserName=$('#txtForgetUserName').val();
 
-    checkExistsUser(userName);
+    checkExistsUser(verifyUserName);
     if (existUser===true) {
         $.ajax({
-            url: BASIC_URL + 'user?otpUserName=' + userName,
+            url: BASIC_URL + 'user?otpUserName=' + verifyUserName,
             method: 'GET',
             async: false,
             success: function (res) {
@@ -66,8 +67,27 @@ $('#btnChangePass').click(function () {
     let verifyPass=$('#txtVerifyPass').val();
     let newPass=$('#txtNewPass').val();
 
+    let userPasswordDTO={
+         userName:verifyUserName,
+         password:newPass
+    }
+
     if (otp===verifyPass){
-        console.log("Correct")
+        $.ajax({
+            url:BASIC_URL+'user?changePassword',
+            method:'PUT',
+            data: JSON.stringify(userPasswordDTO),
+            contentType: "application/json",
+            header:'Access-Control-Allow-Origin',
+            origin:'*',
+            async:false,
+            success:function (res) {
+                console.log(res.data);
+                showAlert("Password Changed")
+            },error:function (err) {
+                console.log(err);
+            }
+        });
     }else {
         showErrorAlert("Verification Failed..")
     }
