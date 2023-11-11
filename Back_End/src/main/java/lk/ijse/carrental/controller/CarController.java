@@ -55,16 +55,7 @@ public class CarController {
 
     @PostMapping(params = {"cID"})
     public  ResponseUtil saveCarImage(@ModelAttribute CarImageDTO carImageDTO,String cID){
-        System.out.println ("++++++++++++++++++++++++");
-
-        System.out.println (cID);
         carImageDTO.setCID (cID);
-
-        System.out.println ("++++++++++++++++++++++++");
-        System.out.println ("COME TO SAVE CAR IMAGE CONTROLLER");
-        System.out.println (carImageDTO.toString ());
-        System.out.println ("++++++++++++++++++++++++");
-
         carService.saveImage (carImageDTO);
         return new ResponseUtil ("OK","Image save  Success",cID);
     }
@@ -89,8 +80,6 @@ public class CarController {
 
     @PutMapping(params = {"changeCarMilage"})
     public ResponseUtil updateMilage(@RequestBody ChangeMilage cm) {
-        System.out.println("+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+");
-        System.out.println (cm.toString ());
         carService.changeMilage(cm.getMileage (),cm.getCarID ());
         return new ResponseUtil("OK", "Car Milage Updated", cm);
     }

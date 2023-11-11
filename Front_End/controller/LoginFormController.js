@@ -7,6 +7,88 @@ let role;
 var login_ID;
 var cusID;
 var driverID;
+let otp;
+let existUser;
+
+$('#forgetPasswordPane').css('display','none');
+
+$('#verifyPasswordPane').css('display','none');
+
+$('#sendOtpBtn').click(function () {
+
+    let userName=$('#txtForgetUserName').val();
+
+    checkExistsUser(userName);
+    if (existUser===true) {
+        $.ajax({
+            url: BASIC_URL + 'user?otpUserName=' + userName,
+            method: 'GET',
+            async: false,
+            success: function (res) {
+                console.log(res.data)
+                otp = res.data + '';
+                $('#verifyPasswordPane').css('display', 'block');
+            }, error: function (err) {
+                alert("Customer Get Error");
+            }
+
+        });
+    }else {
+        $('#txtForgetUserName').css('border', '1px solid red');
+        showErrorAlert("This user not in system")
+    }
+
+});
+
+$('#txtForgetUserName').on('focusout', function () {
+    if ($(this).val() === '') {
+       $(this).css('border', '');
+    }
+});
+
+function checkExistsUser(userName) {
+    $.ajax({
+        url:BASIC_URL+'user?checkUserName='+userName,
+        method:'GET',
+        async:false,
+        success:function (res) {
+            console.log(res.data);
+            existUser=res.data;
+        },error:function (err) {
+            alert("USER CHECK ERROR");
+        }
+
+    });
+}
+
+
+$('#btnChangePass').click(function () {
+    let verifyPass=$('#txtVerifyPass').val();
+    let newPass=$('#txtNewPass').val();
+
+    if (otp===verifyPass){
+        console.log("Correct")
+    }else {
+        showErrorAlert("Verification Failed..")
+    }
+});
+
+
+
+$('#closeVerifyPane').click(function () {
+    window.location.href = '../view/LoginForm.html';
+});
+
+$('#closeVerify').click(function () {
+    window.location.href = '../view/LoginForm.html';
+});
+
+
+
+$('#forgetPassword').click(function () {
+    $('#form').css('display','none')
+    $('#forgetPasswordPane').css('display','block')
+})
 
 $('#subBtn').click(function () {
     generateLoginID();
@@ -46,6 +128,7 @@ $('#subBtn').click(function () {
                        break;
                    case  "DRIVER":
                        localStorage.setItem('driverID',driverID);
+                       localStorage.setItem('userName',userName);
                        window.location.href = '../view/DriverPage.html';
                        break;
                    default:
@@ -59,8 +142,6 @@ $('#subBtn').click(function () {
        }
    });
 });
-
-
 
 
 function generateLoginID() {

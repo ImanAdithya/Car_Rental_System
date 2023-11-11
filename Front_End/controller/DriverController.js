@@ -5,8 +5,6 @@ let driverIDNum;
 let driver_ID;
 
 
-
-
 //Bind Table Values to TextFields
 function bindTrEvents() {
     $('#tblDriver>tr').click(function () {

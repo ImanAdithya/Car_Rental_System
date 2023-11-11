@@ -20,10 +20,19 @@ public class UserController {
 
     @GetMapping(params = "userName")
     public ResponseUtil getUser(String userName ){
-        System.out.println ("++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println ("++++++++++++++++++++++++++++++++++++++++++");
         UserDTO userDto = userService.findUser (userName);
-        System.out.println (userDto);
         return new ResponseUtil ("OK","User Get Succuss",userDto);
+    }
+
+    @GetMapping(params = {"checkUserName"})
+    public ResponseUtil existsByUserName(String checkUserName){
+        boolean b = userService.existsByUserName (checkUserName);
+        return new ResponseUtil ("OK","This User Already Exists",b);
+    }
+
+    @GetMapping(params = {"otpUserName"})
+    public ResponseUtil generateOTP(String otpUserName){
+        int otp = userService.sendMail (otpUserName);
+        return new ResponseUtil ("OK","your Otp :",otp);
     }
 }

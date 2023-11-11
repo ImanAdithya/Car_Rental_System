@@ -9,12 +9,20 @@ import lk.ijse.carrental.repo.CustomerRepository;
 import lk.ijse.carrental.repo.UserRepository;
 import lk.ijse.carrental.service.CustomerService;
 import lk.ijse.carrental.service.UserService;
+import lk.ijse.carrental.util.SendMail;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
+import java.io.File;
 import java.util.List;
 
 import java.io.IOException;
@@ -38,6 +46,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     ModelMapper mapper;
 
+
+
+
+
     @Override
     public void saveCustomer(CustomerDTO dto) {
 
@@ -58,6 +70,14 @@ public class CustomerServiceImpl implements CustomerService {
                 "",
                 ""
         ));
+
+
+//        SimpleMailMessage smp=new SimpleMailMessage ();
+//        smp.setTo ("uchithma@gmail.com");
+//        smp.setSubject ("EASY CAR RENTAL");
+//        smp.setText ("IMANA ADITHYA ...MY TEST EMAIL SENDING..");
+//        javaMailSender.send (smp);
+
     }
 
     @Override

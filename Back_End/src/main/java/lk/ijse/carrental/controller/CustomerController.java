@@ -7,6 +7,8 @@ import lk.ijse.carrental.dto.UserDTO;
 import lk.ijse.carrental.service.CustomerService;
 import lk.ijse.carrental.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +21,8 @@ public class CustomerController {
 
     @Autowired
     CustomerService customerService;
+
+
 
     @PostMapping
     public ResponseUtil saveCustomer(@RequestBody CustomerDTO customerDTO){
@@ -62,7 +66,6 @@ public class CustomerController {
         customerService.updateCustomer (customerDTO);
         return new ResponseUtil("Ok","Successfully Updated",customerDTO);
     }
-
 
 
 

@@ -1,5 +1,11 @@
 let BASIC_URL='http://localhost:8080/Back_End_war/';
+
+
 var driverID=localStorage.getItem('driverID');
+var userName=localStorage.getItem('userName');
+
+$('#logUserName').text(userName);
+
 console.log(driverID)
 
 getAllRentDriver();

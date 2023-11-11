@@ -16,7 +16,7 @@
 <main>
     <div id="form">
             <div>
-                <img id="logo" src="../assets/img/logo.png">
+                <img id="logo" src="../assets/img/logo/newLogo.png">
                 <img id="loginpic" src="../assets/img/login.jpg">
             </div>
             <div>
@@ -24,7 +24,6 @@
                     <h1 id="login" class="d-flex justify-content-center">LOGIN</h1>
                     <div id="formDetail">
                         <form>
-
                             <div class="mb-3 d-flex justify-content-center">
                                 <input type="text" class="form-control" id="username" placeholder="UserName">
                             </div>
@@ -34,7 +33,7 @@
                             </div>
 
                             <div class="mb-3 form-check">
-                                <label class="form-check-label d-flex justify-content-end me-5" id="forget" >Forget Password</label>
+                                <label class="form-check-label d-flex justify-content-end me-5" id="forgetPassword" style="color: #F35D09">Forget Password</label>
                             </div>
 
                             <button type="button" class="btn btn-primary mb-5" id="subBtn">Submit</button>
@@ -54,6 +53,64 @@
                     </div>
                 </div>
             </div>
+    </div>
+
+    <div id="forgetPasswordPane" class="container-fluid position-fixed" style="left: 39vw;top: 13vw" >
+
+        <div class="position-relative w-100  d-flex justify-content-end">
+            <button type="button" class="btn-close mt-1" aria-label="Close" id="closeVerifyPane" ></button>
+        </div>
+
+        <div class="mx-3">
+            <h2>Forget your password</h2>
+        </div>
+
+        <div class="mx-3 mt-4">
+            <p>Please enter the username you'd like your password</br>reset information sent to</p>
+        </div>
+
+
+        <form class="position-relative" id="forgetPassForm" style="top: 1.5vw">
+            <div class="mx-3">
+                <input type="text" class="form-control" id="txtForgetUserName" placeholder="ENTER USER NAME" style="width: 21vw">
+            </div>
+
+            <div class="mt-4 mx-3">
+                <button type="button" class="btn btn-success" style="width: 21vw" id="sendOtpBtn">SEND OTP CODE</button>
+            </div>
+        </form>
+
+    </div>
+
+    <div id="verifyPasswordPane" class="container-fluid position-fixed" style="left: 39vw;top: 13vw" >
+
+        <div class="position-relative w-100  d-flex justify-content-end">
+            <button type="button" class="btn-close mt-1" aria-label="Close" id="closeVerify" ></button>
+        </div>
+
+        <div class="mx-3">
+            <h2>Verify, it's you</h2>
+        </div>
+
+        <div class="mx-3 mt-4">
+            <p>Easy car rental OTP send your gmail.You will be receiving OTP shortly number and verify it's you</p>
+        </div>
+
+
+        <form class="position-relative" id="verifyForm" style="top: 1.5vw">
+            <div class="d-flex flex-row  mx-3">
+                <input type="text" class="form-control" id="txtVerifyPass" placeholder="ENTER VERIFY PASSWORD" style="width: 21vw">
+            </div>
+
+            <div class="mx-3 mt-4">
+                <input type="password" class="form-control" id="txtNewPass" placeholder="ENTER NEW PASSWORD"  style="width: 21vw">
+            </div>
+
+            <div class="mt-4 mx-3">
+                <button type="button" class="btn btn-success" style="width: 21vw" id="btnChangePass">CHANGE PASSWORD</button>
+            </div>
+        </form>
+
     </div>
 
 </main>

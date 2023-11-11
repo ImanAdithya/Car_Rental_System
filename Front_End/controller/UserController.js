@@ -1,9 +1,11 @@
 let BASIC_URL='http://localhost:8080/Back_End_war/';
 
+
 $('#btnClose').click(function () {
     window.location.href = '../view/LoginForm.html';
 });
 let car_ID;
+let userValidate;
 generateCustomerID();
 //Register Customer
 $('#btnRegister').click(function () {
@@ -18,6 +20,7 @@ $('#btnRegister').click(function () {
     let licenceNum = $('#txtLicense').val();
     let userName = $('#txtUserName').val();
     let password = $('#txtPass').val();
+    let rePass = $('#txtConPass').val();
     let role="CUS";
 
     let customer={
@@ -34,48 +37,62 @@ $('#btnRegister').click(function () {
         }
     }
 
+    checkUserValidate(userName);
 
-    $.ajax({
-        url:BASIC_URL+'customer',
-        method:'POST',
-        async: false,
-        data : JSON.stringify(customer),
-        contentType : 'application/json',
-        header:'Access-Control-Allow-Origin',
-        origin:'*',
-        success:function (res) {
-            showAlert("CUSTOMER ADDED SUCCUSS");
-            generateCustomerID();
+    if (password===rePass){
+        $('#txtConPass').css('border', '');
+        if (userValidate===false) {
 
-        },error:function (err) {
-            alert(err.responseJSON.message);
+            $.ajax({
+                url: BASIC_URL + 'customer',
+                method: 'POST',
+                async: false,
+                data: JSON.stringify(customer),
+                contentType: 'application/json',
+                header: 'Access-Control-Allow-Origin',
+                origin: '*',
+                success: function (res) {
+                    showAlert("CUSTOMER ADDED SUCCUSS");
+                    generateCustomerID();
+
+                }, error: function (err) {
+                    alert(err.responseJSON.message);
+                }
+            })
+
+            if ($('#cusNicImage').get(0).files.length === 0 || $('#cusLicenseImage').get(0).files.length === 0) {
+                return;
+            }
+
+            $.ajax({
+                url: BASIC_URL + "customer?cID=" + cusID,
+                method: "post",
+                async: false,
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (res) {
+                    // alert(res.message);
+                },
+                error: function (res) {
+                    alert(res.message);
+                }
+            });
+
+        }else {
+            showErrorAlert("This User Name Already Taken...Try Again")
         }
-    })
-
-    if ($('#cusNicImage').get(0).files.length === 0 || $('#cusLicenseImage').get(0).files.length === 0) {
-        return;
+    }else {
+        $('#txtConPass').css('border', '1px solid red');
+        showErrorAlert("Please Check Your Password Again..")
     }
 
-    $.ajax({
-        url: BASIC_URL + "customer?cID="+cusID,
-        method: "post",
-        async: false,
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function (res) {
-         // alert(res.message);
-        },
-        error: function (res) {
-            alert(res.message);
-        }
-    });
+
 
 
 });
 
 getAllCustomer();
-
 function getAllCustomer() {
     $('#tblCustomer').empty();
 
@@ -107,9 +124,6 @@ function getAllCustomer() {
         }
     });
 }
-
-
-
 function generateCustomerID() {
     $.ajax({
         url: BASIC_URL+'customer?generateID',
@@ -118,7 +132,6 @@ function generateCustomerID() {
         dataType: "json",
         success: function (resp) {
             if (resp.data == null) {
-
                 car_ID = 'C00-001';
             } else {
                 let number = parseInt(resp.data.slice(4), 7);
@@ -132,4 +145,20 @@ function generateCustomerID() {
         }
     });
 }
+function checkUserValidate(userName) {
+    $.ajax({
+        url:BASIC_URL+'user?checkUserName='+userName,
+        method:'GET',
+        async:false,
+        success:function (res) {
+            console.log(res.data);
+            userValidate=res.data;
+        },error:function (err) {
+            alert("USER CHECK ERROR");
+        }
 
+    });
+}
+
+
+//checkUserName
