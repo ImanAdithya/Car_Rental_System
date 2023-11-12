@@ -11,6 +11,7 @@ import lk.ijse.carrental.service.DriverService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -30,12 +31,18 @@ public class DriverServiceImpl  implements DriverService {
     @Autowired
     ModelMapper mapper;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public void saveDriver(DriverDTO dto) {
 
         if (driverRepo.existsById (dto.getDriverID ())){
             throw new RuntimeException (dto.getDriverID ()+"This Driver Already Exists");
         }
+
+        String encodedPassword = passwordEncoder.encode(dto.getUser().getPassword());
+        dto.getUser().setPassword(encodedPassword);
 
         driverRepo.save (new Driver (
                 dto.getDriverID (),
