@@ -207,6 +207,7 @@ function AddToCart(carId) {
         driverID:null,
     }
     rentDetails.push(Rent_Detail);
+    showAlert("CAR ADDED TO CART")
 }
 
 //Calculate Wavier Payment

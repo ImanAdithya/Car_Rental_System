@@ -62,7 +62,6 @@ function checkExistsUser(userName) {
     });
 }
 
-
 $('#btnChangePass').click(function () {
     let verifyPass=$('#txtVerifyPass').val();
     let newPass=$('#txtNewPass').val();
@@ -93,8 +92,6 @@ $('#btnChangePass').click(function () {
     }
 });
 
-
-
 $('#closeVerifyPane').click(function () {
     window.location.href = '../view/LoginForm.html';
 });
@@ -103,44 +100,47 @@ $('#closeVerify').click(function () {
     window.location.href = '../view/LoginForm.html';
 });
 
-
-
 $('#forgetPassword').click(function () {
     $('#form').css('display','none')
     $('#forgetPasswordPane').css('display','block')
 })
 
 $('#subBtn').click(function () {
+
     generateLoginID();
     console.log(login_ID)
 
     let inputUserName=$('#username').val();
     let inputUserPass=$('#pass').val();
-    console.log(inputUserPass);
+
+    if (inputUserName==="Admin" && inputUserPass==='1234'){
+        window.location.href = '../view/AdiminPage.html';
+    }
+
+    let userDetail={
+        userName:inputUserName,
+        password:inputUserPass
+    }
 
    $.ajax({
-       url:BASIC_URL+'user?userName='+inputUserName,
-       method:'GET',
-       dataType:'json',
+       url:BASIC_URL+'user?encryptData',
+       method:'POST',
+       data:JSON.stringify(userDetail),
+       contentType: "application/json",
+       header:'Access-Control-Allow-Origin',
+       origin:'*',
        async:false,
        success:function (res) {
-           console.log(res.data)
            userName=res.data.userName;
-           password=res.data.password;
            role=res.data.role;
-           console.log(userName)
-
            if (role==="CUS"){
                getCustomer(userName);
            }else if (role==="DRIVER"){
                getDriver(userName);
            }
-           if (inputUserName===userName && inputUserPass===password){
+           if (res.data.validate){
                saveLoginDetail();
                switch (role){
-                   case "ADMIN":
-                       window.location.href = '../view/AdiminPage.html';
-                       break;
                    case "CUS":
                        localStorage.setItem('userName',userName);
                        localStorage.setItem('cusID',cusID);
@@ -162,7 +162,6 @@ $('#subBtn').click(function () {
        }
    });
 });
-
 
 function generateLoginID() {
     $.ajax({

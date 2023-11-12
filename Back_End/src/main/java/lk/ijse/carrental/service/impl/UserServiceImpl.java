@@ -1,5 +1,6 @@
 package lk.ijse.carrental.service.impl;
 
+import lk.ijse.carrental.dto.LogUserDTO;
 import lk.ijse.carrental.dto.UserDTO;
 import lk.ijse.carrental.entity.Customer;
 import lk.ijse.carrental.entity.User;
@@ -10,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -33,6 +35,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     JavaMailSender javaMailSender;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void saveUser(UserDTO dto) {
@@ -88,7 +93,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changePassword(String password, String userName) {
-        userRepo.changePassword (password,userName);
+        String encodedPassword = passwordEncoder.encode(password);
+        userRepo.changePassword (encodedPassword,userName);
+    }
+
+    @Override
+    public LogUserDTO checkValidUser(UserDTO userDTO) {
+        User user = userRepo.findByUserName (userDTO.getUserName ());
+        boolean matches = passwordEncoder.matches (userDTO.getPassword (), user.getPassword ());
+        return new LogUserDTO (matches,user.getUserName (),user.getRole ());
     }
 
 

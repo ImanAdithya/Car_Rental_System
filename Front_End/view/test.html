@@ -2,18 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <title>Smooth Scrolling</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+        }
+    </style>
 </head>
 <body>
-<h1>Contact Us</h1>
-<form action="mailto:you@yourdmainhere.com" method="post" enctype="text/plain">
-    FirstName: <input type="text" name="FirstName">
-    Email: <input type="text" name="Email">
-    <input type="submit" name="submit" value="Submit">
-</form>
-</body>
+<section id="section1" class="section">Section 1</section>
+<section id="section2" class="section">Section 2</section>
+<section id="section3" class="section">Section 3</section>
 
-<script></script>
+<script src="../assets/js/jquery-3.6.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(window).on("scroll", function () {
+            $(".section").each(function () {
+                var sectionTop = $(this).offset().top;
+                var sectionBottom = sectionTop + $(this).outerHeight();
+                var scrollTop = $(window).scrollTop();
+
+                if (scrollTop >= sectionTop && scrollTop < sectionBottom) {
+                    var targetId = $(this).next(".section").attr("id");
+                    if (targetId) {
+                        $("html, body").animate({
+                            scrollTop: $("#" + targetId).offset().top
+                        }, 1000);
+                    }
+                }
+            });
+        });
+    });
+</script>
+</body>
 </html>

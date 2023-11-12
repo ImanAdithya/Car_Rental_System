@@ -1,5 +1,6 @@
 package lk.ijse.carrental.service;
 
+import lk.ijse.carrental.dto.LogUserDTO;
 import lk.ijse.carrental.dto.UserDTO;
 
 import java.util.List;
@@ -13,4 +14,5 @@ public interface UserService {
     boolean existsByUserName(String userName);
     int sendMail(String userName);
     void changePassword(String password,String userName);
+    LogUserDTO checkValidUser(UserDTO userDTO);
 }

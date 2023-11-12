@@ -2,6 +2,7 @@ package lk.ijse.carrental.controller;
 
 
 import lk.ijse.carrental.dto.ChangeMilage;
+import lk.ijse.carrental.dto.LogUserDTO;
 import lk.ijse.carrental.dto.UserDTO;
 import lk.ijse.carrental.dto.userPasswordDTO;
 import lk.ijse.carrental.service.UserService;
@@ -39,5 +40,12 @@ public class UserController {
     public ResponseUtil changePassword(@RequestBody userPasswordDTO ud) {
        userService.changePassword (ud.getPassword (), ud.getUserName ());
         return new ResponseUtil("OK", "User Password Change Success", ud.getUserName ());
+    }
+
+    @PostMapping(params = {"encryptData"})
+    public ResponseUtil validUser(@RequestBody UserDTO userDTO){
+        LogUserDTO logUserDTO = userService.checkValidUser (userDTO);
+        return new ResponseUtil("OK", "User Validate",logUserDTO);
+
     }
 }

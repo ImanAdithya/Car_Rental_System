@@ -17,6 +17,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -46,8 +47,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     ModelMapper mapper;
 
-
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -58,8 +59,10 @@ public class CustomerServiceImpl implements CustomerService {
         if(b){
             throw new RuntimeException ("This User Name Not a Valid UserName...");
         }
+        String encodedPassword = passwordEncoder.encode(dto.getUser().getPassword());
+        dto.getUser().setPassword(encodedPassword);
 
-       customerRepo.save (new Customer(
+        customerRepo.save (new Customer(
                 dto.getCusID (),
                 dto.getCusName (),
                 dto.getContact (),

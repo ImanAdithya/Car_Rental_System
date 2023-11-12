@@ -160,5 +160,27 @@ function checkUserValidate(userName) {
     });
 }
 
+$(document).ready(function() {
+    $('#cusNicImageFile').change(function() {
+        var selectedFile = this.files[0];
+        if (selectedFile) {
+            var fileURL = URL.createObjectURL(selectedFile);
+            $('#cusNicImage').attr('src', fileURL);
+        } else {
+            $('#cusNicImage').attr('src', '');
+        }
+    });
+});
 
-//checkUserName
+$(document).ready(function() {
+    $('#cusLicenseImageFile').change(function() {
+        var selectedFile = this.files[0];
+        if (selectedFile) {
+            var fileURL = URL.createObjectURL(selectedFile);
+            $('#cusLicenseImage').attr('src', fileURL);
+        } else {
+            $('#cusLicenseImage').attr('src', '');
+        }
+    });
+});
+
